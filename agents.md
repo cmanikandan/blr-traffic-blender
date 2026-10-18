@@ -1,4 +1,4 @@
-# AGENTS.md — Ondu Second: Bangalore Gravity Glitch
+# AGENTS.md — Ondu Second: Bangalore Gravity Glitch (Pro Edition)
 
 This document provides context, architectural conventions, coordinate systems, and build workflows for AI coding agents working on **Ondu Second: Bangalore Gravity Glitch**.
 
@@ -6,18 +6,23 @@ This document provides context, architectural conventions, coordinate systems, a
 
 ## 1. Project Overview
 
-**Ondu Second: Bangalore Gravity Glitch** is a self-contained 3D WebGL (Three.js) arcade traffic game set on a bustling 6-lane Bengaluru highway corridor alongside the elevated Namma Metro Purple Line viaduct, Vidhana Soudha, and the Silk Board flyover gantry.
+**Ondu Second: Bangalore Gravity Glitch** is a self-contained 3D WebGL (Three.js r170) arcade traffic game set on a bustling 6-lane Bengaluru highway corridor alongside the elevated Namma Metro Purple Line viaduct, Vidhana Soudha, and the Silk Board flyover gantry.
 
 ### Key Gameplay Pillars
-- **Player Vehicle**: Authentic Bengaluru Bajaj RE Auto-Rickshaw (canary-yellow canopy `#FFD000` + emerald-green lower chassis `#009A44`) with 3 independent wheels that can snap off on heavy impacts and be repaired with `R`.
-- **Two-Way Indian Traffic**:
+- **Player Vehicle**: Authentic Bengaluru Bajaj RE Auto-Rickshaw (canary-yellow canopy `#FFD000` + emerald-green lower chassis `#009A44` + bilingual rear hood stencil) with 3 independent wheels that can snap off on heavy impacts and be repaired with `R`.
+- **Bilingual Kannada + English Hoardings & Gantries (60:40 Rule)**:
+  - 8 procedural canvas-textured roadside commercial hoardings (Rameshwaram Cafe, Namma Yatri, KMF Nandini, Namma Metro, Mysore Sandal Soap, BTP Alert, Zepto/Blinkit, Vidyarthi Bhavan) and 2 overhead National Highway gantries (`SILK BOARD JUNCTION` and `HEBBAL FLYOVER`) displaying bold Kannada (`ಕನ್ನಡ`) primary headlines above English subtitles.
+- **Bengaluru Traffic Police (BTP) Sudden License Check (`traffic_police.glb`)**:
+  - Articulated BTP officer in white pith helmet, lime-green hi-vis reflective vest, khaki uniform, aviator sunglasses, and red LED baton standing beside a bilingual BTP checkpost barricade with flashing red/blue strobes.
+  - Blows a synthesized pea-whistle (`playPoliceWhistle`) and steps out into the lane (`#hud-cop-alert`). Players can press **`L`** (or click **`🪪 Show DL [L]`**) to verify their DigiLocker DL & RC for `+₹100`, swerve to evade (`+₹60`), or get busted with a `-₹100` e-Challan fine on collision.
+- **Occasional Darting Stray Dog (`stray_dog.glb`)**:
+  - Articulated Indian Pariah Dog (Indie dog) with 4 galloping legs (`Dog_Leg_FL`, `Dog_Leg_FR`, `Dog_Leg_RL`, `Dog_Leg_RR`) and curled tail that suddenly darts across the highway with a double-bark (`playDogBark`).
+  - Honking (`H`) makes the dog bolt 2x faster; jumping cleanly over the dog with `SPACE` awards a `+₹75` Good Boy Hop Bonus.
+- **Two-Way Indian Traffic & Sudden Jaywalkers**:
   - **Left Side (`LANES[0..2]` at `x = -9.5, -5.7, -1.9`)**: Drives **forward** (`-Z`, same direction as the player).
-  - **Right Side (`LANES[3..5]` at `x = +1.9, +5.7, +9.5`)**: Drives **oncoming** (`+Z`, rotated `180°` with front windshields and headlights facing the camera).
-- **Sudden Road-Crossing Jaywalkers**: Pedestrians (`pedestrian_jaywalker.glb`) waiting along the kerbs and zebra crossings who suddenly dart across the road as the player approaches, raising the iconic Bengaluru *"Ondu Second / Stop Hand"* gesture while carrying a cloth `jhola` bag.
-- **Dynamic Hazards & Controlled Gravity Glitch**:
-  - Magnetic BBMP potholes (dark asphalt craters with rainwater puddles, orange-and-white traffic cones, and cyan gravity rings) pull nearby vehicles laterally and trigger a controlled low-G bounce.
-  - Sudden monsoon downpours reduce tire grip to `0%` (hydroplaning drift) and activate a 1,600-streak 3D rain particle system.
-- **Procedural Web Audio Engine**: Zero external audio files. Synthesizes a continuous ambient city drone, speed-modulated 2-stroke auto *"tuk-tuk"* engine, pink-noise monsoon downpour layer, and a multi-harmonic **3-burst Bengaluru Auto-Rickshaw reed/bulb horn (`"PA-PA-PAAARP!"`)** with nonlinear waveshaper saturation, diaphragm rattle modulation, and under-flyover slapback echo.
+  - **Right Side (`LANES[3..5]` at `x = +1.9, +5.7, +9.5`)**: Drives **oncoming** (`+Z`, rotated `180°`).
+  - **Jaywalkers (`pedestrian_jaywalker.glb`)**: Cross the highway raising the *"Ondu Second!"* stop hand.
+- **Procedural Web Audio Engine**: Zero external audio files. Synthesizes ambient city drone, 2-stroke auto *"tuk-tuk"* engine, pink-noise monsoon downpour layer, 3-burst Bengaluru Auto-Rickshaw reed/bulb horn (`"PA-PA-PAAARP!"`), BTP police pea-whistle & siren, DigiLocker verification chime, and Indie stray dog double-bark.
 
 ---
 
@@ -25,11 +30,19 @@ This document provides context, architectural conventions, coordinate systems, a
 
 ```text
 blr-traffic-blender/
+├── README.md                  # Full documentation, screenshots & controls
 ├── agents.md                  # Agent architecture, conventions & build instructions
-├── build_assets_blender.py    # Blender Python (bpy) procedural 3D asset generator
+├── build_assets_blender.py    # Blender Python (bpy) procedural 3D asset generator (12 models)
 ├── build_game_html.py         # Compiler that embeds assets/*.glb into index.html
 ├── index.html                 # Unified playable 3D WebGL game (Three.js + Web Audio + HUD)
-├── assets/                    # Exported Blender .glb binary 3D models
+├── screenshots/               # AAA hero banner, Blender studio render & live WebGL screenshots
+│   ├── pro_hero_banner.jpg
+│   ├── blender_assets_upgraded.png
+│   ├── gameplay_medium_clear.png
+│   ├── gameplay_action.png
+│   ├── gameplay_peak_hour.png
+│   └── gameplay_menu.png
+├── assets/                    # Exported Blender .glb binary 3D models (12 total)
 │   ├── auto_rickshaw.glb
 │   ├── bmtc_bus.glb
 │   ├── commuter_techie.glb
@@ -39,17 +52,19 @@ blr-traffic-blender/
 │   ├── metro_station.glb
 │   ├── pedestrian_jaywalker.glb
 │   ├── silk_board_sign.glb
+│   ├── stray_dog.glb
+│   ├── traffic_police.glb
 │   └── vidhana_soudha.glb
-└── *.glb                      # Root-level copies of the 10 .glb models for direct relative fetch
+└── *.glb                      # Root-level copies of the 12 .glb models for direct relative fetch
 ```
 
 > **Important**: Never edit `index.html` directly if you plan to re-run `build_game_html.py`. Always make HTML/CSS/JS changes inside `build_game_html.py` and run `python3 build_game_html.py` to regenerate `index.html`.
 
 ---
 
-## 3. Blender MCP & 3D Asset Conventions (`build_assets_blender.py`)
+## 3. Blender & 3D Asset Conventions (`build_assets_blender.py`)
 
-All 10 `.glb` models are procedurally modeled in Blender (`bpy`) and exported with `export_yup=True` and `export_apply=True`.
+All 12 `.glb` models are procedurally modeled in Blender (`bpy`) and exported with `export_yup=True` and `export_apply=True`.
 
 ### Coordinate System Mapping (Blender $\rightarrow$ Three.js)
 - **Blender `+Y`** $\rightarrow$ **Three.js `-Z`** (Forward, driving away from the chase camera).
@@ -60,53 +75,35 @@ All 10 `.glb` models are procedurally modeled in Blender (`bpy`) and exported wi
 ### Mandatory Scene-Graph Naming & Pivot Rules
 1. **Detachable Vehicle Wheels (`Wheel_*`)**:
    - Every vehicle exports wheels as separate child mesh objects of the root empty (`Wheel_Front`, `Wheel_Rear_L`, `Wheel_Rear_R`, `Wheel_FL`, `Wheel_FR`, `Wheel_RL`, `Wheel_RR`).
-   - **Crucial Pivot Rule**: Build wheel cylinders at `(0, 0, 0)`, join with `apply_loc=False`, and then set `wheel.location = (x, y, radius)` before parenting to `root`. This keeps each wheel's origin at its axle center so `w.node.rotation.x` spins smoothly in Three.js without eccentric vertical bouncing.
-2. **Articulated Jaywalker Pedestrian (`pedestrian_jaywalker.glb`)**:
-   - Child nodes `Leg_L` and `Leg_R` have their local origins at the hip (`z = 0.78`), and `Arm_L` / `Arm_R` have their local origins at the shoulder (`z = 1.32`), built with `apply_loc=False`.
-   - The torso mesh is named `Ped_Torso` so Three.js can clone its material and tint jaywalkers with diverse Indian street outfit colors.
-3. **Namma Metro Station & Train (`metro_station.glb`)**:
-   - Includes a child object named `Metro_Train` which Three.js detaches at runtime (`scene.attach(continuousMetroTrain)`) so the Purple Line train glides continuously along the entire 360m unbroken viaduct at `X = +18.5`.
-4. **ACES Filmic Tone Mapping & Emission Strengths**:
-   - Three.js renders with `THREE.ACESFilmicToneMapping` (`toneMappingExposure = 1.25`).
-   - Keep `emission_strength` in Blender between `0.5` and `1.2` for colored lights (`taillight`, `amber_glow`). Values above `2.5` will clip and desaturate into white under ACES Filmic tone mapping.
+   - Build wheel cylinders at `(0, 0, 0)`, join with `apply_loc=False`, and then set `wheel.location = (x, y, radius)` before parenting to `root`.
+2. **Articulated Jaywalker (`pedestrian_jaywalker.glb`) & BTP Traffic Cop (`traffic_police.glb`)**:
+   - Jaywalker child nodes: `Leg_L`, `Leg_R`, `Arm_L`, `Arm_R`, `Ped_Torso`.
+   - BTP Traffic Cop child nodes: `Cop_Leg_L`, `Cop_Leg_R` (pivoted at hip `z = 0.78`), `Cop_Arm_L`, `Cop_Arm_R` (pivoted at shoulder `z = 1.34`, holding glowing red LED baton), `Cop_Torso`.
+3. **Articulated Indie Stray Dog (`stray_dog.glb`)**:
+   - Child nodes `Dog_Leg_FL`, `Dog_Leg_FR`, `Dog_Leg_RL`, `Dog_Leg_RR` have pivots at shoulder/hip height (`z = 0.34`) so `rotation.x` animates a realistic 4-leg bounding gallop cycle in Three.js.
+   - Body mesh is named `Dog_Body` to support coat color variations.
 
 ---
 
 ## 4. Build, Run & Verification Workflow
 
-### Step 1: Regenerate 3D `.glb` Assets via Blender MCP
-If you modify `build_assets_blender.py`, execute it against the running Blender MCP server (`127.0.0.1:9876`, TCP JSON command `{"type": "execute_code", "params": {"code": "..."}}`):
-
+### Step 1: Regenerate 12 3D `.glb` Assets & Showcase Render in Blender
 ```bash
-python3 -c '
-import json, socket
-with open("build_assets_blender.py") as f:
-    code = f.read()
-s = socket.create_connection(("127.0.0.1", 9876), timeout=30)
-s.sendall(json.dumps({"type": "execute_code", "params": {"code": code}}).encode())
-print(s.recv(65536).decode())
-s.close()
-'
+/Applications/Blender.app/Contents/MacOS/Blender --background --python build_assets_blender.py
 ```
 
 ### Step 2: Compile `index.html`
-After updating `build_game_html.py` or re-exporting `.glb` assets:
-
 ```bash
 python3 build_game_html.py
 ```
 
-This compresses all `assets/*.glb` files into base64-gzipped payloads inside `EMBEDDED_GLB_GZ` and writes `index.html`.
-
 ### Step 3: Serve Locally & Verify Visually
-Start a local HTTP server:
-
 ```bash
 python3 -m http.server 8765
 ```
-
- URL query parameters supported by `index.html` for automated testing and headless browser screenshots:
-- `http://localhost:8765/index.html` — Opens the native `<dialog id="gravity-modal">` difficulty selector.
-- `http://localhost:8765/index.html?autostart=low` — Boots directly into **Low (Cubbon Park Morning)** mode.
-- `http://localhost:8765/index.html?autostart=medium` — Boots directly into **Medium (Indiranagar 6 PM Rush)** mode.
-- `http://localhost:8765/index.html?autostart=complex&rain=1&snapwheel=1` — Boots directly into **Complex (Silk Board 8 PM Gridlock)** mode with active monsoon rain (`0%` tire grip) and a snapped wheel.
+Query parameters supported by `index.html`:
+- `?autostart=low|medium|complex` — Boots directly into the specified difficulty profile.
+- `&rain=1` — Activates monsoon downpour (`0%` tire grip).
+- `&snapwheel=1` — Snaps off one player wheel at boot.
+- `&copcheck=1` — Triggers an immediate BTP Traffic Police license checkpost ahead.
+- `&hop=1` — Launches the player auto into a mid-air Gravity Hop with active comic callout bubbles.

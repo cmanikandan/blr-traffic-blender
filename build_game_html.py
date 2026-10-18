@@ -4,7 +4,7 @@ import gzip
 import json
 import os
 
-WORKSPACE_DIR = "/Users/mani/Documents/Mani/games/blr-traffic-blender"
+WORKSPACE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_DIR = os.path.join(WORKSPACE_DIR, "assets")
 
 def build_embedded_glb_dict():
@@ -22,7 +22,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ondu Second: Bangalore Gravity Glitch | 3D WebGL Arcade</title>
+  <title>ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Bangalore Gravity Glitch — Pro 3D WebGL Arcade</title>
   <style>
     :root {
       --in-oklab: ;
@@ -34,6 +34,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       --blinkit-yellow: #ffe600;
       --nh-green: #006b38;
       --danger-red: #ff3b5c;
+      --cop-blue: #2563eb;
       --grip-pct: 100%;
       --grip-hue: 145;
       --speed-pct: 50%;
@@ -57,9 +58,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #1a2436;
+      background: #0f172a;
       color: #f8fafc;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', 'Noto Sans Kannada', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     #game-canvas {
@@ -71,6 +72,25 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       z-index: 1;
     }
 
+    /* Cinematic Vignette & Optional Police Strobe Screen Edge */
+    .vignette-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      background: radial-gradient(circle at 50% 50%, transparent 62%, rgba(4, 8, 18, 0.55) 100%);
+      transition: box-shadow 0.15s ease;
+    }
+
+    .vignette-overlay.cop-strobe {
+      animation: police-screen-flash 0.36s infinite alternate;
+    }
+
+    @keyframes police-screen-flash {
+      0% { box-shadow: inset 0 0 65px rgba(239, 68, 68, 0.55); }
+      100% { box-shadow: inset 0 0 65px rgba(37, 99, 235, 0.55); }
+    }
+
     /* =========================================================================
        PROFESSIONAL 4-CORNER ARCADE HUD (Responsive, Zero Overflow)
        ========================================================================= */
@@ -79,7 +99,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       inset: 0;
       z-index: 10;
       pointer-events: none;
-      padding: 16px 20px;
+      padding: 14px 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -104,14 +124,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     /* Top-Left: Authentic Bengaluru Digital Auto Fare Meter */
     .auto-fare-unit {
-      background: linear-gradient(165deg var(--in-oklab), #141821, #090c12);
+      background: linear-gradient(165deg var(--in-oklab), rgba(20, 24, 33, 0.94), rgba(9, 12, 18, 0.96));
       border: 2px solid var(--auto-yellow);
       border-radius: 14px;
-      padding: 10px 16px;
-      min-width: 195px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      padding: 10px 15px;
+      min-width: 210px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(12px);
     }
 
     .auto-fare-unit::before {
@@ -132,11 +153,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       align-items: center;
       margin-top: 2px;
       margin-bottom: 4px;
-      font-size: 0.65rem;
+      font-size: 0.64rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: #94a3b8;
       text-transform: uppercase;
+      gap: 8px;
     }
 
     .meter-status-dot {
@@ -158,7 +180,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .meter-screen {
       background: #05070b;
-      border: 1px solid rgba(255, 208, 0, 0.22);
+      border: 1px solid rgba(255, 208, 0, 0.25);
       border-radius: 8px;
       padding: 6px 10px;
       display: flex;
@@ -183,23 +205,43 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       color: var(--auto-yellow);
     }
 
-    /* Top-Center: Authentic Indian Highway Sign Banner */
+    .dl-status-strip {
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.63rem;
+      font-weight: 800;
+      color: #cbd5e1;
+      letter-spacing: 0.04em;
+    }
+
+    .dl-badge {
+      background: rgba(34, 197, 94, 0.18);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #86efac;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* Top-Center: Authentic Bilingual (Kannada + English) Indian Highway Sign Banner */
     .highway-sign-cluster {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
+      max-width: 500px;
     }
 
     .nh-sign-board {
-      background: linear-gradient(180deg var(--in-oklab), #007a40, #00542b);
+      background: linear-gradient(180deg var(--in-oklab), #007a40, #004d27);
       border: 2.5px solid #ffffff;
-      border-radius: 10px;
+      border-radius: 11px;
       padding: 6px 18px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
       color: #ffffff;
     }
 
@@ -207,28 +249,44 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       background: var(--auto-yellow);
       color: #0b0e14;
       font-weight: 900;
-      font-size: 0.66rem;
-      padding: 2px 6px;
+      font-size: 0.68rem;
+      padding: 3px 7px;
       border-radius: 4px;
       letter-spacing: 0.06em;
+      border: 1px solid #0b0e14;
+      white-space: nowrap;
     }
 
-    .nh-text {
-      font-size: 0.8rem;
+    .nh-text-stack {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.18;
+    }
+
+    .nh-kn {
+      font-size: 0.86rem;
+      font-weight: 900;
+      color: #fde047;
+      letter-spacing: 0.02em;
+    }
+
+    .nh-en {
+      font-size: 0.70rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: #ffffff;
     }
 
     .rain-banner {
-      background: linear-gradient(90deg var(--in-oklab), rgba(2, 132, 199, 0.92), rgba(79, 70, 229, 0.92));
+      background: linear-gradient(90deg var(--in-oklab), rgba(2, 132, 199, 0.94), rgba(79, 70, 229, 0.94));
       border: 1px solid #7dd3fc;
       color: #ffffff;
       padding: 5px 14px;
       border-radius: 999px;
-      font-size: 0.72rem;
+      font-size: 0.70rem;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       display: none;
       box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
@@ -240,31 +298,87 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       gap: 6px;
     }
 
+    /* BTP Traffic Cop Sudden License Check Alert Banner */
+    .cop-alert-banner {
+      background: linear-gradient(95deg var(--in-oklab), rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.96));
+      border: 2px solid #ef4444;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 30px rgba(239, 68, 68, 0.45);
+      animation: cop-border-pulse 0.4s infinite alternate;
+    }
+
+    .cop-alert-banner.visible {
+      display: inline-flex;
+    }
+
+    @keyframes cop-border-pulse {
+      from { border-color: #ef4444; box-shadow: 0 0 22px rgba(239, 68, 68, 0.55); }
+      to { border-color: #3b82f6; box-shadow: 0 0 22px rgba(59, 130, 246, 0.55); }
+    }
+
+    .cop-alert-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cop-alert-kn {
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: #fde047;
+    }
+
+    .cop-alert-en {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #f8fafc;
+      letter-spacing: 0.04em;
+    }
+
+    .cop-dl-btn {
+      appearance: none;
+      background: #22c55e;
+      color: #052e16;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .cop-dl-btn:hover {
+      filter: brightness(1.1);
+    }
+
     /* Top-Right: Compact Glass Pill Toolbar */
     .top-toolbar {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.82);
+      gap: 5px;
+      background: rgba(15, 23, 42, 0.86);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 12px;
       padding: 5px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     .mode-segmented {
       display: flex;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.38);
       border-radius: 8px;
       padding: 2px;
       gap: 2px;
-    }
-
-    .pill-btn {
-      appearance: none;
     }
 
     .tool-btn {
@@ -272,18 +386,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       border: 1px solid transparent;
       background: transparent;
       color: #cbd5e1;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 6px 10px;
+      padding: 6px 9px;
       border-radius: 7px;
       cursor: pointer;
-      transition: background-color 0.04s ease, color 0.04s ease;
+      transition: background-color 0.06s ease, color 0.06s ease;
       white-space: nowrap;
     }
 
     .tool-btn:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.09);
     }
 
     .tool-btn.active-mode {
@@ -304,18 +418,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     /* Bottom-Left: Minimalist Key Hints */
     .controls-card {
-      background: rgba(15, 23, 42, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
       padding: 10px 14px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 16px;
-      font-size: 0.72rem;
+      gap: 8px 14px;
+      font-size: 0.71rem;
       color: #e2e8f0;
-      max-width: 460px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      max-width: 520px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .key-item {
@@ -333,18 +447,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       font-family: ui-monospace, monospace;
       font-weight: 800;
       color: var(--auto-yellow);
-      font-size: 0.68rem;
+      font-size: 0.67rem;
     }
 
     /* Bottom-Right: Sleek Speedometer & Auto Telemetry Cluster */
     .speed-cluster {
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 16px;
       padding: 12px 18px;
       backdrop-filter: blur(12px);
-      min-width: 240px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      min-width: 245px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -467,22 +581,22 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       position: absolute;
       transform: translate(-50%, -50%);
       font-weight: 900;
-      font-size: 0.92rem;
-      letter-spacing: 0.03em;
-      padding: 5px 12px;
-      border-radius: 8px;
+      font-size: 0.90rem;
+      letter-spacing: 0.02em;
+      padding: 6px 13px;
+      border-radius: 9px;
       background: var(--auto-yellow);
       color: #090d16;
       border: 2px solid #090d16;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
       white-space: nowrap;
-      animation: float-up-fade 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: float-up-fade 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes float-up-fade {
       0% { opacity: 0; transform: translate(-50%, -20%) scale(0.7); }
       20% { opacity: 1; transform: translate(-50%, -65%) scale(1.04); }
-      100% { opacity: 0; transform: translate(-50%, -140%) scale(0.95); }
+      100% { opacity: 0; transform: translate(-50%, -145%) scale(0.95); }
     }
 
     /* =========================================================================
@@ -490,19 +604,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
        ========================================================================= */
     dialog#gravity-modal {
       margin: auto;
-      width: min(880px, 92vw);
-      max-height: 90vh;
+      width: min(900px, 93vw);
+      max-height: 91vh;
       overflow-y: auto;
-      background: linear-gradient(160deg var(--in-oklab), rgba(15, 23, 42, 0.96), rgba(9, 13, 24, 0.98));
+      background: linear-gradient(160deg var(--in-oklab), rgba(15, 23, 42, 0.97), rgba(9, 13, 24, 0.99));
       color: #f8fafc;
-      border: 2px solid rgba(255, 208, 0, 0.65);
+      border: 2px solid rgba(255, 208, 0, 0.7);
       border-radius: 22px;
       padding: 0;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8);
     }
 
     dialog#gravity-modal::backdrop {
-      background: rgba(6, 10, 20, 0.65);
+      background: rgba(6, 10, 20, 0.68);
       backdrop-filter: blur(8px);
     }
 
@@ -515,7 +629,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     .modal-inner {
-      padding: 24px 28px;
+      padding: 22px 26px;
     }
 
     .modal-top {
@@ -524,6 +638,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       align-items: center;
       gap: 12px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
 
     .modal-badge {
@@ -539,7 +654,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     .modal-inner h1 {
-      font-size: 1.65rem;
+      font-size: 1.6rem;
       font-weight: 900;
       letter-spacing: -0.01em;
       color: #ffffff;
@@ -547,20 +662,20 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .modal-lead {
       color: #94a3b8;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       line-height: 1.45;
       margin-top: 4px;
     }
 
     .mode-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
 
     .mode-card {
-      background: rgba(30, 41, 59, 0.65);
+      background: rgba(30, 41, 59, 0.68);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 16px;
       padding: 16px;
@@ -575,7 +690,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     .mode-card:hover,
     .mode-card.selected {
       transform: translateY(-3px);
-      background: rgba(30, 41, 59, 0.92);
+      background: rgba(30, 41, 59, 0.94);
       border-color: var(--auto-yellow);
     }
 
@@ -595,14 +710,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     .tag-complex { background: rgba(255, 59, 92, 0.2); color: #fb7185; }
 
     .mode-card h2 {
-      font-size: 1.12rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 4px;
     }
 
     .mode-desc {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #cbd5e1;
       line-height: 1.4;
       margin-bottom: 10px;
@@ -610,7 +725,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .mode-stats {
       list-style: none;
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       color: #94a3b8;
       display: flex;
       flex-direction: column;
@@ -645,7 +760,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     .asset-status-bar {
       padding: 10px 14px;
       border-radius: 12px;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.78);
       border: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       flex-wrap: wrap;
@@ -668,12 +783,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       border-radius: 5px;
       padding: 2px 6px;
       font-family: ui-monospace, monospace;
-      font-size: 0.65rem;
+      font-size: 0.63rem;
       color: #cbd5e1;
     }
 
     .asset-chip.loaded {
-      border-color: rgba(34, 197, 94, 0.5);
+      border-color: rgba(34, 197, 94, 0.55);
       color: #86efac;
     }
   </style>
@@ -688,29 +803,45 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </script>
 </head>
 <body>
+  <div class="vignette-overlay" id="vignette-fx"></div>
+
   <!-- 4-Corner Professional Arcade HUD -->
   <div class="hud-layer">
     <header class="hud-top-row">
       <!-- Top-Left: Authentic Bengaluru Auto Digital Fare Meter -->
       <div class="auto-fare-unit interactive">
         <div class="meter-header">
-          <span>KA-01 BAJAJ RE METER</span>
+          <span>ನಮ್ಮ ಆಟೋ • KA-01 METER</span>
           <span class="meter-status-dot" id="surge-badge">1.0x HIRE</span>
         </div>
         <div class="meter-screen">
           <div class="fare-digits" id="hud-fare">₹30.00</div>
           <div class="fare-sub" id="hud-dist">0.0 KM</div>
         </div>
+        <div class="dl-status-strip">
+          <span>🪪 DIGILOCKER DL &amp; RC</span>
+          <span class="dl-badge" id="hud-dl-status">VALID • PRESS [L]</span>
+        </div>
       </div>
 
-      <!-- Top-Center: National Highway Landmark Distance Sign -->
+      <!-- Top-Center: Bilingual (Kannada + English) National Highway Sign & BTP Cop Alert -->
       <div class="highway-sign-cluster">
         <div class="nh-sign-board">
           <span class="nh-shield">NH 44</span>
-          <span class="nh-text" id="hud-landmark">SILK BOARD JUNCTION • 45m</span>
+          <div class="nh-text-stack">
+            <span class="nh-kn" id="hud-landmark-kn">ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಮೇಲ್ಸೇತುವೆ • 45m</span>
+            <span class="nh-en" id="hud-landmark">SILK BOARD FLYOVER GANTRY • 45m</span>
+          </div>
+        </div>
+        <div class="cop-alert-banner interactive" id="hud-cop-alert">
+          <div class="cop-alert-text">
+            <span class="cop-alert-kn">👮‍♂️ ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್: "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL ತೋರಿಸಿ!"</span>
+            <span class="cop-alert-en">BTP SUDDEN LICENSE CHECK AHEAD • SHOW DIGILOCKER DL OR SWERVE!</span>
+          </div>
+          <button type="button" class="cop-dl-btn" id="btn-show-dl">🪪 Show DL [L]</button>
         </div>
         <div class="rain-banner" id="hud-weather-alert">
-          ⛈️ MONSOON DOWNPOUR • TIRE FRICTION 0% (HYDROPLANING)
+          ⛈️ ಮುಂಗಾರು ಮಳೆ • MONSOON DOWNPOUR • TIRE FRICTION 0% (HYDROPLANING)
         </div>
       </div>
 
@@ -722,6 +853,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           <button type="button" class="tool-btn" data-quick-mode="complex">Peak Hour</button>
         </div>
         <button type="button" class="tool-btn action-pill" id="btn-horn-test">📯 Horn</button>
+        <button type="button" class="tool-btn action-pill" id="btn-cop-test">👮 Cop Check</button>
         <button type="button" class="tool-btn action-pill" id="btn-rain-toggle">🌧️ Rain</button>
         <button type="button" class="tool-btn action-pill" id="btn-audio-toggle">🔊 Audio</button>
         <button type="button" class="tool-btn action-pill" id="btn-open-modal">⚙️ Menu</button>
@@ -734,6 +866,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <span class="key-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Steer &amp; Throttle</span>
         <span class="key-item"><kbd>SPACE</kbd> Gravity Glitch Hop</span>
         <span class="key-item"><kbd>H</kbd> Auto Horn ("Pa-Pa-Paarp!")</span>
+        <span class="key-item"><kbd>L</kbd> Flash License to Cop</span>
         <span class="key-item"><kbd>R</kbd> Fix Wheel</span>
         <span class="key-item"><kbd>ESC</kbd> Menu</span>
       </div>
@@ -745,7 +878,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="speed-num" id="hud-speed">65</span>
             <span class="speed-unit">KM/H</span>
           </div>
-          <span class="alt-badge" id="hud-alt">ROAD 0.0m</span>
+          <span class="alt-badge" id="hud-alt">ON ROAD</span>
         </div>
 
         <div class="bar-group">
@@ -781,24 +914,24 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="hazard-trim"></div>
     <div class="modal-inner">
       <div class="modal-top">
-        <span class="modal-badge">KA-01 BENGALURU TRAFFIC ARCADE</span>
+        <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • KA-01 BENGALURU TRAFFIC PRO EDITION</span>
       </div>
-      <h1 id="modal-title">ONDU SECOND: BANGALORE GRAVITY GLITCH</h1>
+      <h1 id="modal-title">ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: BANGALORE GRAVITY GLITCH</h1>
       <p class="modal-lead">
-        Drive the iconic green-and-yellow Bengaluru Auto-Rickshaw on the left-hand lanes while dodging oncoming right-side traffic, sudden road-crossing jaywalkers raising the classic "Ondu Second!" stop hand, hyper-speed Zepto/Blinkit riders, and magnetic BBMP potholes!
+        Drive the iconic emerald-and-canary Bengaluru Auto-Rickshaw down a realistic PBR highway lined with bilingual <strong>Kannada + English hoardings</strong>, sudden <strong>Bengaluru Traffic Police (BTP) license checks</strong>, darting <strong>Indie stray dogs</strong>, "Ondu Second!" jaywalkers, hyper-speed Zepto/Blinkit riders, and magnetic BBMP potholes!
       </p>
 
       <div class="mode-grid">
         <article class="mode-card" data-mode="low">
           <div>
             <span class="mode-tag tag-low">Low • Easy Mode</span>
-            <h2>Cubbon Park Morning</h2>
+            <h2>ಕಬ್ಬನ್ ಪಾರ್ಕ್ ಬೆಳಿಗ್ಗೆ | Cubbon Park Morning</h2>
             <p class="mode-desc">
-              Light two-way morning traffic, occasional pedestrians crossing, gentle pothole gravity pull, and clear dry roads.
+              Cruising morning traffic with bilingual Kannada hoardings, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
             </p>
             <ul class="mode-stats">
               <li><strong>Traffic:</strong> 12 Two-Way Vehicles</li>
-              <li><strong>Jaywalkers:</strong> 5 Pedestrians</li>
+              <li><strong>Hazards:</strong> 5 Jaywalkers • 3 Stray Dogs • 1 BTP Cop</li>
               <li><strong>Pothole Pull:</strong> Mild Magnetic Pull</li>
             </ul>
           </div>
@@ -808,13 +941,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <article class="mode-card selected" data-mode="medium">
           <div>
             <span class="mode-tag tag-med">Medium • Normal Mode</span>
-            <h2>Indiranagar 6 PM Rush</h2>
+            <h2>ಇಂದಿರಾನಗರ ಸಂಜೆ ರಶ್ | Indiranagar 6 PM Rush</h2>
             <p class="mode-desc">
-              Bustling two-way Bengaluru rush with oncoming BMTC buses, sudden jaywalkers darting across lanes, and Zepto/Blinkit cut-offs.
+              Bustling evening rush with oncoming BMTC 500D buses, sudden BTP Traffic Cop license stops, darting Indie stray dogs, and Zepto/Blinkit cut-offs.
             </p>
             <ul class="mode-stats">
               <li><strong>Traffic:</strong> 20 Two-Way Vehicles</li>
-              <li><strong>Jaywalkers:</strong> 8 Sudden Crossers</li>
+              <li><strong>Hazards:</strong> 8 Jaywalkers • 5 Stray Dogs • 2 BTP Cops</li>
               <li><strong>Pothole Pull:</strong> Strong Sinkhole Pull</li>
             </ul>
           </div>
@@ -824,13 +957,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <article class="mode-card" data-mode="complex">
           <div>
             <span class="mode-tag tag-complex">Complex • Peak Hour</span>
-            <h2>Silk Board 8 PM Gridlock</h2>
+            <h2>ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಟ್ರಾಫಿಕ್ | Silk Board 8 PM Gridlock</h2>
             <p class="mode-desc">
-              Complete Silk Board peak-hour chaos! Convoys of oncoming BMTC 500D buses, non-stop jaywalkers, monsoon downpours, and low-G glitch bounces.
+              Full Silk Board peak-hour madness! Non-stop BMTC convoys, aggressive BTP e-Challan nakabandis, pack of darting stray dogs, and monsoon hydroplaning.
             </p>
             <ul class="mode-stats">
               <li><strong>Traffic:</strong> 30 Dense Two-Way Vehicles</li>
-              <li><strong>Jaywalkers:</strong> 12 Non-Stop Crossers</li>
+              <li><strong>Hazards:</strong> 12 Jaywalkers • 7 Stray Dogs • 3 BTP Cops</li>
               <li><strong>Pothole Pull:</strong> Maximum Gravity Glitch</li>
             </ul>
           </div>
@@ -839,9 +972,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
 
       <div class="asset-status-bar">
-        <div><strong>Blender MCP 3D Assets:</strong> <span id="asset-load-summary">Loading 10/10 .glb models...</span></div>
+        <div><strong>Blender 3D PBR Assets:</strong> <span id="asset-load-summary">Loading 12/12 .glb models...</span></div>
         <div class="asset-badges">
           <span class="asset-chip" data-asset="auto_rickshaw.glb">auto_rickshaw.glb</span>
+          <span class="asset-chip" data-asset="traffic_police.glb">traffic_police.glb</span>
+          <span class="asset-chip" data-asset="stray_dog.glb">stray_dog.glb</span>
           <span class="asset-chip" data-asset="delivery_swiggy.glb">delivery_swiggy.glb</span>
           <span class="asset-chip" data-asset="delivery_zepto.glb">delivery_zepto.glb</span>
           <span class="asset-chip" data-asset="delivery_blinkit.glb">delivery_blinkit.glb</span>
@@ -860,9 +995,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <script type="module">
     import * as THREE from 'three';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
     // =========================================================================
-    // 1. BLENDER MCP GLB ASSET LOADER (HTTP + Embedded Gzip Binary Fallback)
+    // 1. BLENDER GLB ASSET LOADER (HTTP + Embedded Gzip Binary Fallback)
     // =========================================================================
     const EMBEDDED_GLB_GZ = __EMBEDDED_GLB_JSON__;
 
@@ -900,7 +1040,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 2. WEB AUDIO API SYNTHESIZER (City Drone, Tuk-Tuk, Beep-Beep, Rain Noise)
+    // 2. WEB AUDIO API SYNTHESIZER (Tuk-Tuk, Horn, BTP Whistle, Stray Dog Bark)
     // =========================================================================
     class BangaloreAudioEngine {
       constructor() {
@@ -931,7 +1071,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
 
       _setupHornEchoChain() {
-        // Nonlinear brass/reed horn saturation curve (gives authentic Indian auto horn bite!)
         const samples = 1024;
         const curve = new Float32Array(samples);
         for (let i = 0; i < samples; i++) {
@@ -942,7 +1081,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         this.hornShaper.curve = curve;
         this.hornShaper.oversample = '2x';
 
-        // Nasal horn bell formant filter + under-flyover street slapback echo
         this.hornBellFilter = this.ctx.createBiquadFilter();
         this.hornBellFilter.type = 'peaking';
         this.hornBellFilter.frequency.value = 1140;
@@ -1065,17 +1203,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const now = this.ctx.currentTime;
 
         if (variant === 'auto') {
-          // Authentic Bengaluru Bajaj RE Auto-Rickshaw Horn:
-          // Dual-reed discordant brass/bulb horn ("PA-PA-PAAARP!") with air-pressure pitch envelope & 50Hz diaphragm rattle!
           const bursts = [
             { offset: 0.00, dur: 0.095, pitchMult: 1.00, peakGain: 0.28 },
             { offset: 0.115, dur: 0.095, pitchMult: 1.03, peakGain: 0.30 },
             { offset: 0.230, dur: 0.230, pitchMult: 0.99, peakGain: 0.34 }
           ];
-          const baseF1 = 442 + (Math.random() - 0.5) * 14; // Primary brass reed
-          const baseF2 = baseF1 * 1.254;                   // Dissonant major-third twin reed (~554 Hz)
-          const baseF3 = baseF1 * 2.0;                     // Nasal bell harmonic (~884 Hz)
-          const subBulb = baseF1 * 0.5;                    // Rubber bulb air-cavity thump (~221 Hz)
+          const baseF1 = 442 + (Math.random() - 0.5) * 14;
+          const baseF2 = baseF1 * 1.254;
+          const baseF3 = baseF1 * 2.0;
+          const subBulb = baseF1 * 0.5;
 
           bursts.forEach((b) => {
             const start = now + b.offset;
@@ -1094,7 +1230,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             const f2 = baseF2 * b.pitchMult;
             const f3 = baseF3 * b.pitchMult;
 
-            // Air-pressure squeeze bend: swells up +7% on attack, then droops -4% on release
             o1.frequency.setValueAtTime(f1 * 0.94, start);
             o1.frequency.linearRampToValueAtTime(f1 * 1.06, start + 0.022);
             o1.frequency.exponentialRampToValueAtTime(f1 * 0.97, end);
@@ -1106,7 +1241,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             o3.frequency.setValueAtTime(f3, start);
             oSub.frequency.setValueAtTime(subBulb, start);
 
-            // 52Hz mechanical horn diaphragm rattle FM modulation
             const rattleLfo = this.ctx.createOscillator();
             rattleLfo.type = 'sine';
             rattleLfo.frequency.value = 52;
@@ -1148,7 +1282,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           return;
         }
 
-        // BMTC Bus deep dual-air horn or Scooter quick piezo beep
         const isBus = variant === 'bus';
         const f1 = isBus ? 185 : 1120 + (Math.random() - 0.5) * 60;
         const f2 = isBus ? 233 : f1 * 1.25;
@@ -1181,6 +1314,110 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           o2.start(start);
           o1.stop(start + dur + 0.01);
           o2.stop(start + dur + 0.01);
+        });
+      }
+
+      // Authentic Shrill Bengaluru Traffic Police Pea-Whistle ("PRRREEEET!")
+      playPoliceWhistle(withSiren = false) {
+        if (!this.initialized || !this.enabled) return;
+        const now = this.ctx.currentTime;
+        const dur = 0.42;
+        const o1 = this.ctx.createOscillator();
+        const o2 = this.ctx.createOscillator();
+        const peaLfo = this.ctx.createOscillator();
+        o1.type = 'sine';
+        o2.type = 'triangle';
+        peaLfo.type = 'sine';
+
+        o1.frequency.setValueAtTime(2780, now);
+        o1.frequency.linearRampToValueAtTime(2960, now + 0.08);
+        o1.frequency.setValueAtTime(2920, now + dur);
+
+        o2.frequency.setValueAtTime(2835, now);
+        peaLfo.frequency.value = 48; // Pea trill inside whistle chamber
+        const lfoGain = this.ctx.createGain();
+        lfoGain.gain.value = 115;
+        peaLfo.connect(lfoGain);
+        lfoGain.connect(o1.frequency);
+        lfoGain.connect(o2.frequency);
+
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0.001, now);
+        g.gain.linearRampToValueAtTime(0.22, now + 0.02);
+        g.gain.setValueAtTime(0.20, now + dur - 0.05);
+        g.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+        o1.connect(g);
+        o2.connect(g);
+        g.connect(this.master);
+        o1.start(now); o2.start(now); peaLfo.start(now);
+        o1.stop(now + dur + 0.02); o2.stop(now + dur + 0.02); peaLfo.stop(now + dur + 0.02);
+
+        if (withSiren) {
+          const sOsc = this.ctx.createOscillator();
+          sOsc.type = 'sawtooth';
+          sOsc.frequency.setValueAtTime(650, now + 0.12);
+          sOsc.frequency.linearRampToValueAtTime(1180, now + 0.32);
+          sOsc.frequency.linearRampToValueAtTime(620, now + 0.54);
+          const sg = this.ctx.createGain();
+          sg.gain.setValueAtTime(0.15, now + 0.12);
+          sg.gain.exponentialRampToValueAtTime(0.001, now + 0.56);
+          sOsc.connect(sg);
+          sg.connect(this.master);
+          sOsc.start(now + 0.12);
+          sOsc.stop(now + 0.58);
+        }
+      }
+
+      // DigiLocker License Verified Chime
+      playLicenseVerified() {
+        if (!this.initialized || !this.enabled) return;
+        const now = this.ctx.currentTime;
+        [587.33, 880.0, 1174.66].forEach((freq, idx) => {
+          const o = this.ctx.createOscillator();
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(freq, now + idx * 0.07);
+          const g = this.ctx.createGain();
+          g.gain.setValueAtTime(0.18, now + idx * 0.07);
+          g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.22);
+          o.connect(g);
+          g.connect(this.master);
+          o.start(now + idx * 0.07);
+          o.stop(now + idx * 0.07 + 0.24);
+        });
+      }
+
+      // Authentic Indie Street Dog Double Bark ("BOW-WOW!")
+      playDogBark() {
+        if (!this.initialized || !this.enabled) return;
+        const now = this.ctx.currentTime;
+        [0.0, 0.16].forEach((offset, idx) => {
+          const start = now + offset;
+          const dur = 0.12;
+          const osc = this.ctx.createOscillator();
+          osc.type = 'sawtooth';
+          const fPeak = idx === 0 ? 490 : 540;
+          osc.frequency.setValueAtTime(310, start);
+          osc.frequency.linearRampToValueAtTime(fPeak, start + 0.035);
+          osc.frequency.exponentialRampToValueAtTime(220, start + dur);
+
+          const bp = this.ctx.createBiquadFilter();
+          bp.type = 'bandpass';
+          bp.frequency.setValueAtTime(750, start);
+          bp.frequency.linearRampToValueAtTime(1150, start + 0.04);
+          bp.frequency.exponentialRampToValueAtTime(520, start + dur);
+          bp.Q.value = 2.4;
+
+          const g = this.ctx.createGain();
+          g.gain.setValueAtTime(0.001, start);
+          g.gain.linearRampToValueAtTime(0.24, start + 0.015);
+          g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+
+          osc.connect(bp);
+          bp.connect(g);
+          g.connect(this.master);
+          osc.start(start);
+          osc.stop(start + dur + 0.01);
         });
       }
 
@@ -1231,13 +1468,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     const audio = new BangaloreAudioEngine();
 
     // =========================================================================
-    // 3. DIFFICULTY PROFILES (Two-Way Traffic + Jaywalkers + Glitch Bounce)
+    // 3. DIFFICULTY PROFILES (Two-Way Traffic + Jaywalkers + BTP Cops + Stray Dogs)
     // =========================================================================
     const GRAVITY_PROFILES = {
       low: {
         id: 'low',
         trafficCount: 12,
         jaywalkerCount: 5,
+        dogCount: 3,
+        copCount: 1,
         busRatio: 0.14,
         deliveryRatio: 0.35,
         deliverySpeedMult: 1.15,
@@ -1255,6 +1494,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         id: 'medium',
         trafficCount: 20,
         jaywalkerCount: 8,
+        dogCount: 5,
+        copCount: 2,
         busRatio: 0.22,
         deliveryRatio: 0.48,
         deliverySpeedMult: 1.45,
@@ -1272,6 +1513,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         id: 'complex',
         trafficCount: 30,
         jaywalkerCount: 12,
+        dogCount: 7,
+        copCount: 3,
         busRatio: 0.32,
         deliveryRatio: 0.48,
         deliverySpeedMult: 1.75,
@@ -1290,7 +1533,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     let currentProfile = GRAVITY_PROFILES.medium;
 
     // =========================================================================
-    // 4. THREE.JS SCENE, GOLDEN-HOUR SKY, LIGHTING & CAMERA
+    // 4. PRO THREE.JS SCENE, PMREM ENVIRONMENT, UNREAL BLOOM & SKY DOME
     // =========================================================================
     const canvas = document.getElementById('game-canvas');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
@@ -1299,46 +1542,143 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 0.95;
 
     const scene = new THREE.Scene();
-    // Warm Bengaluru Golden-Hour / Dusk Horizon Sky (NOT pitch black!)
-    const drySkyColor = new THREE.Color(0x283e66);
-    const rainSkyColor = new THREE.Color(0x162238);
+    const drySkyColor = new THREE.Color(0x1b2b48);
+    const rainSkyColor = new THREE.Color(0x0d1524);
     scene.background = drySkyColor.clone();
-    scene.fog = new THREE.FogExp2(0x283e66, 0.0045);
+    scene.fog = new THREE.FogExp2(0x1b2b48, 0.0038);
 
-    const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 420);
+    // PMREM Metallic & Glass Reflections (Pro-Game PBR Lighting)
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environmentIntensity = 0.28;
+
+    const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 440);
     camera.position.set(0, 4.2, 7.8);
 
-    const hemiLight = new THREE.HemisphereLight(0x9ec5ff, 0x3d352e, 1.65);
+    // Post-Processing Composer with Subtle UnrealBloomPass
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      0.16, // strength
+      0.32, // radius
+      0.94  // threshold (only bright lights/neon/LEDs bloom!)
+    );
+    composer.addPass(bloomPass);
+    composer.addPass(new OutputPass());
+
+    const hemiLight = new THREE.HemisphereLight(0x9ec5ff, 0x362c24, 0.95);
     scene.add(hemiLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfff0d4, 2.6);
-    sunLight.position.set(35, 55, 30);
+    const sunLight = new THREE.DirectionalLight(0xffe6bd, 1.85);
+    sunLight.position.set(36, 58, 28);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.set(2048, 2048);
     sunLight.shadow.camera.near = 1;
-    sunLight.shadow.camera.far = 180;
+    sunLight.shadow.camera.far = 190;
     const d = 48;
     sunLight.shadow.camera.left = -d;
     sunLight.shadow.camera.right = d;
     sunLight.shadow.camera.top = d;
     sunLight.shadow.camera.bottom = -d;
+    sunLight.shadow.bias = -0.0005;
     scene.add(sunLight);
 
+    // Procedural Bengaluru Golden-Hour / Dusk Horizon Sky Dome
+    function createSkyDomeTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+      const grad = ctx.createLinearGradient(0, 0, 0, 512);
+      grad.addColorStop(0.0, '#0b1329');
+      grad.addColorStop(0.35, '#192b52');
+      grad.addColorStop(0.47, '#3b4d7a');
+      grad.addColorStop(0.53, '#d97745');
+      grad.addColorStop(0.58, '#2b354f');
+      grad.addColorStop(1.0, '#111827');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1024, 512);
+
+      // Soft dusk clouds near horizon
+      for (let i = 0; i < 40; i++) {
+        const cx = Math.random() * 1024;
+        const cy = 150 + Math.random() * 110;
+        const rw = 60 + Math.random() * 140;
+        const rh = 8 + Math.random() * 20;
+        const cg = ctx.createRadialGradient(cx, cy, 2, cx, cy, rw);
+        cg.addColorStop(0, 'rgba(255, 196, 138, 0.16)');
+        cg.addColorStop(1, 'rgba(255, 196, 138, 0.0)');
+        ctx.fillStyle = cg;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rw, rh, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const skyDome = new THREE.Mesh(
+      new THREE.SphereGeometry(380, 32, 20),
+      new THREE.MeshBasicMaterial({ map: createSkyDomeTexture(), side: THREE.BackSide, fog: false })
+    );
+    scene.add(skyDome);
+
     // =========================================================================
-    // 5. HIGHWAY, CONTINUOUS UNBROKEN NAMMA METRO VIADUCT, TREES & LANDMARKS
+    // 5. PROCEDURAL PBR ASPHALT HIGHWAY, SKYLINE, & BILINGUAL KANNADA HOARDINGS
     // =========================================================================
     const ROAD_WIDTH = 22.8; // 6 lanes * 3.8m
     const LANES = [-9.5, -5.7, -1.9, 1.9, 5.7, 9.5];
     const CORRIDOR_LENGTH = 360;
 
-    // Realistic Grey Asphalt Road Surface
+    function createAsphaltTextures() {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 1024;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#242935';
+      ctx.fillRect(0, 0, 1024, 1024);
+
+      // Micro-aggregate asphalt grain & tar patches
+      for (let i = 0; i < 28000; i++) {
+        const x = Math.random() * 1024;
+        const y = Math.random() * 1024;
+        const v = 28 + Math.floor(Math.random() * 30);
+        ctx.fillStyle = `rgb(${v}, ${v + 3}, ${v + 9})`;
+        ctx.fillRect(x, y, 2, 2);
+      }
+
+      // Subtle glossy tire wear tracks down each of the 6 lanes
+      for (let lane = 0; lane < 6; lane++) {
+        const lx = ((lane + 0.5) / 6) * 1024;
+        for (const wheelOffset of [-32, 32]) {
+          const tg = ctx.createLinearGradient(lx + wheelOffset - 22, 0, lx + wheelOffset + 22, 0);
+          tg.addColorStop(0, 'rgba(15, 18, 25, 0)');
+          tg.addColorStop(0.5, 'rgba(14, 17, 24, 0.42)');
+          tg.addColorStop(1, 'rgba(15, 18, 25, 0)');
+          ctx.fillStyle = tg;
+          ctx.fillRect(lx + wheelOffset - 22, 0, 44, 1024);
+        }
+      }
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      tex.repeat.set(1, 28);
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
     const roadMat = new THREE.MeshStandardMaterial({
-      color: 0x2b303c,
-      roughness: 0.72,
-      metalness: 0.10
+      map: createAsphaltTextures(),
+      color: 0xd8dee9,
+      roughness: 0.68,
+      metalness: 0.14
     });
     const roadMesh = new THREE.Mesh(new THREE.PlaneGeometry(ROAD_WIDTH, CORRIDOR_LENGTH * 1.6), roadMat);
     roadMesh.rotation.x = -Math.PI / 2;
@@ -1346,38 +1686,289 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     roadMesh.receiveShadow = true;
     scene.add(roadMesh);
 
-    // Raised Sidewalk / Urban Boulevard Ground
-    const groundMat = new THREE.MeshStandardMaterial({ color: 0x384152, roughness: 0.88 });
-    const groundMesh = new THREE.Mesh(new THREE.PlaneGeometry(240, CORRIDOR_LENGTH * 1.6), groundMat);
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0x2c3444, roughness: 0.86 });
+    const groundMesh = new THREE.Mesh(new THREE.PlaneGeometry(260, CORRIDOR_LENGTH * 1.6), groundMat);
     groundMesh.rotation.x = -Math.PI / 2;
     groundMesh.position.set(0, -0.04, -CORRIDOR_LENGTH * 0.35);
     groundMesh.receiveShadow = true;
     scene.add(groundMesh);
 
-    // Scrolling Corridor Segments (6m each) — Includes Unbroken Namma Metro Viaduct on Right!
+    // =========================================================================
+    // 5B. BILINGUAL KANNADA + ENGLISH (60:40 RULE) HOARDINGS & HIGHWAY GANTRIES
+    // =========================================================================
+    const BILINGUAL_HOARDING_ADS = [
+      {
+        bgTop: '#7c1d1d',
+        bgBot: '#3b0a0a',
+        border: '#fbbf24',
+        badge: 'ಇಂದಿರಾನಗರ • INDIRANAGAR',
+        knTitle: 'ದಿ ರಾಮೇಶ್ವರಂ ಕೆಫೆ',
+        enTitle: 'THE RAMESHWARAM CAFE',
+        knSub: 'ಶುದ್ಧ ತುಪ್ಪದ ಪುದಿ ಮಸಾಲೆ ದೋಸೆ ಮತ್ತು ಫಿಲ್ಟರ್ ಕಾಫಿ',
+        enSub: 'PURE GHEE PUDI MASALA DOSA & DEGREE FILTER COFFEE',
+        accent: '#fde047'
+      },
+      {
+        bgTop: '#064e3b',
+        bgBot: '#022c22',
+        border: '#ffd000',
+        badge: 'ನಮ್ಮ ಬೆಂಗಳೂರು • ZERO COMMISSION',
+        knTitle: 'ನಮ್ಮ ಯಾತ್ರಿ ಆಟೋ ಆಪ್',
+        enTitle: 'NAMMA YATRI • AUTO APP',
+        knSub: 'ಆಟೋ ಚಾಲಕರ ಸ್ವಂತ ಆಪ್ • ಮೀಟರ್ ಮೇಲೆ ₹೨೦ ಬೇಡ!',
+        enSub: '100% DIRECT TO DRIVER • ONE CLICK INSTANT PICKUP',
+        accent: '#ffd000'
+      },
+      {
+        bgTop: '#1e3a8a',
+        bgBot: '#0f172a',
+        border: '#38bdf8',
+        badge: 'ಕರ್ನಾಟಕ ಹಾಲು ಮಹಾಮಂಡಳಿ • KMF',
+        knTitle: 'ನಂದಿನಿ ತಾಜಾ ಹಾಲು ಮತ್ತು ಸಿಹಿ',
+        enTitle: 'KMF NANDINI MILK & MYSORE PAK',
+        knSub: 'ಪ್ರತಿ ದಿನ ಬೆಳಿಗ್ಗೆ ಪರಿಶುದ್ಧ ಹಾಲು, ಮೊಸರು ಮತ್ತು ತುಪ್ಪ',
+        enSub: 'GOOD LIFE PURE MILK, CURD & GHEE SWEETS',
+        accent: '#7dd3fc'
+      },
+      {
+        bgTop: '#4c1d95',
+        bgBot: '#1e1b4b',
+        border: '#c084fc',
+        badge: 'BMRCL • ನಮ್ಮ ಮೆಟ್ರೋ',
+        knTitle: 'ನಮ್ಮ ಮೆಟ್ರೋ - ನೇರಳೆ ಮಾರ್ಗ',
+        enTitle: 'NAMMA METRO PURPLE LINE',
+        knSub: 'ವೈಟ್‌ಫೀಲ್ಡ್ ನಿಂದ ಚಲ್ಲಘಟ್ಟ ವರೆಗೆ ಟ್ರಾಫಿಕ್ ಇಲ್ಲದ ಪ್ರಯಾಣ!',
+        enSub: 'WHITEFIELD TO CHALLAGHATTA • BEAT SILK BOARD RUSH',
+        accent: '#e9d5ff'
+      },
+      {
+        bgTop: '#78350f',
+        bgBot: '#451a03',
+        border: '#f59e0b',
+        badge: 'ಕರ್ನಾಟಕದ ಹೆಮ್ಮೆ • SINCE 1916',
+        knTitle: 'ಮೈಸೂರು ಸ್ಯಾಂಡಲ್ ಸೋಪ್',
+        enTitle: 'MYSORE SANDAL SOAP',
+        knSub: 'ಶೇಕಡಾ ೧೦೦ ಪರಿಶುದ್ಧ ಶ್ರೀಗಂಧದ ಎಣ್ಣೆಯ ಸೋಪು',
+        enSub: '100% PURE NATURAL SANDALWOOD OIL • HERITAGE',
+        accent: '#fde68a'
+      },
+      {
+        bgTop: '#0f172a',
+        bgBot: '#1e293b',
+        border: '#ef4444',
+        badge: 'BTP • ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್',
+        knTitle: 'ಸಂಚಾರ ನಿಯಮ ಪಾಲಿಸಿ • ಸುರಕ್ಷಿತವಾಗಿರಿ',
+        enTitle: 'BENGALURU TRAFFIC POLICE ALERT',
+        knSub: 'ಮುಂದೆ ತಪಾಸಣೆ ಇದೆ • DL, RC ಮತ್ತು ಇನ್ಶೂರೆನ್ಸ್ ತೋರಿಸಿ!',
+        enSub: 'SUDDEN LICENSE & E-CHALLAN CHECK AHEAD • PRESS [L]',
+        accent: '#bef264'
+      },
+      {
+        bgTop: '#581c87',
+        bgBot: '#2e1065',
+        border: '#10f560',
+        badge: '೧೦ ನಿಮಿಷದಲ್ಲಿ • 10-MIN DELIVERY',
+        knTitle: 'ಜೆಪ್ಟೊ ಮತ್ತು ಬ್ಲಿಂಕಿಟ್ ಸೂಪರ್ ಸ್ಟೋರ್',
+        enTitle: 'ZEPTO & BLINKIT DARK STORE',
+        knSub: 'ಕೊತ್ತಂಬರಿ ಸೊಪ್ಪು, ಹಾಲು ಮತ್ತು ತಿಂಡಿ ೧೦ ನಿಮಿಷದಲ್ಲಿ!',
+        enSub: 'FRESH CORIANDER, MILK & SNACKS IN 10 MINUTES',
+        accent: '#10f560'
+      },
+      {
+        bgTop: '#431407',
+        bgBot: '#1c0a00',
+        border: '#fb923c',
+        badge: 'ಗಾಂಧಿ ಬಜಾರ್ • SINCE 1943',
+        knTitle: 'ವಿದ್ಯಾರ್ಥಿ ಭವನ ಮಸಾಲೆ ದೋಸೆ',
+        enTitle: 'VIDYARTHI BHAVAN HERITAGE',
+        knSub: 'ಬೆಂಗಳೂರಿನ ಇತಿಹಾಸ ಪ್ರಸಿದ್ಧ ಗರಿಗರಿ ಬೆಣ್ಣೆ ಮಸಾಲೆ ದೋಸೆ',
+        enSub: 'LEGENDARY CRISPY BUTTER MASALA DOSA & COFFEE',
+        accent: '#fed7aa'
+      }
+    ];
+
+    function createBilingualHoardingTexture(ad) {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+
+      const grad = ctx.createLinearGradient(0, 0, 1024, 512);
+      grad.addColorStop(0, ad.bgTop);
+      grad.addColorStop(1, ad.bgBot);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1024, 512);
+
+      // Outer & inner neon border
+      ctx.strokeStyle = ad.border;
+      ctx.lineWidth = 14;
+      ctx.strokeRect(14, 14, 996, 484);
+      ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(30, 30, 964, 452);
+
+      // Top 60% Kannada Header Pill
+      ctx.fillStyle = ad.border;
+      ctx.beginPath();
+      ctx.roundRect(52, 46, 460, 48, 10);
+      ctx.fill();
+      ctx.fillStyle = '#090d16';
+      ctx.font = '900 24px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText(ad.badge, 70, 79);
+
+      // 60:40 Rule Tag on top-right
+      ctx.fillStyle = 'rgba(255,255,255,0.14)';
+      ctx.beginPath();
+      ctx.roundRect(750, 46, 220, 46, 8);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 20px "Inter", sans-serif';
+      ctx.fillText('ಕನ್ನಡ 60% • BBMP', 772, 76);
+
+      // Prominent Kannada Headline (60% Primary Display)
+      ctx.fillStyle = ad.accent;
+      ctx.shadowColor = 'rgba(0,0,0,0.65)';
+      ctx.shadowBlur = 10;
+      ctx.font = '900 66px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
+      ctx.fillText(ad.knTitle, 54, 185);
+
+      // Kannada Sub-headline
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 34px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
+      ctx.fillText(ad.knSub, 54, 248);
+
+      // Divider rule
+      ctx.strokeStyle = ad.border;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(54, 285);
+      ctx.lineTo(968, 285);
+      ctx.stroke();
+
+      // English Headline (40% Secondary Display)
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 48px "Inter", -apple-system, sans-serif';
+      ctx.fillText(ad.enTitle, 54, 360);
+
+      // English Sub-headline
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '800 27px "Inter", -apple-system, sans-serif';
+      ctx.fillText(ad.enSub, 54, 422);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    function createBilingualGantrySignTexture(isHebbal = false) {
+      const c = document.createElement('canvas');
+      c.width = 2048;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+
+      const g = ctx.createLinearGradient(0, 0, 0, 512);
+      g.addColorStop(0, '#006b38');
+      g.addColorStop(1, '#004725');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 2048, 512);
+
+      // White reflective highway border
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 16;
+      ctx.strokeRect(18, 18, 2012, 476);
+
+      // NH 44 Yellow Shield
+      ctx.fillStyle = '#ffd000';
+      ctx.beginPath();
+      ctx.roundRect(56, 52, 180, 96, 14);
+      ctx.fill();
+      ctx.fillStyle = '#090d16';
+      ctx.font = '900 44px "Inter", sans-serif';
+      ctx.fillText('NH 44', 78, 116);
+
+      // Top Bold Kannada Highway Destination
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 78px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText(
+        isHebbal
+          ? 'ಹೆಬ್ಬಾಳ ಮೇಲ್ಸೇತುವೆ • ಹೊರ ವರ್ತುಲ ರಸ್ತೆ (ORR)'
+          : 'ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಜಂಕ್ಷನ್ • ಹೊಸೂರು ರಸ್ತೆ',
+        270,
+        125
+      );
+
+      // Middle Bold English Highway Destination
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 58px "Inter", sans-serif';
+      ctx.fillText(
+        isHebbal
+          ? 'HEBBAL FLYOVER • OUTER RING ROAD (KIAL AIRPORT)'
+          : 'SILK BOARD JUNCTION • HOSUR ROAD (ELECTRONIC CITY)',
+        270,
+        215
+      );
+
+      // Horizontal Divider
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(40, 260);
+      ctx.lineTo(2008, 260);
+      ctx.stroke();
+
+      // 3 Bilingual Lane Guidance Columns
+      const cols = isHebbal
+        ? [
+            { x: 110, kn: '← ಯಶವಂತಪುರ', en: 'YESHWANTHPUR' },
+            { x: 760, kn: '↑ ಕೆಂಪೇಗೌಡ ಏರ್‌ಪೋರ್ಟ್', en: 'BENGALURU AIRPORT' },
+            { x: 1470, kn: '→ ಮಾರತ್ತಹಳ್ಳಿ', en: 'MARATHAHALLI' }
+          ]
+        : [
+            { x: 110, kn: '← ಬಿಟಿಎಂ ಲೇಔಟ್', en: 'BTM LAYOUT' },
+            { x: 760, kn: '↑ ಎಲೆಕ್ಟ್ರಾನಿಕ್ ಸಿಟಿ', en: 'ELECTRONIC CITY' },
+            { x: 1470, kn: '→ ಎಚ್‌ಎಸ್‌ಆರ್ ಲೇಔಟ್', en: 'HSR LAYOUT' }
+          ];
+
+      cols.forEach((col) => {
+        ctx.fillStyle = '#fde047';
+        ctx.font = '900 44px "Noto Sans Kannada", "Inter", sans-serif';
+        ctx.fillText(col.kn, col.x, 355);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '800 34px "Inter", sans-serif';
+        ctx.fillText(col.en, col.x, 425);
+      });
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    // Build Scrolling Corridor Segments (6m each) — Includes Viaduct, Streetlamps & Skyline
     const scrollingStrips = [];
     const whiteDashMat = new THREE.MeshBasicMaterial({ color: 0xf1f5f9 });
     const yellowLineMat = new THREE.MeshBasicMaterial({ color: 0xffd000 });
-    const kerbYellowMat = new THREE.MeshStandardMaterial({ color: 0xffd000, roughness: 0.45 });
+    const kerbYellowMat = new THREE.MeshStandardMaterial({ color: 0xffd000, roughness: 0.42 });
     const kerbBlackMat = new THREE.MeshStandardMaterial({ color: 0x1e2430, roughness: 0.65 });
-    const concreteMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.75 });
+    const concreteMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.72 });
     const metroPurpleMat = new THREE.MeshStandardMaterial({
       color: 0x7c3aed,
-      roughness: 0.35,
-      emissive: 0x4c1d95,
-      emissiveIntensity: 0.25
+      roughness: 0.32,
+      emissive: 0x5b21b6,
+      emissiveIntensity: 0.45
     });
-    const railMetalMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8, roughness: 0.3 });
+    const poleMetalMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.85, roughness: 0.25 });
+    const lampBulbMat = new THREE.MeshBasicMaterial({ color: 0xfff3c4 });
     const treeTrunkMat = new THREE.MeshStandardMaterial({ color: 0x5c4033, roughness: 0.9 });
     const treeLeafMat = new THREE.MeshStandardMaterial({ color: 0x2d6a4f, roughness: 0.75 });
     const gulmoharLeafMat = new THREE.MeshStandardMaterial({ color: 0x40916c, roughness: 0.7 });
 
     const dashGeo = new THREE.BoxGeometry(0.16, 0.02, 2.8);
     const kerbGeo = new THREE.BoxGeometry(0.55, 0.26, 6.02);
-    // Unbroken 6.05m Viaduct Deck Segment at X = +18.5 so the Metro Line is 100% continuous!
     const viaductDeckGeo = new THREE.BoxGeometry(6.8, 1.1, 6.06);
     const viaductWallGeo = new THREE.BoxGeometry(0.26, 1.15, 6.06);
-    const viaductPierGeo = new THREE.CylinderGeometry(0.95, 1.05, 7.6, 12);
+    const viaductPierGeo = new THREE.CylinderGeometry(0.95, 1.05, 7.6, 14);
     const viaductCapGeo = new THREE.BoxGeometry(5.8, 1.1, 2.0);
 
     const METRO_X = 18.5;
@@ -1390,13 +1981,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       // Lane Divider Dashes between the 6 lanes
       for (const lx of [-7.6, -3.8, 0.0, 3.8, 7.6]) {
         if (lx === 0.0) {
-          // Double yellow center median line
-          const cl = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.02, 6.02), yellowLineMat);
-          cl.position.set(0, 0.01, 0);
+          const cl = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 6.02), yellowLineMat);
+          cl.position.set(0, 0.012, 0);
           row.add(cl);
         } else if (segIdx % 2 === 0) {
           const dash = new THREE.Mesh(dashGeo, whiteDashMat);
-          dash.position.set(lx, 0.01, 0);
+          dash.position.set(lx, 0.012, 0);
           row.add(dash);
         }
       }
@@ -1409,18 +1999,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       kerbR.position.set(ROAD_WIDTH / 2 + 0.28, 0.13, 0);
       row.add(kerbL, kerbR);
 
-      // Painted White Zebra Crossings at key pedestrian crossing intervals (including z = -18m)
+      // Painted White Zebra Crossings at key pedestrian crossing intervals
       if (segIdx % 14 === 3) {
-        const zebraGeo = new THREE.BoxGeometry(0.95, 0.022, 3.8);
+        const zebraGeo = new THREE.BoxGeometry(0.95, 0.024, 3.8);
         for (let zx = -9.6; zx <= 9.6; zx += 1.6) {
           if (Math.abs(zx) < 0.5) continue;
           const stripe = new THREE.Mesh(zebraGeo, whiteDashMat);
-          stripe.position.set(zx, 0.012, 0);
+          stripe.position.set(zx, 0.014, 0);
           row.add(stripe);
         }
       }
 
-      // CONTINUOUS UNBROKEN NAMMA METRO ELEVATED VIADUCT along X = +18.5!
+      // Continuous Unbroken Namma Metro Elevated Viaduct along X = +18.5
       const vDeck = new THREE.Mesh(viaductDeckGeo, concreteMat);
       vDeck.position.set(METRO_X, 8.2, 0);
       vDeck.receiveShadow = true;
@@ -1430,7 +2020,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       vWallR.position.set(METRO_X + 3.3, 9.1, 0);
       row.add(vDeck, vWallL, vWallR);
 
-      // Concrete Viaduct Pier every 18m (3 segments)
       if (segIdx % 3 === 0) {
         const pier = new THREE.Mesh(viaductPierGeo, concreteMat);
         pier.position.set(METRO_X, 3.8, 0);
@@ -1439,35 +2028,126 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         row.add(pier, cap);
       }
 
-      // Lush Bengaluru Rain Trees along Left Boulevard & Streetlamps every 24m
-      if (segIdx % 4 === 0) {
+      // Lush Bengaluru Rain Trees (set behind hoardings) & Warm LED Highway Streetlamps
+      if (segIdx % 5 === 0) {
         const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.38, 3.6, 8), treeTrunkMat);
-        trunk.position.set(-ROAD_WIDTH / 2 - 3.8, 1.8, 0);
-        const crown1 = new THREE.Mesh(new THREE.SphereGeometry(2.6, 10, 8), segIdx % 8 === 0 ? treeLeafMat : gulmoharLeafMat);
-        crown1.scale.set(1.2, 0.65, 1.2);
-        crown1.position.set(-ROAD_WIDTH / 2 - 3.8, 4.3, 0);
+        trunk.position.set(-ROAD_WIDTH / 2 - 11.2, 1.8, 0);
+        const crown1 = new THREE.Mesh(new THREE.SphereGeometry(2.6, 12, 10), segIdx % 10 === 0 ? treeLeafMat : gulmoharLeafMat);
+        crown1.scale.set(1.25, 0.68, 1.25);
+        crown1.position.set(-ROAD_WIDTH / 2 - 11.2, 4.6, 0);
         row.add(trunk, crown1);
+
+        // Dual Boulevard Streetlamp
+        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.13, 7.5, 8), poleMetalMat);
+        pole.position.set(-ROAD_WIDTH / 2 - 1.2, 3.75, 2.2);
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.10, 0.10), poleMetalMat);
+        arm.position.set(-ROAD_WIDTH / 2 - 0.4, 7.4, 2.2);
+        const bulb = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.08, 0.24), lampBulbMat);
+        bulb.position.set(-ROAD_WIDTH / 2 + 0.2, 7.34, 2.2);
+        row.add(pole, arm, bulb);
       }
 
       scene.add(row);
       scrollingStrips.push(row);
     }
 
-    // Dynamic Scrolling Bangalore Landmarks (Silk Board Gantry, Vidhana Soudha, Metro Station + Continuous Train)
+    // Build Illuminated Bilingual (Kannada + English) Roadside Hoardings & Tech Park Skyline
+    const hoardingGroup = new THREE.Group();
+    scene.add(hoardingGroup);
+    const hoardingInstances = [];
+
+    function buildBilingualHoardings() {
+      const frameMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.75, roughness: 0.3 });
+      const glowBarMat = new THREE.MeshBasicMaterial({ color: 0xfffbeb });
+
+      for (let i = 0; i < BILINGUAL_HOARDING_ADS.length; i++) {
+        const ad = BILINGUAL_HOARDING_ADS[i];
+        const tex = createBilingualHoardingTexture(ad);
+        const g = new THREE.Group();
+
+        const isLeft = i % 2 === 0;
+        const w = 9.0;
+        const h = 4.5;
+
+        // Steel support pillars
+        for (const px of [-w * 0.36, w * 0.36]) {
+          const post = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 4.6, 10), poleMetalMat);
+          post.position.set(px, 2.3, 0);
+          g.add(post);
+        }
+
+        // Backing cabinet
+        const cabinet = new THREE.Mesh(new THREE.BoxGeometry(w + 0.35, h + 0.35, 0.28), frameMat);
+        cabinet.position.set(0, 5.8, 0);
+        g.add(cabinet);
+
+        // Illuminated Bilingual Ad Face (Self-lit so Kannada & English text is super crisp day or rain!)
+        const faceMat = new THREE.MeshBasicMaterial({ map: tex });
+        const faceFront = new THREE.Mesh(new THREE.PlaneGeometry(w, h), faceMat);
+        faceFront.position.set(0, 5.8, 0.16);
+        g.add(faceFront);
+
+        // Top LED floodlight bar
+        const floodBar = new THREE.Mesh(new THREE.BoxGeometry(w * 0.92, 0.14, 0.35), glowBarMat);
+        floodBar.position.set(0, 5.8 + h * 0.5 + 0.18, 0.22);
+        g.add(floodBar);
+
+        const xPos = isLeft ? (-ROAD_WIDTH / 2 - 5.2) : (ROAD_WIDTH / 2 + 4.4);
+        const zPos = -18 - i * (CORRIDOR_LENGTH / BILINGUAL_HOARDING_ADS.length);
+        g.position.set(xPos, 0, zPos);
+        // Angle slightly toward the road so driver reads Kannada + English effortlessly
+        g.rotation.y = isLeft ? 0.34 : -0.34;
+
+        hoardingGroup.add(g);
+        hoardingInstances.push(g);
+      }
+    }
+    buildBilingualHoardings();
+
+    // Dynamic Scrolling Bangalore Landmarks (Silk Board Gantry with Kannada+English, Vidhana Soudha, Metro)
     const landmarkInstances = [];
     let continuousMetroTrain = null;
 
     function spawnLandmarksFromGLB() {
-      // 1. Massive "Silk Board" Highway Green Sign spanning directly over the 6-lane road
-      for (const zPos of [-65, -245]) {
+      // 1. Massive "Silk Board" & "Hebbal" Bilingual Highway Green Sign Gantries
+      const gantryConfigs = [
+        {
+          zPos: -42,
+          isHebbal: false,
+          kn: 'ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಮೇಲ್ಸೇತುವೆ',
+          en: 'SILK BOARD FLYOVER GANTRY'
+        },
+        {
+          zPos: -222,
+          isHebbal: true,
+          kn: 'ಹೆಬ್ಬಾಳ ಮೇಲ್ಸೇತುವೆ (ORR)',
+          en: 'HEBBAL FLYOVER GANTRY'
+        }
+      ];
+
+      gantryConfigs.forEach((cfg) => {
         const silk = loadedTemplates['silk_board_sign.glb'].clone(true);
-        silk.position.set(0, 0, zPos);
+        const signTex = createBilingualGantrySignTexture(cfg.isHebbal);
+        const signMat = new THREE.MeshBasicMaterial({ map: signTex });
+
+        // Attach ultra-crisp Bilingual Kannada+English highway signboard over the 3D gantry frame
+        const frontBoard = new THREE.Mesh(new THREE.PlaneGeometry(19.4, 3.75), signMat);
+        frontBoard.position.set(0, 8.85, 0.72);
+        silk.add(frontBoard);
+
+        const backBoard = new THREE.Mesh(new THREE.PlaneGeometry(19.4, 3.75), signMat);
+        backBoard.position.set(0, 8.85, -0.72);
+        backBoard.rotation.y = Math.PI;
+        silk.add(backBoard);
+
+        silk.position.set(0, 0, cfg.zPos);
         scene.add(silk);
         landmarkInstances.push({
           mesh: silk,
-          type: 'SILK BOARD FLYOVER GANTRY'
+          kn: cfg.kn,
+          type: cfg.en
         });
-      }
+      });
 
       // 2. Vidhana Soudha Grand Facade along the Left Boulevard Vista
       for (const zPos of [-135, -315]) {
@@ -1477,6 +2157,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         scene.add(vidhana);
         landmarkInstances.push({
           mesh: vidhana,
+          kn: 'ವಿಧಾನ ಸೌಧ • ಬೆಂಗಳೂರು',
           type: 'VIDHANA SOUDHA GRAND FACADE'
         });
       }
@@ -1484,7 +2165,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       // 3. Namma Metro Station seamlessly aligned onto the continuous viaduct at X = METRO_X
       const metro = loadedTemplates['metro_station.glb'].clone(true);
       metro.position.set(METRO_X, 0, -185);
-      // Extract the Purple Line Train so it can ride continuously along the entire 360m viaduct!
       metro.traverse((child) => {
         if (child.name && child.name.startsWith('Metro_Train')) {
           continuousMetroTrain = child;
@@ -1497,6 +2177,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       scene.add(metro);
       landmarkInstances.push({
         mesh: metro,
+        kn: 'ನಮ್ಮ ಮೆಟ್ರೋ ನೇರಳೆ ಮಾರ್ಗ ನಿಲ್ದಾಣ',
         type: 'NAMMA METRO PURPLE LINE STATION'
       });
     }
@@ -1508,15 +2189,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     const potholeGroup = new THREE.Group();
     scene.add(potholeGroup);
 
-    const potholeRimMat = new THREE.MeshStandardMaterial({ color: 0x1b1e26, roughness: 0.92 });
+    const potholeRimMat = new THREE.MeshStandardMaterial({ color: 0x161922, roughness: 0.92 });
     const potholeWaterMat = new THREE.MeshStandardMaterial({
       color: 0x1e293b,
-      roughness: 0.08,
-      metalness: 0.65
+      roughness: 0.05,
+      metalness: 0.85
     });
     const potholeGlowMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.55 });
-    const coneOrangeMat = new THREE.MeshStandardMaterial({ color: 0xf97316, roughness: 0.4 });
-    const coneWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.3 });
+    const coneOrangeMat = new THREE.MeshStandardMaterial({ color: 0xf97316, roughness: 0.35 });
+    const coneWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.25 });
 
     function rebuildPotholes(count) {
       while (potholeGroup.children.length > 0) {
@@ -1526,21 +2207,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       for (let i = 0; i < count; i++) {
         const g = new THREE.Group();
-        // Jagged 7-sided dark asphalt crater rim
         const rim = new THREE.Mesh(new THREE.CylinderGeometry(1.55, 1.75, 0.06, 7), potholeRimMat);
         rim.position.y = 0.02;
-        // Glossy rainwater puddle inside crater
-        const puddle = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, 0.07, 10), potholeWaterMat);
+        const puddle = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, 0.07, 12), potholeWaterMat);
         puddle.position.y = 0.025;
-        // Subtle gravity-glitch shimmer ring inside crater
-        const anomalyRing = new THREE.Mesh(new THREE.RingGeometry(0.95, 1.12, 16), potholeGlowMat);
+        const anomalyRing = new THREE.Mesh(new THREE.RingGeometry(0.95, 1.12, 20), potholeGlowMat);
         anomalyRing.rotation.x = -Math.PI / 2;
         anomalyRing.position.y = 0.065;
 
-        // BBMP Orange-and-White Traffic Cone at edge of pothole
-        const cone = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.65, 10), coneOrangeMat);
+        const cone = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.65, 12), coneOrangeMat);
         cone.position.set(1.45, 0.32, 0.4);
-        const coneBand = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.16, 0.18, 10), coneWhiteMat);
+        const coneBand = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.16, 0.18, 12), coneWhiteMat);
         coneBand.position.set(1.45, 0.36, 0.4);
 
         g.add(rim, puddle, anomalyRing, cone, coneBand);
@@ -1600,7 +2277,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 7. PLAYER AUTO-RICKSHAW & GROUNDED LANE TRAFFIC WITH DETACHABLE WHEELS
+    // 7. PLAYER AUTO-RICKSHAW (With Bilingual Rear Hood Decal & Headlight Beam)
     // =========================================================================
     function extractWheelNodes(rootMesh) {
       const wheels = [];
@@ -1617,6 +2294,27 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       return wheels;
     }
 
+    function createAutoBackDecalTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 160;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#111827';
+      ctx.fillRect(0, 0, 512, 160);
+      ctx.strokeStyle = '#ffd000';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(6, 6, 500, 148);
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 42px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('ನಮ್ಮ ಬೆಂಗಳೂರು • ಒಂದು ಸೆಕೆಂಡ್', 28, 68);
+      ctx.fillStyle = '#4ade80';
+      ctx.font = '900 30px "Inter", sans-serif';
+      ctx.fillText('NAMMA BENGALURU • KA-01-AG-9999', 28, 124);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
     const player = {
       mesh: null,
       wheels: [],
@@ -1629,7 +2327,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       mass: 1.4,
       fareRupees: 30.0,
       wheelRepairTimer: 0,
-      hornCooldown: 0
+      hornCooldown: 0,
+      dlVerifiedTimer: 0
     };
 
     function createPlayerAuto() {
@@ -1641,6 +2340,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           c.receiveShadow = true;
         }
       });
+
+      // Add Bilingual Kannada+English Stencil Plate on Rear Canopy Hood
+      const decalMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.92, 0.26),
+        new THREE.MeshBasicMaterial({ map: createAutoBackDecalTexture() })
+      );
+      decalMesh.position.set(0, 1.16, 1.06);
+      decalMesh.rotation.x = -0.08;
+      player.mesh.add(decalMesh);
+
       player.wheels = extractWheelNodes(player.mesh);
       scene.add(player.mesh);
       updateWheelHUD();
@@ -1713,7 +2422,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
     }
 
-    // Grounded Lane-Based NPC Traffic Pool
+    // =========================================================================
+    // 7B. TWO-WAY GROUNDED LANE TRAFFIC POOL
+    // =========================================================================
     const trafficPool = [];
 
     const VEHICLE_SPECS = {
@@ -1770,7 +2481,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         lengthZ: 8.5,
         mass: 5.5,
         hornType: 'bus',
-        callouts: ['🚌 BMTC 500D SILK BOARD!', '📢 SIDE KODI! HEAVY BUS!']
+        callouts: ['🚌 BMTC 500D ಸಿಲ್ಕ್ ಬೋರ್ಡ್!', '📢 SIDE KODI! HEAVY BUS!']
       },
       npc_auto: {
         asset: 'auto_rickshaw.glb',
@@ -1781,7 +2492,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         lengthZ: 2.8,
         mass: 1.35,
         hornType: 'auto',
-        callouts: ['🛺 ONDU SECOND ANNA!', '💸 METER ONE-AND-HALF!']
+        callouts: ['🛺 ಒಂದು ಸೆಕೆಂಡ್ ಅಣ್ಣ! ONDU SECOND!', '💸 METER ONE-AND-HALF!']
       }
     };
 
@@ -1801,9 +2512,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       for (let attempt = 0; attempt < 24; attempt++) {
         let laneIdx;
         if (forceOncoming === true) {
-          laneIdx = 3 + Math.floor(Math.random() * 3); // Right-side oncoming lanes (3, 4, 5)
+          laneIdx = 3 + Math.floor(Math.random() * 3);
         } else if (forceOncoming === false) {
-          laneIdx = Math.floor(Math.random() * 3);     // Left-side forward lanes (0, 1, 2)
+          laneIdx = Math.floor(Math.random() * 3);
         } else {
           laneIdx = Math.floor(Math.random() * LANES.length);
         }
@@ -1831,14 +2542,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       };
     }
 
-    // Left-Hand Lanes (0, 1, 2) drive FORWARD (-Z); Right-Hand Lanes (3, 4, 5) drive ONCOMING (+Z)!
     const HERO_SLOTS = [
-      { type: 'techie', laneIdx: 0, z: -10.5 },
-      { type: 'bmtc', laneIdx: 1, z: -14.5 },
-      { type: 'swiggy', laneIdx: 2, z: -18.5 },
-      { type: 'npc_auto', laneIdx: 3, z: -13.0 },
-      { type: 'bmtc', laneIdx: 4, z: -22.0 },
-      { type: 'zepto', laneIdx: 5, z: -11.0 },
+      { type: 'techie', laneIdx: 2, z: -13.5 },
+      { type: 'bmtc', laneIdx: 0, z: -27.0 },
+      { type: 'swiggy', laneIdx: 1, z: -22.5 },
+      { type: 'npc_auto', laneIdx: 3, z: -15.0 },
+      { type: 'bmtc', laneIdx: 4, z: -23.0 },
+      { type: 'zepto', laneIdx: 5, z: -11.5 },
       { type: 'blinkit', laneIdx: 3, z: -29.0 }
     ];
 
@@ -1856,10 +2566,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       const wheels = extractWheelNodes(mesh);
       const laneIdx = hero ? hero.laneIdx : slotIndex % LANES.length;
-      const isOncoming = laneIdx >= 3; // Right side of yellow median = Oncoming traffic!
+      const isOncoming = laneIdx >= 3;
       const laneX = LANES[laneIdx];
       const rowIdx = Math.floor(slotIndex / LANES.length);
-      const zOffset = hero ? hero.z : -26 - rowIdx * 22 - (slotIndex % 3) * 6;
+      const zOffset = hero ? hero.z : -30 - rowIdx * 22 - (slotIndex % 3) * 6;
 
       const baseSpeed = spec.isHyperDelivery
         ? (28 + Math.random() * 10) * currentProfile.deliverySpeedMult
@@ -1927,14 +2637,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 7B. SUDDEN BENGALURU JAYWALKER PEDESTRIANS (Crossing Road + Stop Hand!)
+    // 7C. SUDDEN BENGALURU JAYWALKER PEDESTRIANS (Crossing Road + Stop Hand!)
     // =========================================================================
     const jaywalkers = [];
     const JAYWALKER_SHIRT_COLORS = [0xf97316, 0x06b6d4, 0xec4899, 0xeab308, 0x22c55e, 0xa855f7];
     const JAYWALKER_CALLOUTS = [
-      '✋ "ONDU SECOND ANNA!" CROSSING!',
+      '✋ "ಒಂದು ಸೆಕೆಂಡ್ ಅಣ್ಣ! ONDU SECOND!"',
       '🚶‍♂️ SUDDEN JAYWALKER ON ROAD!',
-      '✋ "WAIT MAADI!" STOP HAND!',
+      '✋ "ಸ್ವಲ್ಪ ತಡೀರಿ! WAIT MAADI!"',
       '🛍️ UNCLE CROSSING SILK BOARD!'
     ];
 
@@ -1958,16 +2668,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (c.name === 'Arm_R') armR = c;
       });
 
-      // First two jaywalkers are already mid-crossing right in front of the player!
       let startX, startZ, dirX, state;
       if (index === 0) {
-        startX = -3.8;
-        startZ = -17.5;
+        startX = 0.6;
+        startZ = -19.5;
         dirX = 1;
         state = 'crossing';
       } else if (index === 1) {
         startX = 3.6;
-        startZ = -32.0;
+        startZ = -34.0;
         dirX = -1;
         state = 'crossing';
       } else {
@@ -2024,14 +2733,234 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 8. COMIC CALLOUTS & INPUT CONTROLS
+    // 7D. NEW! BENGALURU TRAFFIC POLICE (BTP) SUDDEN LICENSE CHECK ("DL TORSI!")
+    // =========================================================================
+    const trafficCops = [];
+
+    function createBtpBarricadeTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#1e3a8a';
+      ctx.fillRect(0, 0, 512, 256);
+      ctx.strokeStyle = '#ffd000';
+      ctx.lineWidth = 12;
+      ctx.strokeRect(8, 8, 496, 240);
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 36px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್', 30, 82);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 30px "Inter", sans-serif';
+      ctx.fillText('BENGALURU TRAFFIC POLICE', 28, 140);
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(28, 165, 456, 62);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 30px "Inter", sans-serif';
+      ctx.fillText('STOP • ನಿಲ್ಲಿಸಿ • DL & RC CHECK', 48, 207);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const btpBarricadeTex = createBtpBarricadeTexture();
+    const strobeRedMat = new THREE.MeshBasicMaterial({ color: 0xff1e42 });
+    const strobeBlueMat = new THREE.MeshBasicMaterial({ color: 0x2563eb });
+
+    function spawnTrafficCopCheckpost(index, total) {
+      const group = new THREE.Group();
+
+      // 1. BTP Officer Mesh (`traffic_police.glb`)
+      const copMesh = loadedTemplates['traffic_police.glb'].clone(true);
+      let legL = null, legR = null, armL = null, armR = null;
+      copMesh.traverse((c) => {
+        if (c.isMesh) {
+          c.castShadow = true;
+          c.receiveShadow = true;
+        }
+        if (c.name === 'Cop_Leg_L') legL = c;
+        if (c.name === 'Cop_Leg_R') legR = c;
+        if (c.name === 'Cop_Arm_L') armL = c;
+        if (c.name === 'Cop_Arm_R') armR = c;
+      });
+      // Rotate cop to face oncoming player auto (+Z) and scale slightly for arcade hero visibility
+      copMesh.rotation.y = Math.PI;
+      copMesh.scale.setScalar(1.18);
+      group.add(copMesh);
+
+      // 2. BTP Steel Checkpost Barricade with Flashing Red/Blue Police Strobe Lights
+      const barricade = new THREE.Group();
+      const board = new THREE.Mesh(
+        new THREE.BoxGeometry(2.5, 1.25, 0.14),
+        new THREE.MeshBasicMaterial({ map: btpBarricadeTex })
+      );
+      board.position.set(0, 1.0, 0);
+      const leg1 = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.5, 8), poleMetalMat);
+      leg1.position.set(-1.05, 0.75, 0);
+      const leg2 = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.5, 8), poleMetalMat);
+      leg2.position.set(1.05, 0.75, 0);
+      const beaconR = new THREE.Mesh(new THREE.SphereGeometry(0.15, 10, 8), strobeRedMat);
+      beaconR.position.set(-0.85, 1.75, 0);
+      const beaconB = new THREE.Mesh(new THREE.SphereGeometry(0.15, 10, 8), strobeBlueMat);
+      beaconB.position.set(0.85, 1.75, 0);
+      barricade.add(board, leg1, leg2, beaconR, beaconB);
+      barricade.position.set(-1.75, 0, 0.5);
+      group.add(barricade);
+
+      // Place first cop at z = -14.5m in Lane 1 so player sees & experiences the BTP checkpost right away!
+      const startZ = index === 0 ? -14.5 : -48 - index * (CORRIDOR_LENGTH / Math.max(2, total));
+      const kerbX = -ROAD_WIDTH / 2 + 1.15;
+      const targetLaneIdx = index === 0 ? 1 : (index % 2 === 0 ? 0 : 1);
+      group.position.set(index === 0 ? LANES[1] : kerbX, 0, startZ);
+      scene.add(group);
+
+      return {
+        group,
+        copMesh,
+        barricade,
+        beaconR,
+        beaconB,
+        legL,
+        legR,
+        armL,
+        armR,
+        pos: group.position,
+        state: index === 0 ? 'stepping_out' : 'waiting', // waiting -> stepping_out -> cleared / fined
+        targetX: LANES[targetLaneIdx],
+        kerbX,
+        triggerDist: 58,
+        walkPhase: index * 1.7,
+        whistleBlown: false,
+        resolved: false
+      };
+    }
+
+    function rebuildTrafficCops(count) {
+      trafficCops.forEach((c) => scene.remove(c.group));
+      trafficCops.length = 0;
+      if (!loadedTemplates['traffic_police.glb']) return;
+      for (let i = 0; i < count; i++) {
+        trafficCops.push(spawnTrafficCopCheckpost(i, count));
+      }
+    }
+
+    function resetCopCheckpost(cop) {
+      cop.pos.z -= CORRIDOR_LENGTH + Math.random() * 30;
+      cop.pos.x = cop.kerbX;
+      cop.targetX = LANES[Math.floor(Math.random() * 2)]; // Left lanes 0 or 1
+      cop.state = 'waiting';
+      cop.whistleBlown = false;
+      cop.resolved = false;
+      if (cop.legL) cop.legL.rotation.x = 0;
+      if (cop.legR) cop.legR.rotation.x = 0;
+    }
+
+    // =========================================================================
+    // 7E. NEW! SUDDEN DARTING BENGALURU STRAY DOGS (`stray_dog.glb`)
+    // =========================================================================
+    const strayDogs = [];
+    const DOG_COAT_COLORS = [0xb86b35, 0xd99b66, 0x4a3525, 0xe2e8f0];
+    const DOG_CALLOUTS = [
+      '🐕 "ಬೌ-ಬೌ! BOW-WOW!" STRAY DOG DARTING!',
+      '🐕 SUDDEN INDIE DOGGO ON ROAD! WATCH OUT!',
+      '🐾 STREET DOG CHASING SCOOTER!'
+    ];
+
+    function spawnStrayDog(index, total) {
+      const mesh = loadedTemplates['stray_dog.glb'].clone(true);
+      let legFL = null, legFR = null, legRL = null, legRR = null;
+      const coatHex = DOG_COAT_COLORS[index % DOG_COAT_COLORS.length];
+
+      mesh.traverse((c) => {
+        if (c.isMesh) {
+          c.castShadow = true;
+          c.receiveShadow = true;
+          if (c.name === 'Dog_Body' && c.material && index > 0) {
+            c.material = c.material.clone();
+            c.material.color.setHex(coatHex);
+          }
+        }
+        if (c.name === 'Dog_Leg_FL') legFL = c;
+        if (c.name === 'Dog_Leg_FR') legFR = c;
+        if (c.name === 'Dog_Leg_RL') legRL = c;
+        if (c.name === 'Dog_Leg_RR') legRR = c;
+      });
+
+      // Scale slightly so the Indie dog is clearly visible in arcade camera
+      mesh.scale.setScalar(1.38);
+
+      let dirX, startX, startZ, state;
+      if (index === 0) {
+        dirX = 1;
+        startX = -0.3;
+        startZ = -9.8;
+        state = 'darting';
+      } else {
+        dirX = index % 2 === 0 ? 1 : -1;
+        startX = dirX > 0 ? -ROAD_WIDTH / 2 - 1.2 : ROAD_WIDTH / 2 + 1.2;
+        startZ = -36 - index * (CORRIDOR_LENGTH / Math.max(3, total));
+        state = 'waiting';
+      }
+
+      // In Three.js after export_yup: +Y in Blender -> -Z in Three.js.
+      // So rotation.y = -Math.PI/2 faces +X (right), and +Math.PI/2 faces -X (left).
+      const yaw = dirX > 0 ? -Math.PI * 0.48 : Math.PI * 0.48;
+      mesh.position.set(startX, 0, startZ);
+      mesh.rotation.set(0, yaw, 0);
+      scene.add(mesh);
+
+      return {
+        mesh,
+        pos: mesh.position,
+        legFL,
+        legFR,
+        legRL,
+        legRR,
+        dirX,
+        state,
+        runSpeed: 6.4 + (index % 3) * 1.1,
+        speedBoost: 1.0,
+        triggerDist: 42 + (index % 3) * 9,
+        gallopPhase: index * 1.9,
+        vy: 0,
+        barked: index === 0,
+        hopBonusAwarded: false,
+        hitCooldown: 0
+      };
+    }
+
+    function rebuildStrayDogs(count) {
+      strayDogs.forEach((d) => scene.remove(d.mesh));
+      strayDogs.length = 0;
+      if (!loadedTemplates['stray_dog.glb']) return;
+      for (let i = 0; i < count; i++) {
+        strayDogs.push(spawnStrayDog(i, count));
+      }
+    }
+
+    function resetStrayDogToKerb(d) {
+      d.dirX = Math.random() < 0.5 ? 1 : -1;
+      d.pos.x = d.dirX > 0 ? -ROAD_WIDTH / 2 - 1.2 : ROAD_WIDTH / 2 + 1.2;
+      d.pos.y = 0;
+      d.pos.z -= CORRIDOR_LENGTH + Math.random() * 25;
+      d.state = 'waiting';
+      d.speedBoost = 1.0;
+      d.vy = 0;
+      d.barked = false;
+      d.hopBonusAwarded = false;
+      d.triggerDist = 38 + Math.random() * 24;
+      d.mesh.rotation.set(0, d.dirX > 0 ? -Math.PI * 0.48 : Math.PI * 0.48, 0);
+    }
+
+    // =========================================================================
+    // 8. COMIC CALLOUTS, LICENSE CHECK ACTION & INPUT CONTROLS
     // =========================================================================
     const calloutLayer = document.getElementById('callout-layer');
     let lastCalloutTime = 0;
 
     function spawnComicCallout(worldPos, text, bgColor = '#ffd000') {
       const now = performance.now();
-      if (now - lastCalloutTime < 220) return;
+      if (now - lastCalloutTime < 190) return;
       lastCalloutTime = now;
 
       const proj = worldPos.clone().add(new THREE.Vector3(0, 2.0, 0)).project(camera);
@@ -2042,11 +2971,58 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const el = document.createElement('div');
       el.className = 'comic-pop';
       el.textContent = text;
-      el.style.left = `${Math.min(window.innerWidth - 130, Math.max(130, x))}px`;
-      el.style.top = `${Math.min(window.innerHeight - 90, Math.max(90, y))}px`;
+      el.style.left = `${Math.min(window.innerWidth - 150, Math.max(150, x))}px`;
+      el.style.top = `${Math.min(window.innerHeight - 95, Math.max(95, y))}px`;
       el.style.backgroundColor = bgColor;
       calloutLayer.appendChild(el);
-      setTimeout(() => el.remove(), 1150);
+      setTimeout(() => el.remove(), 1250);
+    }
+
+    function flashDigiLockerLicenseToCop() {
+      audio.init();
+      player.dlVerifiedTimer = 6.0;
+      const dlBadge = document.getElementById('hud-dl-status');
+      dlBadge.textContent = 'VERIFIED ✓ (+₹100)';
+
+      let clearedAnyCop = false;
+      trafficCops.forEach((cop) => {
+        const distAhead = -cop.pos.z;
+        if (distAhead > -8 && distAhead < 85 && !cop.resolved) {
+          cop.resolved = true;
+          cop.state = 'cleared';
+          clearedAnyCop = true;
+          player.fareRupees += 100;
+          audio.playLicenseVerified();
+          spawnComicCallout(
+            cop.pos,
+            '🪪 "ಸರಿ ಬಿಡಿ! ಮುಂದೆ ಹೋಗಿ!" (DL VERIFIED! +₹100)',
+            '#4ade80'
+          );
+        }
+      });
+
+      if (!clearedAnyCop) {
+        audio.playLicenseVerified();
+        spawnComicCallout(player.pos, '🪪 DIGILOCKER DL & GREEN EMISSION READY!', '#4ade80');
+      }
+      document.getElementById('hud-cop-alert').classList.remove('visible');
+      document.getElementById('vignette-fx').classList.remove('cop-strobe');
+    }
+
+    function triggerSuddenCopEncounterNow() {
+      audio.init();
+      if (trafficCops.length === 0) return;
+      const cop = trafficCops[0];
+      cop.pos.z = -12.5;
+      cop.pos.x = -3.8;
+      cop.targetX = -3.8;
+      cop.state = 'stepping_out';
+      cop.whistleBlown = true;
+      cop.resolved = false;
+      audio.playPoliceWhistle(false);
+      document.getElementById('hud-cop-alert').classList.add('visible');
+      document.getElementById('vignette-fx').classList.add('cop-strobe');
+      spawnComicCallout(cop.pos, '👮‍♂️ "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL ತೋರಿಸಿ!" [PRESS L]', '#ef4444');
     }
 
     const keys = { up: false, down: false, left: false, right: false, space: false };
@@ -2087,6 +3063,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         case 'KeyH':
           triggerPlayerHorn();
           break;
+        case 'KeyL':
+          flashDigiLockerLicenseToCop();
+          break;
+        case 'KeyC':
+          triggerSuddenCopEncounterNow();
+          break;
         case 'KeyR':
           reattachAllPlayerWheels();
           break;
@@ -2125,7 +3107,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       player.hornCooldown = 0.28;
       audio.init();
       audio.playBeepBeepHorn('auto');
-      spawnComicCallout(player.pos, '📯 PA-PA-PAAARP! SIDE KODI!', '#ffd000');
+      spawnComicCallout(player.pos, '📯 ಪಾ-ಪಾ-ಪಾರ್ಪ್! ಸೈಡ್ ಕೊಡಿ! (SIDE KODI!)', '#ffd000');
 
       // Same-direction vehicles ahead yield slightly when honked at
       trafficPool.forEach((v) => {
@@ -2137,12 +3119,22 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
 
-      // Jaywalkers scurry faster across the road and wave their Stop Hand when honked at!
+      // Jaywalkers scurry faster across the road when honked at
       jaywalkers.forEach((p) => {
         const dz = p.pos.z - player.pos.z;
         if (dz < 2 && dz > -34 && p.state === 'crossing') {
           p.speedBoost = 1.85;
-          spawnComicCallout(p.pos, '🏃‍♂️ "AYYO! WAIT MAADI ANNA!"', '#fb923c');
+          spawnComicCallout(p.pos, '🏃‍♂️ "ಅಯ್ಯೋ! ತಡೀರಿ ಅಣ್ಣ! WAIT MAADI!"', '#fb923c');
+        }
+      });
+
+      // Stray dogs bark back and bolt 2x faster when honked at!
+      strayDogs.forEach((d) => {
+        const dz = d.pos.z - player.pos.z;
+        if (dz < 2 && dz > -38 && d.state === 'darting') {
+          d.speedBoost = 2.0;
+          audio.playDogBark();
+          spawnComicCallout(d.pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW!" BOLTING!', '#fde047');
         }
       });
     }
@@ -2178,12 +3170,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       rebuildPotholes(currentProfile.potholeCount);
       rebuildTrafficForProfile(currentProfile);
       rebuildJaywalkers(currentProfile.jaywalkerCount);
+      rebuildTrafficCops(currentProfile.copCount);
+      rebuildStrayDogs(currentProfile.dogCount);
       reattachAllPlayerWheels();
 
       rainActive = false;
       rainIntensity = 0.0;
       weatherTimer = currentProfile.rainCycleDuration;
       updateWeatherBanner();
+      document.getElementById('hud-cop-alert').classList.remove('visible');
+      document.getElementById('vignette-fx').classList.remove('cop-strobe');
 
       if (closeDialog && modal.open) {
         modal.close();
@@ -2226,6 +3222,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     });
 
     document.getElementById('btn-horn-test').addEventListener('click', () => triggerPlayerHorn());
+    document.getElementById('btn-cop-test').addEventListener('click', () => triggerSuddenCopEncounterNow());
+    document.getElementById('btn-show-dl').addEventListener('click', () => flashDigiLockerLicenseToCop());
     document.getElementById('btn-open-modal').addEventListener('click', () => toggleGravityModal());
     document.getElementById('btn-rain-toggle').addEventListener('click', () => {
       audio.init();
@@ -2237,13 +3235,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     });
 
     // =========================================================================
-    // 9. SIMULATION, TWO-WAY TRAFFIC & SUDDEN JAYWALKER PHYSICS LOOP
+    // 9. SIMULATION, TWO-WAY TRAFFIC, BTP COPS & STRAY DOGS PHYSICS LOOP
     // =========================================================================
     let cameraShake = 0;
     const clock = new THREE.Clock();
 
     function updateSimulation(dt, elapsed) {
       if (player.hornCooldown > 0) player.hornCooldown -= dt;
+      if (player.dlVerifiedTimer > 0) {
+        player.dlVerifiedTimer -= dt;
+        if (player.dlVerifiedTimer <= 0) {
+          document.getElementById('hud-dl-status').textContent = 'VALID • PRESS [L]';
+        }
+      }
 
       // 1. Weather State Machine & Hydroplaning
       weatherTimer -= dt;
@@ -2256,7 +3260,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const targetRain = rainActive ? 1.0 : 0.0;
       rainIntensity += (targetRain - rainIntensity) * Math.min(1, dt * 2.5);
       rainMat.opacity = rainIntensity * 0.68;
-      roadMat.roughness = 0.72 - rainIntensity * 0.56;
+      roadMat.roughness = 0.68 - rainIntensity * 0.54;
+      roadMat.metalness = 0.14 + rainIntensity * 0.45;
       scene.background.lerpColors(drySkyColor, rainSkyColor, rainIntensity);
       scene.fog.color.copy(scene.background);
 
@@ -2310,7 +3315,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const lateralFrictionDamping = 0.65 + tireGrip * 5.5;
       player.vel.x *= Math.exp(-lateralFrictionDamping * dt);
 
-      // Gravity pulls vehicle cleanly back to the road (y = 0)
       player.vel.y -= currentProfile.gravityReturn * dt;
       player.pos.x += player.vel.x * dt;
       player.pos.y += player.vel.y * dt;
@@ -2347,12 +3351,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         });
       }
 
-      // 3. Seamless Scrolling Corridor, Continuous Viaduct & Continuous Metro Train
+      // 3. Seamless Scrolling Corridor, Bilingual Hoardings, Viaduct & Metro Train
       const scrollStep = player.forwardSpeed * dt;
       scrollingStrips.forEach((row) => {
         row.position.z += scrollStep;
         if (row.position.z > 36) {
           row.position.z -= CORRIDOR_LENGTH;
+        }
+      });
+
+      hoardingInstances.forEach((h) => {
+        h.position.z += scrollStep;
+        if (h.position.z > 36) {
+          h.position.z -= CORRIDOR_LENGTH;
         }
       });
 
@@ -2365,6 +3376,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       let nearestDist = Infinity;
       let nearestName = 'SILK BOARD JUNCTION';
+      let nearestKn = 'ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಜಂಕ್ಷನ್';
       landmarkInstances.forEach((lm) => {
         lm.mesh.position.z += scrollStep;
         if (lm.mesh.position.z > 60) {
@@ -2374,10 +3386,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (distAhead > -10 && distAhead < nearestDist) {
           nearestDist = distAhead;
           nearestName = lm.type;
+          nearestKn = lm.kn;
         }
       });
-      document.getElementById('hud-landmark').textContent =
-        `${nearestName} • ${Math.max(0, Math.round(nearestDist))}m`;
+      const distMeters = Math.max(0, Math.round(nearestDist));
+      document.getElementById('hud-landmark').textContent = `${nearestName} • ${distMeters}m`;
+      document.getElementById('hud-landmark-kn').textContent = `${nearestKn} • ${distMeters}m`;
 
       // 4. Realistic Potholes with Magnetic Pull & Gravity Glitch Hop
       potholes.forEach((p) => {
@@ -2402,20 +3416,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
               player.vel.y = currentProfile.glitchBounceVy * 0.85;
               cameraShake = 0.3;
               audio.playBounceImpact(false);
-              spawnComicCallout(player.pos, '🕳️ POTHOLE GRAVITY GLITCH!', '#38bdf8');
+              spawnComicCallout(player.pos, '🕳️ BBMP POTHOLE GRAVITY GLITCH!', '#38bdf8');
             }
           }
         }
       });
 
-      // 5. Sudden Road-Crossing Bengaluru Jaywalkers (Wait/Stop Hand Gesture + Walk Cycle)
+      // 5. Sudden Road-Crossing Bengaluru Jaywalkers
       for (let i = 0; i < jaywalkers.length; i++) {
         const p = jaywalkers[i];
         if (p.hitCooldown > 0) p.hitCooldown -= dt;
         p.pos.z += scrollStep;
 
         const distAhead = -p.pos.z;
-        // Suddenly dart onto the road when the player approaches!
         if (p.state === 'waiting' && distAhead < p.triggerDist && distAhead > 8) {
           p.state = 'crossing';
           if (!p.warned && distAhead < 48) {
@@ -2429,14 +3442,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           p.pos.x += p.dirX * p.crossSpeed * p.speedBoost * dt;
           p.walkPhase += dt * 11.5 * p.speedBoost;
 
-          // Articulated walking legs + swinging cloth bag + waving "Ondu Second" Stop Hand!
           const swing = Math.sin(p.walkPhase) * 0.62;
           if (p.legL) p.legL.rotation.x = swing;
           if (p.legR) p.legR.rotation.x = -swing;
           if (p.armL) p.armL.rotation.x = -swing * 0.7;
           if (p.armR) p.armR.rotation.z = Math.sin(p.walkPhase * 1.4) * 0.22;
 
-          // Reached opposite sidewalk
           if ((p.dirX > 0 && p.pos.x > ROAD_WIDTH / 2 + 1.0) || (p.dirX < 0 && p.pos.x < -ROAD_WIDTH / 2 - 1.0)) {
             p.state = 'crossed';
             if (p.legL) p.legL.rotation.x = 0;
@@ -2444,7 +3455,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           }
         }
 
-        // Gravity recovery if bounced
         if (p.pos.y > 0 || p.vy !== 0) {
           p.vy -= currentProfile.gravityReturn * dt;
           p.pos.y += p.vy * dt;
@@ -2454,7 +3464,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           }
         }
 
-        // Check collision between Player Auto and Jaywalker
         const pdx = player.pos.x - p.pos.x;
         const pdz = player.pos.z - p.pos.z;
         if (Math.abs(pdx) < 1.1 && Math.abs(pdz) < 1.15 && player.pos.y < 1.6 && p.hitCooldown <= 0) {
@@ -2468,11 +3477,191 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           audio.playBeepBeepHorn('auto');
           audio.playBounceImpact(false);
           spawnCollisionSparks(p.pos, 10, 0xfb923c);
-          spawnComicCallout(p.pos, '🤸 "AYYO! NODKONDU HOGI ANNA!"', '#ff3b5c');
+          spawnComicCallout(p.pos, '🤸 "ಅಯ್ಯೋ! ನೋಡ್ಕೊಂಡು ಹೋಗಿ ಅಣ್ಣ!"', '#ff3b5c');
         }
 
         if (p.pos.z > 20) {
           resetJaywalkerToKerb(p);
+        }
+      }
+
+      // 5B. NEW! Sudden Bengaluru Traffic Police (BTP) License Check Encounter
+      let anyCopAlertActive = false;
+      for (let i = 0; i < trafficCops.length; i++) {
+        const cop = trafficCops[i];
+        cop.pos.z += scrollStep;
+        cop.walkPhase += dt * 9.0;
+
+        // Flash Red & Blue Police Barricade Strobe Beacons
+        const strobeToggle = Math.floor(elapsed * 10) % 2 === 0;
+        cop.beaconR.scale.setScalar(strobeToggle ? 1.35 : 0.85);
+        cop.beaconB.scale.setScalar(strobeToggle ? 0.85 : 1.35);
+
+        const distAhead = -cop.pos.z;
+
+        // Cop suddenly blows whistle & steps out into the lane to check license!
+        if (cop.state === 'waiting' && distAhead < cop.triggerDist && distAhead > 10) {
+          cop.state = 'stepping_out';
+          if (!cop.whistleBlown) {
+            cop.whistleBlown = true;
+            audio.playPoliceWhistle(false);
+            spawnComicCallout(
+              cop.pos,
+              '👮‍♂️ "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL & RC ತೋರಿಸಿ!" [PRESS L]',
+              '#ef4444'
+            );
+          }
+        }
+
+        if (cop.state === 'stepping_out' && !cop.resolved) {
+          if (distAhead > -2 && distAhead < 56) {
+            anyCopAlertActive = true;
+          }
+          // Step into target lane & wave Red LED Baton
+          const stepErr = cop.targetX - cop.pos.x;
+          cop.pos.x += Math.sign(stepErr) * Math.min(Math.abs(stepErr), 4.2 * dt);
+          if (Math.abs(stepErr) > 0.1) {
+            const swing = Math.sin(cop.walkPhase) * 0.55;
+            if (cop.legL) cop.legL.rotation.x = swing;
+            if (cop.legR) cop.legR.rotation.x = -swing;
+          } else {
+            if (cop.legL) cop.legL.rotation.x = 0;
+            if (cop.legR) cop.legR.rotation.x = 0;
+          }
+          if (cop.armR) {
+            cop.armR.rotation.z = Math.sin(elapsed * 8.5) * 0.35;
+          }
+
+          // If Player Auto has verified DL active, auto-clear when approaching!
+          if (player.dlVerifiedTimer > 0 && distAhead < 22 && distAhead > 0) {
+            cop.resolved = true;
+            cop.state = 'cleared';
+            player.fareRupees += 100;
+            audio.playLicenseVerified();
+            spawnComicCallout(cop.pos, '🪪 "ಸರಿ ಬಿಡಿ! ಮುಂದೆ ಹೋಗಿ!" (DL VERIFIED! +₹100)', '#4ade80');
+          }
+
+          // Check if Cop intercepts Player Auto without showing License!
+          const cdx = player.pos.x - cop.pos.x;
+          const cdz = player.pos.z - cop.pos.z;
+          if (!cop.resolved && Math.abs(cdx) < 2.25 && Math.abs(cdz) < 2.0 && player.pos.y < 1.8) {
+            cop.resolved = true;
+            cop.state = 'fined';
+            // Sudden BTP Traffic Stop! Brakes auto & issues e-Challan fine
+            player.forwardSpeed = 11.0;
+            player.vel.x = (cdx >= 0 ? 1 : -1) * 8.5;
+            player.fareRupees = Math.max(30, player.fareRupees - 100);
+            cameraShake = 0.42;
+            audio.playPoliceWhistle(true);
+            spawnCollisionSparks(cop.pos, 14, 0x3b82f6);
+            document.getElementById('hud-dl-status').textContent = 'e-CHALLAN -₹100!';
+            player.dlVerifiedTimer = 4.0;
+            spawnComicCallout(
+              cop.pos,
+              '🚔 "DL ಎಲ್ಲಿದೆ ಸಾರ್?! ₹100 e-CHALLAN FINE!" (-₹100)',
+              '#ef4444'
+            );
+          }
+
+          // If player swerved cleanly past the checkpost without getting caught
+          if (!cop.resolved && cop.pos.z > 4.5) {
+            cop.resolved = true;
+            cop.state = 'evaded';
+            player.fareRupees += 60;
+            audio.playPoliceWhistle(false);
+            spawnComicCallout(
+              cop.pos,
+              '💨 DODGED BTP CHECKPOST! "ನಿಲ್ಲಿಸಿ! ಕ್ಯಾಮೆರಾ ಚಲನ್!" (+₹60)',
+              '#38bdf8'
+            );
+          }
+        } else if (cop.state === 'cleared') {
+          // Cop steps politely back toward the kerb
+          const backErr = cop.kerbX - cop.pos.x;
+          cop.pos.x += Math.sign(backErr) * Math.min(Math.abs(backErr), 5.0 * dt);
+        }
+
+        if (cop.pos.z > 22) {
+          resetCopCheckpost(cop);
+        }
+      }
+
+      document.getElementById('hud-cop-alert').classList.toggle('visible', anyCopAlertActive);
+      document.getElementById('vignette-fx').classList.toggle('cop-strobe', anyCopAlertActive);
+
+      // 5C. NEW! Sudden Darting Bengaluru Indie Stray Dogs
+      for (let i = 0; i < strayDogs.length; i++) {
+        const d = strayDogs[i];
+        if (d.hitCooldown > 0) d.hitCooldown -= dt;
+        d.pos.z += scrollStep;
+
+        const distAhead = -d.pos.z;
+        if (d.state === 'waiting' && distAhead < d.triggerDist && distAhead > 6) {
+          d.state = 'darting';
+          if (!d.barked && distAhead < 45) {
+            d.barked = true;
+            audio.playDogBark();
+            const msg = DOG_CALLOUTS[i % DOG_CALLOUTS.length];
+            spawnComicCallout(d.pos, msg, '#fde047');
+          }
+        }
+
+        if (d.state === 'darting') {
+          d.pos.x += d.dirX * d.runSpeed * d.speedBoost * dt;
+          d.gallopPhase += dt * 18.0 * d.speedBoost;
+
+          // 4-leg bounding gallop cycle + subtle body hop
+          const bound = Math.sin(d.gallopPhase) * 0.78;
+          if (d.legFL) d.legFL.rotation.x = bound;
+          if (d.legFR) d.legFR.rotation.x = Math.sin(d.gallopPhase + 0.6) * 0.78;
+          if (d.legRL) d.legRL.rotation.x = -bound;
+          if (d.legRR) d.legRR.rotation.x = -Math.sin(d.gallopPhase + 0.6) * 0.78;
+          if (d.vy === 0) {
+            d.pos.y = Math.abs(Math.sin(d.gallopPhase)) * 0.14;
+          }
+
+          if ((d.dirX > 0 && d.pos.x > ROAD_WIDTH / 2 + 1.5) || (d.dirX < 0 && d.pos.x < -ROAD_WIDTH / 2 - 1.5)) {
+            d.state = 'crossed';
+            d.pos.y = 0;
+          }
+        }
+
+        if (d.vy !== 0) {
+          d.vy -= currentProfile.gravityReturn * dt;
+          d.pos.y += d.vy * dt;
+          if (d.pos.y <= 0) {
+            d.pos.y = 0;
+            d.vy = 0;
+          }
+        }
+
+        // Check interaction between Player Auto and Stray Dog
+        const ddx = player.pos.x - d.pos.x;
+        const ddz = player.pos.z - d.pos.z;
+        if (Math.abs(ddx) < 1.15 && Math.abs(ddz) < 1.2) {
+          if (player.pos.y >= 0.85 && !d.hopBonusAwarded) {
+            // Player hopped cleanly over the stray dog with SPACE!
+            d.hopBonusAwarded = true;
+            player.fareRupees += 75;
+            audio.playDogBark();
+            spawnComicCallout(d.pos, '🐕 GRAVITY HOP OVER DOGGO! +₹75 GOOD BOY BONUS!', '#4ade80');
+          } else if (player.pos.y < 0.85 && d.hitCooldown <= 0) {
+            d.hitCooldown = 0.85;
+            const push = ddx >= 0 ? 1 : -1;
+            player.vel.x = push * 9.0;
+            player.vel.y = currentProfile.glitchBounceVy * 0.75;
+            d.vy = currentProfile.glitchBounceVy * 1.05;
+            d.speedBoost = 2.2;
+            cameraShake = 0.28;
+            audio.playDogBark();
+            audio.playBounceImpact(false);
+            spawnCollisionSparks(d.pos, 8, 0xfde047);
+            spawnComicCallout(d.pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW! WATCH IT ANNA!"', '#fb923c');
+          }
+        }
+
+        if (d.pos.z > 20) {
+          resetStrayDogToKerb(d);
         }
       }
 
@@ -2484,7 +3673,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const minLane = v.isOncoming ? 3 : 0;
         const maxLane = v.isOncoming ? 5 : 2;
 
-        // Smart forward lane check within same-direction lanes
         for (let j = 0; j < trafficPool.length; j++) {
           if (i === j) continue;
           const other = trafficPool[j];
@@ -2499,7 +3687,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           }
         }
 
-        // Hyper-delivery Zepto/Blinkit riders weave across their side's lanes
         v.weaveTimer -= dt;
         if (v.spec.isHyperDelivery && v.weaveTimer <= 0) {
           v.weaveTimer = 1.2 + Math.random() * 1.4;
@@ -2515,23 +3702,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         v.pos.x += v.vel.x * dt;
         v.pos.y += v.vel.y * dt;
 
-        // Smooth lane centering
         const laneErr = v.targetLaneX - v.pos.x;
         v.vel.x += laneErr * 7.5 * dt;
         v.vel.x *= Math.exp(-4.2 * dt);
 
-        // Gravity returns NPC vehicles cleanly to the road (y = 0)
         v.vel.y -= currentProfile.gravityReturn * dt;
         if (v.pos.y <= 0) {
           v.pos.y = 0;
           v.vel.y = 0;
         }
 
-        // Smoothly recover Z speed back to cruise speed (negative for forward, positive for oncoming)
         const targetVelZ = v.isOncoming ? v.baseSpeed * 0.42 : -v.baseSpeed;
         v.vel.z += (targetVelZ - v.vel.z) * dt * 2.5;
 
-        // Subtle, realistic tilt into lane changes + 180-deg rotation for oncoming right-side traffic!
         const dirSign = v.isOncoming ? -1 : 1;
         const npcPitch = THREE.MathUtils.clamp(-v.vel.y * 0.025 * dirSign, -0.22, 0.22);
         const npcYaw = v.baseYaw + THREE.MathUtils.clamp(-v.vel.x * 0.025 * dirSign, -0.25, 0.25);
@@ -2573,7 +3756,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           const bonus = isHyper ? 150 : 50;
           player.fareRupees += bonus;
           const msg = v.isOncoming
-            ? `🚨 WRONG-SIDE HEAD-ON! ${v.spec.callouts[0]}`
+            ? `🚨 ರಾಂಗ್ ಸೈಡ್! WRONG-SIDE! ${v.spec.callouts[0]}`
             : `${v.spec.callouts[Math.floor(Math.random() * v.spec.callouts.length)]} +₹${bonus}`;
           spawnComicCallout(v.pos, msg, v.spec.color);
 
@@ -2624,7 +3807,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 8. Smooth Chase Camera & HUD Updates
+      // 8. Smooth Chase Camera, Sky Dome Lock & HUD Updates
       if (cameraShake > 0) cameraShake = Math.max(0, cameraShake - dt * 1.8);
       const shakeX = (Math.random() - 0.5) * cameraShake;
       const shakeY = (Math.random() - 0.5) * cameraShake;
@@ -2633,6 +3816,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       camera.position.y += (3.85 + player.pos.y * 0.45 - camera.position.y) * dt * 6.5 + shakeY;
       camera.position.z = 7.2;
       camera.lookAt(player.pos.x * 0.75, 1.25 + player.pos.y * 0.3, -14);
+
+      skyDome.position.x = camera.position.x;
 
       const surgeMult = (rainActive ? 1.5 : 1.0) * currentProfile.fareRateMult;
       player.fareRupees += (player.forwardSpeed * 0.14 * surgeMult) * dt;
@@ -2658,13 +3843,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         updateSimulation(dt, elapsed);
       }
 
-      renderer.render(scene, camera);
+      composer.render();
     }
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
     });
 
     // =========================================================================
@@ -2684,6 +3870,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       const assetFiles = [
         'auto_rickshaw.glb',
+        'traffic_police.glb',
+        'stray_dog.glb',
         'delivery_swiggy.glb',
         'delivery_zepto.glb',
         'delivery_blinkit.glb',
@@ -2720,6 +3908,26 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (params.get('snapwheel') === '1') {
           snapOffVehicleWheel(player, true);
         }
+        if (params.get('copcheck') === '1') {
+          triggerSuddenCopEncounterNow();
+        }
+        if (params.get('hop') === '1') {
+          player.pos.y = 1.15;
+          player.vel.y = 2.5;
+          player.rot.z = -0.12;
+          setTimeout(() => {
+            lastCalloutTime = 0;
+            if (trafficCops[0]) {
+              spawnComicCallout(trafficCops[0].pos, '👮‍♂️ "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL ತೋರಿಸಿ!" [PRESS L]', '#ef4444');
+            }
+            setTimeout(() => {
+              lastCalloutTime = 0;
+              if (strayDogs[0]) {
+                spawnComicCallout(strayDogs[0].pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW!" +₹75 HOP BONUS!', '#4ade80');
+              }
+            }, 220);
+          }, 2300);
+        }
         updateSimulation(0.05, 0.2);
         gamePaused = false;
       } else {
@@ -2728,7 +3936,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (!modal.open) modal.showModal();
         gamePaused = true;
       }
-      renderer.render(scene, camera);
+      composer.render();
       animate();
     }
 
@@ -2744,7 +3952,7 @@ def main():
     out_file = os.path.join(WORKSPACE_DIR, "index.html")
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(html_out)
-    print(f"Wrote {out_file} ({os.path.getsize(out_file)} bytes)")
+    print(f"Wrote {out_file} ({os.path.getsize(out_file)} bytes) with {len(embedded)} embedded GLB models")
 
 if __name__ == "__main__":
     main()
