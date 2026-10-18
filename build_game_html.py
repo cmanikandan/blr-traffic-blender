@@ -400,13 +400,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       background: rgba(255, 255, 255, 0.09);
     }
 
-    .tool-btn.active-mode {
-      background: var(--auto-yellow);
-      color: #0b0e14;
-      font-weight: 900;
-      box-shadow: 0 2px 10px rgba(255, 208, 0, 0.35);
-    }
-
     .tool-btn.action-pill {
       background: rgba(255, 255, 255, 0.07);
       border-color: rgba(255, 255, 255, 0.14);
@@ -414,6 +407,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .tool-btn.action-pill:hover {
       border-color: var(--auto-yellow);
+    }
+
+    .tool-btn.active-mode,
+    .tool-btn.action-pill.active-mode {
+      background: var(--auto-yellow);
+      color: #0b0e14;
+      border-color: var(--auto-yellow);
+      font-weight: 900;
+      box-shadow: 0 2px 10px rgba(255, 208, 0, 0.35);
     }
 
     /* Bottom-Left: Minimalist Key Hints */
@@ -757,6 +759,359 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       filter: brightness(1.08);
     }
 
+    /* Trip Progress Strip inside Auto Fare Unit */
+    .trip-progress-strip {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .trip-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.63rem;
+      font-weight: 800;
+      color: #fde047;
+      letter-spacing: 0.04em;
+    }
+
+    .trip-bar-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .trip-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd000, #22c55e);
+      transition: width 0.15s linear;
+    }
+
+    /* Camera Selector Bar inside Start Modal */
+    .camera-config-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 4px 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 208, 0, 0.35);
+    }
+
+    .camera-config-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #fde047;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .camera-config-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cam-opt-btn {
+      background: rgba(30, 41, 59, 0.9);
+      color: #cbd5e1;
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 9px;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .cam-opt-btn.active-cam {
+      background: var(--auto-yellow);
+      color: #090d16;
+      border-color: #ffffff;
+      box-shadow: 0 0 12px rgba(255, 208, 0, 0.45);
+    }
+
+    /* =========================================================================
+       AUTO-RICKSHAW DASH CAM / COCKPIT POV OVERLAY
+       ========================================================================= */
+    #dashcam-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 6;
+      display: none;
+      overflow: hidden;
+      --steer-deg: 0deg;
+      --wiper-deg: -42deg;
+    }
+
+    #dashcam-overlay.active {
+      display: block;
+    }
+
+    /* Top Rexine Canopy & Yellow Windshield Arch */
+    .dashcam-top-canopy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      background: linear-gradient(180deg, #111318 0%, #1e222d 72%, #ffd000 72%, #d9a700 100%);
+      border-bottom: 4px solid #090d16;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Left & Right Yellow-Green Auto Windshield A-Pillars */
+    .dashcam-pillar-left,
+    .dashcam-pillar-right {
+      position: absolute;
+      top: 48px;
+      bottom: 0;
+      width: 38px;
+      background: linear-gradient(180deg, #ffd000 0%, #e5b800 55%, #009a44 55%, #007633 100%);
+      border-right: 4px solid #090d16;
+      box-shadow: 8px 0 24px rgba(0, 0, 0, 0.55);
+    }
+
+    .dashcam-pillar-right {
+      right: 0;
+      border-right: none;
+      border-left: 4px solid #090d16;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Hanging Mysuru Mallige (Jasmine Garland) & Nimbu-Mirchi Charm */
+    .dashcam-garland {
+      position: absolute;
+      top: 46px;
+      left: 50%;
+      transform-origin: top center;
+      transform: translateX(-50%) rotate(calc(var(--steer-deg) * -0.8));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.08s linear;
+    }
+
+    .garland-strands {
+      font-size: 1.25rem;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.65));
+      text-align: center;
+    }
+
+    .garland-tag {
+      margin-top: 2px;
+      background: rgba(9, 13, 22, 0.85);
+      border: 1px solid rgba(255, 208, 0, 0.65);
+      color: #fde047;
+      font-size: 0.62rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 99px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Dash Cam REC Timestamp OSD Badge */
+    .dashcam-rec-osd {
+      position: absolute;
+      bottom: 92px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(9, 13, 22, 0.85);
+      border: 1.5px solid rgba(239, 68, 68, 0.75);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+    }
+
+    .rec-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+      animation: blink-rec 1s infinite;
+    }
+
+    @keyframes blink-rec {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Center Windshield Wiper Blade */
+    .dashcam-wiper {
+      position: absolute;
+      top: 52px;
+      left: 50%;
+      width: 5px;
+      height: 290px;
+      background: linear-gradient(180deg, #0f172a, #334155);
+      transform-origin: top center;
+      transform: translateX(-50%) rotate(var(--wiper-deg));
+      border-radius: 4px;
+      opacity: 0.55;
+    }
+
+    /* Bottom Auto Dashboard Cowling & Steering Handlebar */
+    .dashcam-bottom-dash {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(680px, 72vw);
+      height: 96px;
+      background: linear-gradient(180deg, #009a44 0%, #00682d 38%, #111827 38%, #090d16 100%);
+      border-top: 4px solid #ffd000;
+      border-left: 4px solid #090d16;
+      border-right: 4px solid #090d16;
+      border-radius: 36px 36px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 8px;
+    }
+
+    .dashcam-handlebar {
+      width: 340px;
+      height: 18px;
+      background: linear-gradient(90deg, #1e293b 0 18%, #cbd5e1 18% 82%, #1e293b 82% 100%);
+      border: 2px solid #090d16;
+      border-radius: 99px;
+      transform: rotate(var(--steer-deg));
+      transition: transform 0.06s linear;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .dashcam-dash-label {
+      margin-top: 10px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      color: #fde047;
+      letter-spacing: 0.08em;
+    }
+
+    /* =========================================================================
+       END-OF-TRIP SCOREBOARD MODAL (<dialog id="score-modal">)
+       ========================================================================= */
+    dialog#score-modal {
+      margin: auto;
+      width: min(720px, 93vw);
+      max-height: 91vh;
+      overflow-y: auto;
+      background: linear-gradient(160deg var(--in-oklab), rgba(15, 23, 42, 0.98), rgba(9, 13, 24, 0.99));
+      color: #f8fafc;
+      border: 2.5px solid #ffd000;
+      border-radius: 22px;
+      padding: 0;
+      box-shadow: 0 28px 75px rgba(0, 0, 0, 0.85);
+    }
+
+    dialog#score-modal::backdrop {
+      background: rgba(6, 10, 20, 0.78);
+      backdrop-filter: blur(8px);
+    }
+
+    .score-hero-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 14px 0;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(255, 208, 0, 0.35);
+    }
+
+    .score-big-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #ffd000;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.05;
+    }
+
+    .score-rank-pill {
+      display: inline-block;
+      margin-top: 4px;
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid #4ade80;
+      color: #86efac;
+      font-size: 0.76rem;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.05em;
+    }
+
+    .score-breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px 0;
+      font-size: 0.82rem;
+    }
+
+    .score-breakdown-table th,
+    .score-breakdown-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .score-breakdown-table th {
+      color: #94a3b8;
+      font-size: 0.70rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .score-breakdown-table td:last-child,
+    .score-breakdown-table th:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+    }
+
+    .score-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .score-actions .launch-btn {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    .score-actions .secondary-btn {
+      background: rgba(30, 41, 59, 0.95);
+      color: #f8fafc;
+      border: 1.5px solid rgba(255, 208, 0, 0.55);
+    }
+
     .asset-status-bar {
       padding: 10px 14px;
       border-radius: 12px;
@@ -808,7 +1163,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <!-- 4-Corner Professional Arcade HUD -->
   <div class="hud-layer">
     <header class="hud-top-row">
-      <!-- Top-Left: Authentic Bengaluru Auto Digital Fare Meter -->
+      <!-- Top-Left: Authentic Bengaluru Auto Digital Fare Meter + Trip Destination Progress -->
       <div class="auto-fare-unit interactive">
         <div class="meter-header">
           <span>ನಮ್ಮ ಆಟೋ • KA-01 METER</span>
@@ -816,7 +1171,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </div>
         <div class="meter-screen">
           <div class="fare-digits" id="hud-fare">₹30.00</div>
-          <div class="fare-sub" id="hud-dist">0.0 KM</div>
+          <div class="fare-sub" id="hud-dist">0.0 / 1.8 KM</div>
+        </div>
+        <div class="trip-progress-strip">
+          <div class="trip-progress-label">
+            <span id="hud-trip-title">🏁 TRIP TO INDIRANAGAR</span>
+            <span id="hud-trip-pct">0%</span>
+          </div>
+          <div class="trip-bar-track">
+            <div class="trip-bar-fill" id="hud-trip-fill"></div>
+          </div>
         </div>
         <div class="dl-status-strip">
           <span>🪪 DIGILOCKER DL &amp; RC</span>
@@ -846,15 +1210,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
 
       <!-- Top-Right: Compact Glass Pill Toolbar -->
-      <nav class="top-toolbar interactive" aria-label="Game Mode and Audio Controls">
+      <nav class="top-toolbar interactive" aria-label="Game Mode, Camera View and Audio Controls">
         <div class="mode-segmented">
           <button type="button" class="tool-btn" data-quick-mode="low">Low</button>
           <button type="button" class="tool-btn active-mode" data-quick-mode="medium">Medium</button>
           <button type="button" class="tool-btn" data-quick-mode="complex">Peak Hour</button>
         </div>
+        <button type="button" class="tool-btn action-pill" id="btn-camera-toggle">🎥 View: Chase [V]</button>
         <button type="button" class="tool-btn action-pill" id="btn-horn-test">📯 Horn</button>
         <button type="button" class="tool-btn action-pill" id="btn-cop-test">👮 Cop Check</button>
         <button type="button" class="tool-btn action-pill" id="btn-rain-toggle">🌧️ Rain</button>
+        <button type="button" class="tool-btn action-pill" id="btn-end-trip">🏁 End Trip</button>
         <button type="button" class="tool-btn action-pill" id="btn-audio-toggle">🔊 Audio</button>
         <button type="button" class="tool-btn action-pill" id="btn-open-modal">⚙️ Menu</button>
       </nav>
@@ -864,11 +1230,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <!-- Bottom-Left: Controls Guide -->
       <div class="controls-card interactive">
         <span class="key-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Steer &amp; Throttle</span>
-        <span class="key-item"><kbd>SPACE</kbd> Gravity Glitch Hop</span>
+        <span class="key-item"><kbd>V</kbd> Toggle Dash Cam / Chase View</span>
+        <span class="key-item"><kbd>SPACE</kbd> Turbo Gap Boost</span>
         <span class="key-item"><kbd>H</kbd> Auto Horn ("Pa-Pa-Paarp!")</span>
         <span class="key-item"><kbd>L</kbd> Flash License to Cop</span>
         <span class="key-item"><kbd>R</kbd> Fix Wheel</span>
-        <span class="key-item"><kbd>ESC</kbd> Menu</span>
       </div>
 
       <!-- Bottom-Right: Speedometer, Grip & 3-Wheel Status -->
@@ -878,7 +1244,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="speed-num" id="hud-speed">65</span>
             <span class="speed-unit">KM/H</span>
           </div>
-          <span class="alt-badge" id="hud-alt">ON ROAD</span>
+          <span class="alt-badge" id="hud-alt">🎥 CHASE VIEW</span>
         </div>
 
         <div class="bar-group">
@@ -903,71 +1269,98 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     </footer>
   </div>
 
-  <!-- 3D Viewport -->
+  <!-- 3D Viewport & Configurable First-Person Auto Dash Cam Cockpit Overlay -->
   <main>
     <canvas id="game-canvas" aria-label="Ondu Second 3D Bangalore Traffic Viewport"></canvas>
+    <div id="dashcam-overlay" aria-hidden="true">
+      <div class="dashcam-top-canopy"></div>
+      <div class="dashcam-pillar-left"></div>
+      <div class="dashcam-pillar-right"></div>
+      <div class="dashcam-wiper" id="dashcam-wiper"></div>
+      <div class="dashcam-garland">
+        <div class="garland-strands">🌼🌿🍋🌶️🌿🌼</div>
+        <div class="garland-tag">ನಮ್ಮ ಬೆಂಗಳೂರು ಆಟೋ • KA-01</div>
+      </div>
+      <div class="dashcam-rec-osd">
+        <span class="rec-dot"></span>
+        <span id="dashcam-osd-text">REC • KA-01-AG-9999 AUTO DASHCAM • 1080P 60FPS</span>
+      </div>
+      <div class="dashcam-bottom-dash">
+        <div class="dashcam-handlebar"></div>
+        <div class="dashcam-dash-label">🛺 BAJAJ RE COCKPIT • PRESS [V] FOR CHASE VIEW</div>
+      </div>
+    </div>
     <div id="callout-layer" aria-hidden="true"></div>
   </main>
 
-  <!-- Native Modal Dialog: Difficulty & Gravity Profiles Menu -->
+  <!-- Native Modal Dialog: Difficulty, Camera View & Route Menu -->
   <dialog id="gravity-modal" aria-labelledby="modal-title">
     <div class="hazard-trim"></div>
     <div class="modal-inner">
       <div class="modal-top">
         <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • KA-01 BENGALURU TRAFFIC PRO EDITION</span>
       </div>
-      <h1 id="modal-title">ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: BANGALORE GRAVITY GLITCH</h1>
+      <h1 id="modal-title">ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: NAMMA AUTO TRAFFIC</h1>
       <p class="modal-lead">
-        Drive the iconic emerald-and-canary Bengaluru Auto-Rickshaw down a realistic PBR highway lined with bilingual <strong>Kannada + English hoardings</strong>, sudden <strong>Bengaluru Traffic Police (BTP) license checks</strong>, darting <strong>Indie stray dogs</strong>, "Ondu Second!" jaywalkers, hyper-speed Zepto/Blinkit riders, and magnetic BBMP potholes!
+        Drive the iconic emerald-and-canary Bengaluru Auto-Rickshaw down a realistic grounded highway lined with bilingual <strong>Kannada + English hoardings</strong>, sudden <strong>Bengaluru Traffic Police (BTP) license checks</strong>, darting <strong>Indie stray dogs</strong>, and "Ondu Second!" jaywalkers. Complete your trip destination to lock in your final meter fare and driver score!
       </p>
+
+      <!-- User-Configurable Camera Perspective Selector -->
+      <div class="camera-config-bar">
+        <span class="camera-config-title">🎥 Camera Perspective (Configurable Anytime with [V]):</span>
+        <div class="camera-config-btns">
+          <button type="button" class="cam-opt-btn active-cam" data-set-cam="chase">🎥 Regular Chase View (3rd Person)</button>
+          <button type="button" class="cam-opt-btn" data-set-cam="dashcam">🛺 Auto Dash Cam View (Driver Cockpit POV)</button>
+        </div>
+      </div>
 
       <div class="mode-grid">
         <article class="mode-card" data-mode="low">
           <div>
-            <span class="mode-tag tag-low">Low • Easy Mode</span>
+            <span class="mode-tag tag-low">Low • Easy Route (1.2 KM)</span>
             <h2>ಕಬ್ಬನ್ ಪಾರ್ಕ್ ಬೆಳಿಗ್ಗೆ | Cubbon Park Morning</h2>
             <p class="mode-desc">
-              Cruising morning traffic with bilingual Kannada hoardings, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
+              Cruising morning ride with bilingual Kannada hoardings, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
             </p>
             <ul class="mode-stats">
-              <li><strong>Traffic:</strong> 12 Two-Way Vehicles</li>
+              <li><strong>Trip Distance:</strong> 1.2 KM (MG Road → Cubbon Park)</li>
+              <li><strong>Traffic:</strong> 12 Grounded Two-Way Vehicles</li>
               <li><strong>Hazards:</strong> 5 Jaywalkers • 3 Stray Dogs • 1 BTP Cop</li>
-              <li><strong>Pothole Pull:</strong> Mild Magnetic Pull</li>
             </ul>
           </div>
-          <button type="button" class="launch-btn" data-select-mode="low">Play Low Mode</button>
+          <button type="button" class="launch-btn" data-select-mode="low">Start 1.2 KM Trip</button>
         </article>
 
         <article class="mode-card selected" data-mode="medium">
           <div>
-            <span class="mode-tag tag-med">Medium • Normal Mode</span>
+            <span class="mode-tag tag-med">Medium • Normal Route (1.8 KM)</span>
             <h2>ಇಂದಿರಾನಗರ ಸಂಜೆ ರಶ್ | Indiranagar 6 PM Rush</h2>
             <p class="mode-desc">
               Bustling evening rush with oncoming BMTC 500D buses, sudden BTP Traffic Cop license stops, darting Indie stray dogs, and Zepto/Blinkit cut-offs.
             </p>
             <ul class="mode-stats">
-              <li><strong>Traffic:</strong> 20 Two-Way Vehicles</li>
+              <li><strong>Trip Distance:</strong> 1.8 KM (Silk Board → Indiranagar)</li>
+              <li><strong>Traffic:</strong> 20 Grounded Two-Way Vehicles</li>
               <li><strong>Hazards:</strong> 8 Jaywalkers • 5 Stray Dogs • 2 BTP Cops</li>
-              <li><strong>Pothole Pull:</strong> Strong Sinkhole Pull</li>
             </ul>
           </div>
-          <button type="button" class="launch-btn" data-select-mode="medium">Play Normal Mode</button>
+          <button type="button" class="launch-btn" data-select-mode="medium">Start 1.8 KM Trip</button>
         </article>
 
         <article class="mode-card" data-mode="complex">
           <div>
-            <span class="mode-tag tag-complex">Complex • Peak Hour</span>
+            <span class="mode-tag tag-complex">Complex • Peak Hour (2.5 KM)</span>
             <h2>ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಟ್ರಾಫಿಕ್ | Silk Board 8 PM Gridlock</h2>
             <p class="mode-desc">
               Full Silk Board peak-hour madness! Non-stop BMTC convoys, aggressive BTP e-Challan nakabandis, pack of darting stray dogs, and monsoon hydroplaning.
             </p>
             <ul class="mode-stats">
-              <li><strong>Traffic:</strong> 30 Dense Two-Way Vehicles</li>
+              <li><strong>Trip Distance:</strong> 2.5 KM (Electronic City → Hebbal)</li>
+              <li><strong>Traffic:</strong> 30 Dense Grounded Vehicles</li>
               <li><strong>Hazards:</strong> 12 Jaywalkers • 7 Stray Dogs • 3 BTP Cops</li>
-              <li><strong>Pothole Pull:</strong> Maximum Gravity Glitch</li>
             </ul>
           </div>
-          <button type="button" class="launch-btn" data-select-mode="complex">Play Peak Hour</button>
+          <button type="button" class="launch-btn" data-select-mode="complex">Start 2.5 KM Trip</button>
         </article>
       </div>
 
@@ -987,6 +1380,52 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           <span class="asset-chip" data-asset="metro_station.glb">metro_station.glb</span>
           <span class="asset-chip" data-asset="silk_board_sign.glb">silk_board_sign.glb</span>
         </div>
+      </div>
+    </div>
+    <div class="hazard-trim"></div>
+  </dialog>
+
+  <!-- Native Modal Dialog: End-of-Trip Scoreboard & Final Fare Summary -->
+  <dialog id="score-modal" aria-labelledby="score-modal-title">
+    <div class="hazard-trim"></div>
+    <div class="modal-inner">
+      <div class="modal-top">
+        <span class="modal-badge" id="score-route-badge">🏁 ನಮ್ಮ ಆಟೋ ಮೀಟರ್ ರಸೀದಿ • FINAL TRIP RECEIPT</span>
+      </div>
+      <h1 id="score-modal-title">🏁 ಪ್ರಯಾಣ ಮುಕ್ತಾಯ! | TRIP COMPLETED — FINAL SCOREBOARD</h1>
+      <p class="modal-lead" id="score-modal-subtitle">
+        You navigated Bengaluru traffic and reached your destination! Here is your itemized Namma Auto fare and driver performance breakdown:
+      </p>
+
+      <div class="score-hero-row">
+        <div>
+          <div style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Final Driver Score</div>
+          <div class="score-big-num" id="score-total-pts">2,450 PTS</div>
+          <span class="score-rank-pill" id="score-rank-badge">🏆 S-RANK • ನಮ್ಮ ಆಟೋ ರಾಜ (BENGALURU AUTO LEGEND)</span>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Final Auto Meter Fare</div>
+          <div class="score-big-num" style="color: #4ade80;" id="score-total-fare">₹385.00</div>
+          <div style="font-size: 0.75rem; color: #cbd5e1; font-weight: 700;" id="score-dist-summary">Distance: 1.8 / 1.8 KM</div>
+        </div>
+      </div>
+
+      <table class="score-breakdown-table">
+        <thead>
+          <tr>
+            <th>Scoring Category</th>
+            <th>Count / Details</th>
+            <th>Fare / Score Impact</th>
+          </tr>
+        </thead>
+        <tbody id="score-breakdown-body">
+        </tbody>
+      </table>
+
+      <div class="score-actions">
+        <button type="button" class="launch-btn" id="btn-score-replay">🔄 Play Again (New Trip)</button>
+        <button type="button" class="launch-btn secondary-btn" id="btn-score-switch-cam">🎥 Switch View (Dash Cam / Chase) &amp; Replay</button>
+        <button type="button" class="launch-btn secondary-btn" id="btn-score-menu">⚙️ Change Route / Mode</button>
       </div>
     </div>
     <div class="hazard-trim"></div>
@@ -1468,11 +1907,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     const audio = new BangaloreAudioEngine();
 
     // =========================================================================
-    // 3. DIFFICULTY PROFILES (Two-Way Traffic + Jaywalkers + BTP Cops + Stray Dogs)
+    // 3. DIFFICULTY & ROUTE PROFILES (Finite Trips + Two-Way Traffic + Cops + Stray Dogs)
     // =========================================================================
     const GRAVITY_PROFILES = {
       low: {
         id: 'low',
+        routeTitle: 'MG ROAD → CUBBON PARK',
+        targetDistanceKm: 1.2,
         trafficCount: 12,
         jaywalkerCount: 5,
         dogCount: 3,
@@ -1486,12 +1927,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         potholeRadius: 4.5,
         rainCycleDuration: 30,
         rainStormDuration: 7,
-        gravityReturn: 24.0,
-        glitchBounceVy: 5.2,
         fareRateMult: 1.0
       },
       medium: {
         id: 'medium',
+        routeTitle: 'SILK BOARD → INDIRANAGAR',
+        targetDistanceKm: 1.8,
         trafficCount: 20,
         jaywalkerCount: 8,
         dogCount: 5,
@@ -1505,12 +1946,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         potholeRadius: 5.5,
         rainCycleDuration: 22,
         rainStormDuration: 9,
-        gravityReturn: 19.0,
-        glitchBounceVy: 6.8,
         fareRateMult: 1.5
       },
       complex: {
         id: 'complex',
+        routeTitle: 'ELECTRONIC CITY → HEBBAL',
+        targetDistanceKm: 2.5,
         trafficCount: 30,
         jaywalkerCount: 12,
         dogCount: 7,
@@ -1524,8 +1965,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         potholeRadius: 6.4,
         rainCycleDuration: 15,
         rainStormDuration: 11,
-        gravityReturn: 14.5,
-        glitchBounceVy: 8.5,
         fareRateMult: 2.5
       }
     };
@@ -2328,8 +2767,43 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       fareRupees: 30.0,
       wheelRepairTimer: 0,
       hornCooldown: 0,
-      dlVerifiedTimer: 0
+      dlVerifiedTimer: 0,
+      turboBoostTimer: 0,
+      cameraMode: 'chase', // 'chase' | 'dashcam'
+      tripFinished: false,
+      stats: {
+        copsCleared: 0,
+        copsEvaded: 0,
+        copsFined: 0,
+        dogsDodged: 0,
+        closeOvertakes: 0,
+        collisions: 0,
+        wheelsSnapped: 0
+      }
     };
+
+    function resetPlayerStatsAndTrip() {
+      player.pos.set(-1.9, 0, 0);
+      player.vel.set(0, 0, 0);
+      player.rot.set(0, 0, 0);
+      player.forwardSpeed = 32;
+      player.distanceKm = 0;
+      player.fareRupees = 30.0;
+      player.wheelRepairTimer = 0;
+      player.hornCooldown = 0;
+      player.dlVerifiedTimer = 0;
+      player.turboBoostTimer = 0;
+      player.tripFinished = false;
+      player.stats = {
+        copsCleared: 0,
+        copsEvaded: 0,
+        copsFined: 0,
+        dogsDodged: 0,
+        closeOvertakes: 0,
+        collisions: 0,
+        wheelsSnapped: 0
+      };
+    }
 
     function createPlayerAuto() {
       if (player.mesh) scene.remove(player.mesh);
@@ -2388,6 +2862,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       spawnCollisionSparks(worldPos, 14, 0xff5500);
 
       if (isPlayer) {
+        player.stats.wheelsSnapped++;
         player.wheelRepairTimer = 6.0;
         updateWheelHUD();
         spawnComicCallout(worldPos, '🔧 WHEEL SNAPPED! PRESS [R] TO FIX', '#ff3b5c');
@@ -2437,7 +2912,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         lengthZ: 2.2,
         mass: 0.85,
         hornType: 'scooter',
-        callouts: ['⚡ ZEPTO 10-MIN CUT-OFF!', '🟢 ZERO-G GROCERY BOUNCE!', '💨 MOVE ANNA!']
+        callouts: ['⚡ ZEPTO 10-MIN CUT-OFF!', '🟢 EXPRESS GROCERY WEAVE!', '💨 MOVE ANNA!']
       },
       blinkit: {
         asset: 'delivery_blinkit.glb',
@@ -2448,7 +2923,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         lengthZ: 2.2,
         mass: 0.85,
         hornType: 'scooter',
-        callouts: ['⚡ BLINKIT INSTANT CUT!', '🟡 EXPRESS DELIVERY BOUNCE!']
+        callouts: ['⚡ BLINKIT INSTANT CUT!', '🟡 10-MIN DELIVERY RUSH!']
       },
       swiggy: {
         asset: 'delivery_swiggy.glb',
@@ -2992,6 +3467,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           cop.state = 'cleared';
           clearedAnyCop = true;
           player.fareRupees += 100;
+          player.stats.copsCleared++;
           audio.playLicenseVerified();
           spawnComicCallout(
             cop.pos,
@@ -3025,6 +3501,49 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       spawnComicCallout(cop.pos, '👮‍♂️ "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL ತೋರಿಸಿ!" [PRESS L]', '#ef4444');
     }
 
+    // User-Configurable Camera View: 'chase' (3rd Person) vs 'dashcam' (Inside Auto Cockpit POV)
+    function setCameraMode(mode, showCallout = false) {
+      player.cameraMode = mode === 'dashcam' ? 'dashcam' : 'chase';
+      const isDash = player.cameraMode === 'dashcam';
+
+      const overlay = document.getElementById('dashcam-overlay');
+      if (overlay) overlay.classList.toggle('active', isDash);
+
+      if (player.mesh) {
+        player.mesh.visible = !isDash;
+      }
+
+      const camBtn = document.getElementById('btn-camera-toggle');
+      if (camBtn) {
+        camBtn.textContent = isDash ? '🛺 View: Dash Cam [V]' : '🎥 View: Chase [V]';
+        camBtn.classList.toggle('active-mode', isDash);
+      }
+
+      const altBadge = document.getElementById('hud-alt');
+      if (altBadge) {
+        altBadge.textContent = isDash ? '🛺 DASH CAM POV' : '🎥 CHASE VIEW';
+      }
+
+      document.querySelectorAll('[data-set-cam]').forEach((btn) => {
+        btn.classList.toggle('active-cam', btn.dataset.setCam === player.cameraMode);
+      });
+
+      camera.fov = isDash ? 66 : 58;
+      camera.updateProjectionMatrix();
+
+      if (showCallout) {
+        spawnComicCallout(
+          player.pos,
+          isDash ? '🛺 AUTO DASH CAM VIEW (DRIVER COCKPIT POV)' : '🎥 REGULAR CHASE CAMERA VIEW',
+          '#38bdf8'
+        );
+      }
+    }
+
+    function toggleCameraMode() {
+      setCameraMode(player.cameraMode === 'chase' ? 'dashcam' : 'chase', true);
+    }
+
     const keys = { up: false, down: false, left: false, right: false, space: false };
 
     window.addEventListener('keydown', (e) => {
@@ -3053,12 +3572,20 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           break;
         case 'Space':
           e.preventDefault();
-          if (!keys.space && player.pos.y < 0.5) {
-            player.vel.y = currentProfile.glitchBounceVy;
-            audio.playBounceImpact(false);
-            spawnComicCallout(player.pos, '⚡ ZERO-G GLITCH HOP!', '#38bdf8');
+          if (!keys.space && player.turboBoostTimer <= 0) {
+            player.turboBoostTimer = 1.6;
+            audio.playBeepBeepHorn('auto');
+            spawnComicCallout(player.pos, '⚡ TURBO GAP BOOST! (GROUNDED)', '#38bdf8');
           }
           keys.space = true;
+          break;
+        case 'KeyV':
+          toggleCameraMode();
+          break;
+        case 'KeyE':
+          if (!gamePaused) {
+            finishTripAndShowScoreboard('Meter Stopped by Driver');
+          }
           break;
         case 'KeyH':
           triggerPlayerHorn();
@@ -3139,7 +3666,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       });
     }
 
-    // Weather & Modal Controls
+    // Weather, Modal & End-of-Trip Scoreboard Controls
     let rainActive = false;
     let rainIntensity = 0.0;
     let weatherTimer = 14.0;
@@ -3155,7 +3682,85 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     const modal = document.getElementById('gravity-modal');
+    const scoreModal = document.getElementById('score-modal');
     let gamePaused = true;
+
+    function updateTripProgressHUD() {
+      const targetKm = currentProfile.targetDistanceKm || 1.8;
+      const pct = Math.min(100, Math.round((player.distanceKm / targetKm) * 100));
+      document.documentElement.style.setProperty('--trip-pct', `${pct}%`);
+      const titleEl = document.getElementById('hud-trip-title');
+      if (titleEl) titleEl.textContent = `🏁 ${currentProfile.routeTitle}`;
+      const pctEl = document.getElementById('hud-trip-pct');
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      const distEl = document.getElementById('hud-dist');
+      if (distEl) distEl.textContent = `${player.distanceKm.toFixed(2)} / ${targetKm.toFixed(1)} KM`;
+    }
+
+    function finishTripAndShowScoreboard(reason = 'Destination Reached!') {
+      player.tripFinished = true;
+      gamePaused = true;
+      audio.init();
+      audio.playLicenseVerified();
+
+      const targetKm = currentProfile.targetDistanceKm || 1.8;
+      const distPts = Math.round(player.distanceKm * 600);
+      const farePts = Math.round(player.fareRupees * 3.5);
+      const copPts = player.stats.copsCleared * 300 + player.stats.copsEvaded * 150;
+      const dogPts = player.stats.dogsDodged * 200 + player.stats.closeOvertakes * 80;
+      const penaltyPts = player.stats.collisions * 75 + player.stats.copsFined * 250;
+      const totalScore = Math.max(150, distPts + farePts + copPts + dogPts - penaltyPts);
+
+      let rankText = '🏆 S-RANK • ನಮ್ಮ ಆಟೋ ರಾಜ (BENGALURU AUTO LEGEND)';
+      if (totalScore < 1400) {
+        rankText = '🥉 B-RANK • SILK BOARD SURVIVOR (ಸಂಚಾರ ವೀರ)';
+      } else if (totalScore < 2200) {
+        rankText = '🥇 A-RANK • INDIRANAGAR METER BOSS (ಮೀಟರ್ ಬಾಸ್)';
+      }
+
+      document.getElementById('score-route-badge').textContent =
+        `🏁 ${currentProfile.routeTitle} • ${reason.toUpperCase()}`;
+      document.getElementById('score-total-pts').textContent = `${totalScore.toLocaleString()} PTS`;
+      document.getElementById('score-rank-badge').textContent = rankText;
+      document.getElementById('score-total-fare').textContent = `₹${player.fareRupees.toFixed(2)}`;
+      document.getElementById('score-dist-summary').textContent =
+        `Trip Distance: ${player.distanceKm.toFixed(2)} / ${targetKm.toFixed(1)} KM • View: ${player.cameraMode.toUpperCase()}`;
+
+      const tbody = document.getElementById('score-breakdown-body');
+      tbody.innerHTML = `
+        <tr>
+          <td>🛣️ Route Distance Completed (${currentProfile.routeTitle})</td>
+          <td>${player.distanceKm.toFixed(2)} / ${targetKm.toFixed(1)} KM</td>
+          <td class="pts-pos">+${distPts} PTS</td>
+        </tr>
+        <tr>
+          <td>📟 Namma Auto Meter Fare (${currentProfile.fareRateMult.toFixed(1)}x Rate)</td>
+          <td>₹${player.fareRupees.toFixed(2)} Collected</td>
+          <td class="pts-pos">+${farePts} PTS</td>
+        </tr>
+        <tr>
+          <td>👮‍♂️ BTP Traffic Cop License Checks</td>
+          <td>${player.stats.copsCleared} DL Verified • ${player.stats.copsEvaded} Dodged</td>
+          <td class="pts-pos">+${copPts} PTS</td>
+        </tr>
+        <tr>
+          <td>🐕 Indie Stray Dogs &amp; Traffic Overtakes</td>
+          <td>${player.stats.dogsDodged} Dogs Dodged • ${player.stats.closeOvertakes} Overtakes</td>
+          <td class="pts-pos">+${dogPts} PTS</td>
+        </tr>
+        <tr>
+          <td>💥 Traffic Bumps &amp; e-Challan Penalties</td>
+          <td>${player.stats.collisions} Bumps • ${player.stats.copsFined} Fines</td>
+          <td class="${penaltyPts > 0 ? 'pts-neg' : 'pts-pos'}">${penaltyPts > 0 ? '-' + penaltyPts : '0 (CLEAN!)'} PTS</td>
+        </tr>
+      `;
+
+      document.getElementById('hud-cop-alert').classList.remove('visible');
+      document.getElementById('vignette-fx').classList.remove('cop-strobe');
+
+      if (modal.open) modal.close();
+      if (!scoreModal.open) scoreModal.showModal();
+    }
 
     function applyGravityProfile(modeKey, closeDialog = true) {
       currentProfile = GRAVITY_PROFILES[modeKey] || GRAVITY_PROFILES.medium;
@@ -3167,12 +3772,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         card.classList.toggle('selected', card.dataset.mode === modeKey);
       });
 
+      resetPlayerStatsAndTrip();
       rebuildPotholes(currentProfile.potholeCount);
       rebuildTrafficForProfile(currentProfile);
       rebuildJaywalkers(currentProfile.jaywalkerCount);
       rebuildTrafficCops(currentProfile.copCount);
       rebuildStrayDogs(currentProfile.dogCount);
       reattachAllPlayerWheels();
+      setCameraMode(player.cameraMode, false);
+      updateTripProgressHUD();
 
       rainActive = false;
       rainIntensity = 0.0;
@@ -3181,6 +3789,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       document.getElementById('hud-cop-alert').classList.remove('visible');
       document.getElementById('vignette-fx').classList.remove('cop-strobe');
 
+      if (scoreModal && scoreModal.open) {
+        scoreModal.close();
+      }
       if (closeDialog && modal.open) {
         modal.close();
       }
@@ -3189,6 +3800,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     function toggleGravityModal() {
+      if (scoreModal && scoreModal.open) {
+        scoreModal.close();
+      }
       if (modal.open) {
         modal.close();
         gamePaused = false;
@@ -3199,7 +3813,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     modal.addEventListener('close', () => {
-      gamePaused = false;
+      if (!scoreModal.open) {
+        gamePaused = false;
+      }
     });
 
     document.querySelectorAll('[data-select-mode]').forEach((btn) => {
@@ -3221,6 +3837,30 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       });
     });
 
+    document.querySelectorAll('[data-set-cam]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setCameraMode(btn.dataset.setCam, false);
+      });
+    });
+
+    document.getElementById('btn-camera-toggle').addEventListener('click', () => toggleCameraMode());
+    document.getElementById('btn-end-trip').addEventListener('click', () => {
+      finishTripAndShowScoreboard('Meter Stopped by Driver');
+    });
+    document.getElementById('btn-score-replay').addEventListener('click', () => {
+      applyGravityProfile(currentProfile.id, true);
+    });
+    document.getElementById('btn-score-switch-cam').addEventListener('click', () => {
+      setCameraMode(player.cameraMode === 'chase' ? 'dashcam' : 'chase', false);
+      applyGravityProfile(currentProfile.id, true);
+    });
+    document.getElementById('btn-score-menu').addEventListener('click', () => {
+      if (scoreModal.open) scoreModal.close();
+      modal.showModal();
+      gamePaused = true;
+    });
+
     document.getElementById('btn-horn-test').addEventListener('click', () => triggerPlayerHorn());
     document.getElementById('btn-cop-test').addEventListener('click', () => triggerSuddenCopEncounterNow());
     document.getElementById('btn-show-dl').addEventListener('click', () => flashDigiLockerLicenseToCop());
@@ -3235,13 +3875,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     });
 
     // =========================================================================
-    // 9. SIMULATION, TWO-WAY TRAFFIC, BTP COPS & STRAY DOGS PHYSICS LOOP
+    // 9. SIMULATION, STRICT GROUNDED TRAFFIC, BTP COPS & STRAY DOGS LOOP
     // =========================================================================
     let cameraShake = 0;
     const clock = new THREE.Clock();
 
     function updateSimulation(dt, elapsed) {
+      if (player.tripFinished) return;
+
       if (player.hornCooldown > 0) player.hornCooldown -= dt;
+      if (player.turboBoostTimer > 0) player.turboBoostTimer -= dt;
       if (player.dlVerifiedTimer > 0) {
         player.dlVerifiedTimer -= dt;
         if (player.dlVerifiedTimer <= 0) {
@@ -3295,9 +3938,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       document.getElementById('hud-grip-text').textContent =
         gripPct < 15 ? '0% HYDROPLANING!' : `${gripPct}% DRY ASPHALT`;
 
-      // 2. Player Auto-Rickshaw Grounded Physics + Controlled Low-G Bounce
-      const targetSpeed = keys.up ? 48 : keys.down ? 16 : 32;
-      player.forwardSpeed += (targetSpeed - player.forwardSpeed) * dt * 3.5;
+      // 2. Player Auto-Rickshaw Strictly Grounded Physics (NO FLYING AUTOS!)
+      const baseTargetSpeed = keys.up ? 48 : keys.down ? 16 : 32;
+      const targetSpeed = player.turboBoostTimer > 0 ? 56 : baseTargetSpeed;
+      player.forwardSpeed += (targetSpeed - player.forwardSpeed) * dt * 3.8;
       player.distanceKm += (player.forwardSpeed * dt) / 1000;
 
       const steerInput = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
@@ -3315,18 +3959,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const lateralFrictionDamping = 0.65 + tireGrip * 5.5;
       player.vel.x *= Math.exp(-lateralFrictionDamping * dt);
 
-      player.vel.y -= currentProfile.gravityReturn * dt;
+      // Keep Auto strictly planted on the asphalt road (pos.y = 0 always)
       player.pos.x += player.vel.x * dt;
-      player.pos.y += player.vel.y * dt;
-
-      if (player.pos.y <= 0) {
-        player.pos.y = 0;
-        if (player.vel.y < -4.0) {
-          player.vel.y = -player.vel.y * 0.30;
-        } else {
-          player.vel.y = 0;
-        }
-      }
+      player.pos.y = 0;
+      player.vel.y = 0;
 
       const maxRoadX = ROAD_WIDTH / 2 - 1.1;
       if (Math.abs(player.pos.x) > maxRoadX) {
@@ -3335,9 +3971,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
 
       const missingWheelTilt = (3 - attachedWheelCount) * 0.10;
-      const targetPitch = THREE.MathUtils.clamp(-player.vel.y * 0.03 + (keys.up ? -0.03 : 0), -0.28, 0.28);
+      const targetPitch = THREE.MathUtils.clamp((keys.up || player.turboBoostTimer > 0 ? -0.025 : keys.down ? 0.03 : 0), -0.12, 0.12);
       const targetYaw = THREE.MathUtils.clamp(-steerInput * 0.10 - player.vel.x * 0.012, -0.32, 0.32);
-      const targetRoll = THREE.MathUtils.clamp(-steerInput * 0.11 + missingWheelTilt, -0.28, 0.28);
+      const targetRoll = THREE.MathUtils.clamp(-steerInput * 0.11 + missingWheelTilt, -0.25, 0.25);
 
       player.rot.x += (targetPitch - player.rot.x) * dt * 8.0;
       player.rot.y += (targetYaw - player.rot.y) * dt * 8.0;
@@ -3346,10 +3982,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       if (player.mesh) {
         player.mesh.position.copy(player.pos);
         player.mesh.rotation.copy(player.rot);
+        player.mesh.visible = (player.cameraMode === 'chase');
         player.wheels.forEach((w) => {
           if (w.attached) w.node.rotation.x -= (player.forwardSpeed * dt) / 0.28;
         });
       }
+
+      // Update Dash Cam Handlebar & Windshield Wiper CSS Variables
+      document.documentElement.style.setProperty('--steer-deg', `${(-steerInput * 14 - player.vel.x * 0.6).toFixed(1)}deg`);
+      const wiperAngle = rainActive ? Math.sin(elapsed * 8.0) * 38 : -28;
+      document.documentElement.style.setProperty('--wiper-deg', `${wiperAngle.toFixed(1)}deg`);
 
       // 3. Seamless Scrolling Corridor, Bilingual Hoardings, Viaduct & Metro Train
       const scrollStep = player.forwardSpeed * dt;
@@ -3393,7 +4035,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       document.getElementById('hud-landmark').textContent = `${nearestName} • ${distMeters}m`;
       document.getElementById('hud-landmark-kn').textContent = `${nearestKn} • ${distMeters}m`;
 
-      // 4. Realistic Potholes with Magnetic Pull & Gravity Glitch Hop
+      // 4. Realistic Potholes with Lateral Pull & Grounded Suspension Jolt
       potholes.forEach((p) => {
         p.group.position.z += scrollStep;
         p.anomalyRing.rotation.z += dt * 2.5;
@@ -3402,31 +4044,30 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           p.group.position.x = LANES[Math.floor(Math.random() * LANES.length)];
         }
 
-        if (player.pos.y < 1.2) {
-          const dx = p.group.position.x - player.pos.x;
-          const dz = p.group.position.z - player.pos.z;
-          const distSq = dx * dx + dz * dz;
-          const pullR = currentProfile.potholeRadius;
-          if (distSq < pullR * pullR) {
-            const dist = Math.max(0.5, Math.sqrt(distSq));
-            const falloff = 1 - dist / pullR;
-            player.vel.x += (dx / dist) * currentProfile.potholePullStrength * falloff * dt;
+        const dx = p.group.position.x - player.pos.x;
+        const dz = p.group.position.z - player.pos.z;
+        const distSq = dx * dx + dz * dz;
+        const pullR = currentProfile.potholeRadius;
+        if (distSq < pullR * pullR) {
+          const dist = Math.max(0.5, Math.sqrt(distSq));
+          const falloff = 1 - dist / pullR;
+          player.vel.x += (dx / dist) * currentProfile.potholePullStrength * falloff * dt;
 
-            if (dist < 1.35 && player.pos.y < 0.35) {
-              player.vel.y = currentProfile.glitchBounceVy * 0.85;
-              cameraShake = 0.3;
-              audio.playBounceImpact(false);
-              spawnComicCallout(player.pos, '🕳️ BBMP POTHOLE GRAVITY GLITCH!', '#38bdf8');
-            }
+          if (dist < 1.35 && cameraShake < 0.15) {
+            player.forwardSpeed = Math.max(18, player.forwardSpeed * 0.85);
+            cameraShake = 0.32;
+            audio.playBounceImpact(false);
+            spawnComicCallout(player.pos, '🕳️ BBMP POTHOLE SUSPENSION JOLT!', '#38bdf8');
           }
         }
       });
 
-      // 5. Sudden Road-Crossing Bengaluru Jaywalkers
+      // 5. Sudden Road-Crossing Bengaluru Jaywalkers (Strictly Grounded)
       for (let i = 0; i < jaywalkers.length; i++) {
         const p = jaywalkers[i];
         if (p.hitCooldown > 0) p.hitCooldown -= dt;
         p.pos.z += scrollStep;
+        p.pos.y = 0;
 
         const distAhead = -p.pos.z;
         if (p.state === 'waiting' && distAhead < p.triggerDist && distAhead > 8) {
@@ -3455,29 +4096,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           }
         }
 
-        if (p.pos.y > 0 || p.vy !== 0) {
-          p.vy -= currentProfile.gravityReturn * dt;
-          p.pos.y += p.vy * dt;
-          if (p.pos.y <= 0) {
-            p.pos.y = 0;
-            p.vy = 0;
-          }
-        }
-
         const pdx = player.pos.x - p.pos.x;
         const pdz = player.pos.z - p.pos.z;
-        if (Math.abs(pdx) < 1.1 && Math.abs(pdz) < 1.15 && player.pos.y < 1.6 && p.hitCooldown <= 0) {
+        if (Math.abs(pdx) < 1.1 && Math.abs(pdz) < 1.15 && p.hitCooldown <= 0) {
           p.hitCooldown = 0.8;
+          player.stats.collisions++;
           const push = pdx >= 0 ? 1 : -1;
           player.vel.x = push * 10.5;
-          player.vel.y = currentProfile.glitchBounceVy * 0.9;
-          p.vy = currentProfile.glitchBounceVy * 1.1;
           p.speedBoost = 1.9;
           cameraShake = 0.35;
           audio.playBeepBeepHorn('auto');
           audio.playBounceImpact(false);
           spawnCollisionSparks(p.pos, 10, 0xfb923c);
-          spawnComicCallout(p.pos, '🤸 "ಅಯ್ಯೋ! ನೋಡ್ಕೊಂಡು ಹೋಗಿ ಅಣ್ಣ!"', '#ff3b5c');
+          spawnComicCallout(p.pos, '🚶‍♂️ "ಅಯ್ಯೋ! ನೋಡ್ಕೊಂಡು ಹೋಗಿ ಅಣ್ಣ!"', '#ff3b5c');
         }
 
         if (p.pos.z > 20) {
@@ -3485,21 +4116,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 5B. NEW! Sudden Bengaluru Traffic Police (BTP) License Check Encounter
+      // 5B. Sudden Bengaluru Traffic Police (BTP) License Check Encounter
       let anyCopAlertActive = false;
       for (let i = 0; i < trafficCops.length; i++) {
         const cop = trafficCops[i];
         cop.pos.z += scrollStep;
         cop.walkPhase += dt * 9.0;
 
-        // Flash Red & Blue Police Barricade Strobe Beacons
         const strobeToggle = Math.floor(elapsed * 10) % 2 === 0;
         cop.beaconR.scale.setScalar(strobeToggle ? 1.35 : 0.85);
         cop.beaconB.scale.setScalar(strobeToggle ? 0.85 : 1.35);
 
         const distAhead = -cop.pos.z;
 
-        // Cop suddenly blows whistle & steps out into the lane to check license!
         if (cop.state === 'waiting' && distAhead < cop.triggerDist && distAhead > 10) {
           cop.state = 'stepping_out';
           if (!cop.whistleBlown) {
@@ -3517,7 +4146,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (distAhead > -2 && distAhead < 56) {
             anyCopAlertActive = true;
           }
-          // Step into target lane & wave Red LED Baton
           const stepErr = cop.targetX - cop.pos.x;
           cop.pos.x += Math.sign(stepErr) * Math.min(Math.abs(stepErr), 4.2 * dt);
           if (Math.abs(stepErr) > 0.1) {
@@ -3537,6 +4165,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             cop.resolved = true;
             cop.state = 'cleared';
             player.fareRupees += 100;
+            player.stats.copsCleared++;
             audio.playLicenseVerified();
             spawnComicCallout(cop.pos, '🪪 "ಸರಿ ಬಿಡಿ! ಮುಂದೆ ಹೋಗಿ!" (DL VERIFIED! +₹100)', '#4ade80');
           }
@@ -3544,10 +4173,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           // Check if Cop intercepts Player Auto without showing License!
           const cdx = player.pos.x - cop.pos.x;
           const cdz = player.pos.z - cop.pos.z;
-          if (!cop.resolved && Math.abs(cdx) < 2.25 && Math.abs(cdz) < 2.0 && player.pos.y < 1.8) {
+          if (!cop.resolved && Math.abs(cdx) < 2.25 && Math.abs(cdz) < 2.0) {
             cop.resolved = true;
             cop.state = 'fined';
-            // Sudden BTP Traffic Stop! Brakes auto & issues e-Challan fine
+            player.stats.copsFined++;
             player.forwardSpeed = 11.0;
             player.vel.x = (cdx >= 0 ? 1 : -1) * 8.5;
             player.fareRupees = Math.max(30, player.fareRupees - 100);
@@ -3567,6 +4196,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (!cop.resolved && cop.pos.z > 4.5) {
             cop.resolved = true;
             cop.state = 'evaded';
+            player.stats.copsEvaded++;
             player.fareRupees += 60;
             audio.playPoliceWhistle(false);
             spawnComicCallout(
@@ -3576,7 +4206,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             );
           }
         } else if (cop.state === 'cleared') {
-          // Cop steps politely back toward the kerb
           const backErr = cop.kerbX - cop.pos.x;
           cop.pos.x += Math.sign(backErr) * Math.min(Math.abs(backErr), 5.0 * dt);
         }
@@ -3589,11 +4218,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       document.getElementById('hud-cop-alert').classList.toggle('visible', anyCopAlertActive);
       document.getElementById('vignette-fx').classList.toggle('cop-strobe', anyCopAlertActive);
 
-      // 5C. NEW! Sudden Darting Bengaluru Indie Stray Dogs
+      // 5C. Sudden Darting Bengaluru Indie Stray Dogs (Grounded)
       for (let i = 0; i < strayDogs.length; i++) {
         const d = strayDogs[i];
         if (d.hitCooldown > 0) d.hitCooldown -= dt;
         d.pos.z += scrollStep;
+        d.pos.y = 0;
 
         const distAhead = -d.pos.z;
         if (d.state === 'waiting' && distAhead < d.triggerDist && distAhead > 6) {
@@ -3610,54 +4240,36 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           d.pos.x += d.dirX * d.runSpeed * d.speedBoost * dt;
           d.gallopPhase += dt * 18.0 * d.speedBoost;
 
-          // 4-leg bounding gallop cycle + subtle body hop
           const bound = Math.sin(d.gallopPhase) * 0.78;
           if (d.legFL) d.legFL.rotation.x = bound;
           if (d.legFR) d.legFR.rotation.x = Math.sin(d.gallopPhase + 0.6) * 0.78;
           if (d.legRL) d.legRL.rotation.x = -bound;
           if (d.legRR) d.legRR.rotation.x = -Math.sin(d.gallopPhase + 0.6) * 0.78;
-          if (d.vy === 0) {
-            d.pos.y = Math.abs(Math.sin(d.gallopPhase)) * 0.14;
-          }
 
           if ((d.dirX > 0 && d.pos.x > ROAD_WIDTH / 2 + 1.5) || (d.dirX < 0 && d.pos.x < -ROAD_WIDTH / 2 - 1.5)) {
             d.state = 'crossed';
-            d.pos.y = 0;
           }
         }
 
-        if (d.vy !== 0) {
-          d.vy -= currentProfile.gravityReturn * dt;
-          d.pos.y += d.vy * dt;
-          if (d.pos.y <= 0) {
-            d.pos.y = 0;
-            d.vy = 0;
-          }
-        }
-
-        // Check interaction between Player Auto and Stray Dog
         const ddx = player.pos.x - d.pos.x;
         const ddz = player.pos.z - d.pos.z;
-        if (Math.abs(ddx) < 1.15 && Math.abs(ddz) < 1.2) {
-          if (player.pos.y >= 0.85 && !d.hopBonusAwarded) {
-            // Player hopped cleanly over the stray dog with SPACE!
-            d.hopBonusAwarded = true;
-            player.fareRupees += 75;
-            audio.playDogBark();
-            spawnComicCallout(d.pos, '🐕 GRAVITY HOP OVER DOGGO! +₹75 GOOD BOY BONUS!', '#4ade80');
-          } else if (player.pos.y < 0.85 && d.hitCooldown <= 0) {
-            d.hitCooldown = 0.85;
-            const push = ddx >= 0 ? 1 : -1;
-            player.vel.x = push * 9.0;
-            player.vel.y = currentProfile.glitchBounceVy * 0.75;
-            d.vy = currentProfile.glitchBounceVy * 1.05;
-            d.speedBoost = 2.2;
-            cameraShake = 0.28;
-            audio.playDogBark();
-            audio.playBounceImpact(false);
-            spawnCollisionSparks(d.pos, 8, 0xfde047);
-            spawnComicCallout(d.pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW! WATCH IT ANNA!"', '#fb923c');
-          }
+        if (Math.abs(ddx) < 1.15 && Math.abs(ddz) < 1.2 && d.hitCooldown <= 0) {
+          d.hitCooldown = 0.85;
+          player.stats.collisions++;
+          const push = ddx >= 0 ? 1 : -1;
+          player.vel.x = push * 9.0;
+          d.speedBoost = 2.2;
+          cameraShake = 0.28;
+          audio.playDogBark();
+          audio.playBounceImpact(false);
+          spawnCollisionSparks(d.pos, 8, 0xfde047);
+          spawnComicCallout(d.pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW! WATCH IT ANNA!"', '#fb923c');
+        } else if (!d.hopBonusAwarded && d.pos.z > 1.5 && Math.abs(ddx) >= 1.15 && Math.abs(ddx) < 5.5) {
+          d.hopBonusAwarded = true;
+          player.stats.dogsDodged++;
+          player.fareRupees += 75;
+          audio.playDogBark();
+          spawnComicCallout(d.pos, '🐕 CLEAN SWERVE PAST INDIE DOGGO! +₹75 BONUS!', '#4ade80');
         }
 
         if (d.pos.z > 20) {
@@ -3665,7 +4277,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 6. Two-Way Grounded Lane Traffic AI (Left Side Forward -Z, Right Side Oncoming +Z)
+      // 6. Two-Way Strictly Grounded Lane Traffic AI (Left Side Forward -Z, Right Side Oncoming +Z)
       for (let i = 0; i < trafficPool.length; i++) {
         const v = trafficPool[i];
         if (v.hitCooldown > 0) v.hitCooldown -= dt;
@@ -3700,26 +4312,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const relZSpeed = player.forwardSpeed + v.vel.z;
         v.pos.z += relZSpeed * dt;
         v.pos.x += v.vel.x * dt;
-        v.pos.y += v.vel.y * dt;
+        // Strictly grounded on the asphalt road — NO flying autos or vehicles!
+        v.pos.y = 0;
+        v.vel.y = 0;
 
         const laneErr = v.targetLaneX - v.pos.x;
         v.vel.x += laneErr * 7.5 * dt;
         v.vel.x *= Math.exp(-4.2 * dt);
 
-        v.vel.y -= currentProfile.gravityReturn * dt;
-        if (v.pos.y <= 0) {
-          v.pos.y = 0;
-          v.vel.y = 0;
-        }
-
         const targetVelZ = v.isOncoming ? v.baseSpeed * 0.42 : -v.baseSpeed;
         v.vel.z += (targetVelZ - v.vel.z) * dt * 2.5;
 
         const dirSign = v.isOncoming ? -1 : 1;
-        const npcPitch = THREE.MathUtils.clamp(-v.vel.y * 0.025 * dirSign, -0.22, 0.22);
         const npcYaw = v.baseYaw + THREE.MathUtils.clamp(-v.vel.x * 0.025 * dirSign, -0.25, 0.25);
-        const npcRoll = THREE.MathUtils.clamp(-v.vel.x * 0.03 * dirSign, -0.22, 0.22);
-        v.rot.set(npcPitch, npcYaw, npcRoll);
+        const npcRoll = THREE.MathUtils.clamp(-v.vel.x * 0.03 * dirSign, -0.18, 0.18);
+        v.rot.set(0, npcYaw, npcRoll);
 
         v.mesh.position.copy(v.pos);
         v.mesh.rotation.copy(v.rot);
@@ -3728,32 +4335,27 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (w.attached) w.node.rotation.x -= (v.baseSpeed * dt) / 0.26;
         });
 
-        // Player <-> NPC Collision Check
+        // Player <-> NPC Grounded Collision Check
         const hitX = (player.radius + v.spec.radius) * 0.88;
         const hitZ = (1.2 + v.spec.lengthZ * 0.45);
         const dx = player.pos.x - v.pos.x;
-        const dy = Math.abs(player.pos.y - v.pos.y);
         const dz = player.pos.z - v.pos.z;
 
-        if (Math.abs(dx) < hitX && Math.abs(dz) < hitZ && dy < 2.0 && v.hitCooldown <= 0) {
+        if (Math.abs(dx) < hitX && Math.abs(dz) < hitZ && v.hitCooldown <= 0) {
           v.hitCooldown = 0.45;
+          player.stats.collisions++;
           const isHyper = v.spec.isHyperDelivery;
 
           const pushDir = dx >= 0 ? 1 : -1;
           player.vel.x = pushDir * (isHyper ? 13.5 : 9.5);
           v.vel.x = -pushDir * (v.type === 'bmtc' ? 3.0 : 11.0);
 
-          player.vel.y = isHyper ? currentProfile.glitchBounceVy * 1.15 : currentProfile.glitchBounceVy * 0.80;
-          if (v.type !== 'bmtc') {
-            v.vel.y = currentProfile.glitchBounceVy * 0.95;
-          }
-
           audio.playBeepBeepHorn(v.spec.hornType);
           audio.playBounceImpact(isHyper);
           spawnCollisionSparks(v.pos, isHyper ? 18 : 10, v.spec.colorHex);
-          cameraShake = isHyper ? 0.45 : 0.28;
+          cameraShake = isHyper ? 0.42 : 0.26;
 
-          const bonus = isHyper ? 150 : 50;
+          const bonus = isHyper ? 50 : 25;
           player.fareRupees += bonus;
           const msg = v.isOncoming
             ? `🚨 ರಾಂಗ್ ಸೈಡ್! WRONG-SIDE! ${v.spec.callouts[0]}`
@@ -3769,11 +4371,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
 
         if (v.pos.z > 26 || v.pos.z < -CORRIDOR_LENGTH + 15) {
+          if (!v.isOncoming && v.pos.z > 26) {
+            player.stats.closeOvertakes++;
+          }
           recycleTrafficVehicle(v);
         }
       }
 
-      // 7. Update Detached Flying Wheels & Sparks
+      // 7. Update Detached Wheels & Sparks
       for (let i = detachedWheels.length - 1; i >= 0; i--) {
         const dw = detachedWheels[i];
         dw.life -= dt;
@@ -3807,15 +4412,25 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 8. Smooth Chase Camera, Sky Dome Lock & HUD Updates
+      // 8. Configurable Camera (Regular Chase View vs First-Person Auto Dash Cam View)
       if (cameraShake > 0) cameraShake = Math.max(0, cameraShake - dt * 1.8);
       const shakeX = (Math.random() - 0.5) * cameraShake;
       const shakeY = (Math.random() - 0.5) * cameraShake;
 
-      camera.position.x += (player.pos.x * 0.58 - camera.position.x) * dt * 7.5 + shakeX;
-      camera.position.y += (3.85 + player.pos.y * 0.45 - camera.position.y) * dt * 6.5 + shakeY;
-      camera.position.z = 7.2;
-      camera.lookAt(player.pos.x * 0.75, 1.25 + player.pos.y * 0.3, -14);
+      if (player.cameraMode === 'dashcam') {
+        // First-Person Driver Dash Cam View from inside the Auto-Rickshaw Cabin
+        const engineVibY = Math.sin(elapsed * 32) * 0.006;
+        camera.position.x = player.pos.x + shakeX * 0.35;
+        camera.position.y = 1.48 + engineVibY + shakeY * 0.35;
+        camera.position.z = -0.35;
+        camera.lookAt(player.pos.x - steerInput * 2.2, 1.32, -38);
+      } else {
+        // Regular 3rd-Person Chase Camera View
+        camera.position.x += (player.pos.x * 0.58 - camera.position.x) * dt * 7.5 + shakeX;
+        camera.position.y += (3.85 - camera.position.y) * dt * 6.5 + shakeY;
+        camera.position.z = 7.2;
+        camera.lookAt(player.pos.x * 0.75, 1.25, -14);
+      }
 
       skyDome.position.x = camera.position.x;
 
@@ -3824,14 +4439,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const speedKmh = Math.round(player.forwardSpeed * 2.1);
 
       document.getElementById('hud-fare').textContent = `₹${player.fareRupees.toFixed(2)}`;
-      document.getElementById('hud-dist').textContent = `${player.distanceKm.toFixed(1)} KM`;
       document.getElementById('surge-badge').textContent =
         rainActive ? `${surgeMult.toFixed(1)}x SURGE` : `${surgeMult.toFixed(1)}x HIRE`;
       document.getElementById('hud-speed').textContent = String(speedKmh);
-      document.getElementById('hud-alt').textContent =
-        player.pos.y > 0.15 ? `AIR +${player.pos.y.toFixed(1)}m` : 'ON ROAD';
+      updateTripProgressHUD();
 
-      audio.updateContinuous(speedKmh, rainIntensity, player.pos.y);
+      audio.updateContinuous(speedKmh, rainIntensity, 0);
+
+      // 9. Check if Player Reached Trip Destination!
+      if (player.distanceKm >= currentProfile.targetDistanceKm && !player.tripFinished) {
+        player.distanceKm = currentProfile.targetDistanceKm;
+        updateTripProgressHUD();
+        finishTripAndShowScoreboard('Destination Reached!');
+      }
     }
 
     function animate() {
@@ -3859,6 +4479,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     async function bootGame() {
       const params = new URLSearchParams(window.location.search);
       const autoMode = params.get('autostart');
+      const viewParam = params.get('view');
+      if (viewParam === 'dashcam' || viewParam === 'chase') {
+        player.cameraMode = viewParam;
+      }
+
       if (autoMode && GRAVITY_PROFILES[autoMode]) {
         document.querySelectorAll('[data-quick-mode]').forEach((btn) => {
           btn.classList.toggle('active-mode', btn.dataset.quickMode === autoMode);
@@ -3900,6 +4525,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       if (autoMode && GRAVITY_PROFILES[autoMode]) {
         applyGravityProfile(autoMode, true);
+        if (viewParam === 'dashcam' || viewParam === 'chase') {
+          setCameraMode(viewParam, false);
+        }
         if (params.get('rain') === '1') {
           rainActive = true;
           rainIntensity = 1.0;
@@ -3911,10 +4539,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (params.get('copcheck') === '1') {
           triggerSuddenCopEncounterNow();
         }
-        if (params.get('hop') === '1') {
-          player.pos.y = 1.15;
-          player.vel.y = 2.5;
-          player.rot.z = -0.12;
+        if (params.get('action') === '1' || params.get('hop') === '1') {
+          player.turboBoostTimer = 1.4;
           setTimeout(() => {
             lastCalloutTime = 0;
             if (trafficCops[0]) {
@@ -3923,15 +4549,30 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             setTimeout(() => {
               lastCalloutTime = 0;
               if (strayDogs[0]) {
-                spawnComicCallout(strayDogs[0].pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW!" +₹75 HOP BONUS!', '#4ade80');
+                spawnComicCallout(strayDogs[0].pos, '🐕 "ಬೌ-ಬೌ! BOW-WOW!" +₹75 DOGGO SWERVE!', '#4ade80');
               }
             }, 220);
           }, 2300);
         }
         updateSimulation(0.05, 0.2);
         gamePaused = false;
+
+        if (params.get('gameover') === '1') {
+          player.distanceKm = currentProfile.targetDistanceKm;
+          player.fareRupees = 425.50;
+          player.stats.copsCleared = 2;
+          player.stats.copsEvaded = 1;
+          player.stats.dogsDodged = 3;
+          player.stats.closeOvertakes = 9;
+          player.stats.collisions = 1;
+          updateTripProgressHUD();
+          finishTripAndShowScoreboard('Destination Reached!');
+        }
       } else {
         applyGravityProfile('medium', false);
+        if (viewParam === 'dashcam' || viewParam === 'chase') {
+          setCameraMode(viewParam, false);
+        }
         updateSimulation(0.05, 0.2);
         if (!modal.open) modal.showModal();
         gamePaused = true;
