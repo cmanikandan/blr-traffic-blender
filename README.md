@@ -5,6 +5,7 @@
   <a href="https://deepmind.google/technologies/gemini/"><img src="https://img.shields.io/badge/Powered_by-Google_Gemini_Models-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Powered by Google Gemini Models" /></a>
   <a href="https://www.blender.org/"><img src="https://img.shields.io/badge/3D_Assets-Blender_5.2_PBR_.glb-EA7600?style=for-the-badge&logo=blender&logoColor=white" alt="Blender 5.2 PBR GLB" /></a>
   <a href="https://threejs.org/"><img src="https://img.shields.io/badge/Engine-Three.js_r170_4K_HDR_MSAA-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js r170 4K HDR MSAA" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge" alt="License: MIT" /></a>
 </p>
 
 > **🤖 Created with Google Antigravity & Gemini Models**: This game—including its procedural Blender 3D PBR `.glb` asset pipeline, Old Bengaluru narrow-gully heritage architecture, 2K bilingual Kannada + English canvas texture synthesis, Three.js WebGL2 4x MSAA HDR post-processing pipeline, Web Audio synthesizer, and 2K HD key art—was autonomously designed, engineered, and verified using **[Google Antigravity](https://antigravity.google/)**, Google's agentic AI coding & development platform powered by **[Google Gemini models](https://deepmind.google/technologies/gemini/)** ([Gemini API / Google AI for Developers](https://ai.google.dev/)).
@@ -157,3 +158,10 @@ This project was created end-to-end using **[Google Antigravity](https://antigra
 - **[Google Antigravity (`antigravity.google`)](https://antigravity.google/)**: Agentic AI coding environment used to architect the Three.js WebGL2 4x MSAA simulation, automate Blender 3D asset generation, synthesize 2K bilingual Kannada + English highway & bazaar typography, and verify gameplay via Retina GPU browser renders.
 - **[Google Gemini Models (`deepmind.google/technologies/gemini`)](https://deepmind.google/technologies/gemini/) & [Google AI for Developers (`ai.google.dev`)](https://ai.google.dev/)**: Multimodal reasoning, procedural 3D geometry scripting (`bpy`), Web Audio synthesis, and Ultra-HD key art generation.
 - **[Blender MCP (`github.com/ahujasid/blender-mcp`)](https://github.com/ahujasid/blender-mcp)**: Model Context Protocol integration connecting Google Antigravity and Gemini models to Blender for live 3D `.glb` asset authoring.
+
+---
+
+## 📄 License
+
+This project (code, procedural 3D `.glb` assets, and documentation) is open-source and released under the permissive **[MIT License](LICENSE)** — free to play, fork, remix, and use for personal or commercial projects with attribution.
+
