@@ -1,5 +1,9 @@
 # 🛺 ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Namma Auto Traffic (Ultra-HD Pro Edition)
 
+<h3 align="center">
+  🚀 Built End-to-End with <a href="https://antigravity.google/">Google Antigravity</a> &amp; <a href="https://deepmind.google/technologies/gemini/">Google Gemini Models</a> ✨
+</h3>
+
 <p align="center">
   <a href="https://antigravity.google/"><img src="https://img.shields.io/badge/Built_with-Google_Antigravity-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Built with Google Antigravity" /></a>
   <a href="https://deepmind.google/technologies/gemini/"><img src="https://img.shields.io/badge/Powered_by-Google_Gemini_Models-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Powered by Google Gemini Models" /></a>
@@ -8,7 +12,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge" alt="License: MIT" /></a>
 </p>
 
-> **🤖 Created with Google Antigravity & Gemini Models**: This game—including its procedural Blender 3D PBR `.glb` asset pipeline, Old Bengaluru narrow-gully heritage architecture, 2K bilingual Kannada + English canvas texture synthesis, Three.js WebGL2 4x MSAA HDR post-processing pipeline, Web Audio synthesizer, and 2K HD key art—was autonomously designed, engineered, and verified using **[Google Antigravity](https://antigravity.google/)**, Google's agentic AI coding & development platform powered by **[Google Gemini models](https://deepmind.google/technologies/gemini/)** ([Gemini API / Google AI for Developers](https://ai.google.dev/)).
+> [!IMPORTANT]
+> **🤖 Created with [Google Antigravity](https://antigravity.google/) & [Google Gemini Models](https://deepmind.google/technologies/gemini/)**: Every layer of this game—its **12 procedural Blender 3D PBR `.glb` models** (authored via [Blender MCP](https://github.com/ahujasid/blender-mcp)), **Old Bengaluru narrow-gully heritage architecture**, **2K bilingual Kannada + English canvas textures**, **Three.js WebGL2 4x MSAA HDR engine**, **procedural Web Audio synthesizer**, and **2K HD key art**—was autonomously designed, engineered, and verified using **[Google Antigravity](https://antigravity.google/)**, Google's agentic AI coding platform powered by **[Google Gemini models](https://deepmind.google/technologies/gemini/)** ([Google AI for Developers](https://ai.google.dev/)).
 
 <p align="center">
   <img src="screenshots/old_blr_gully_banner.jpg" alt="Ondu Second: Old Bengaluru Narrow Gullies (Chickpet to Malleshwaram) — 2K HD Key Art" width="100%" />
