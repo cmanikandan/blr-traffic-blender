@@ -9,15 +9,27 @@ This document provides context, architectural conventions, coordinate systems, a
 **Ondu Second: Bangalore Gravity Glitch** is a self-contained 3D WebGL (Three.js r170) arcade traffic game set on a bustling 6-lane Bengaluru highway corridor alongside the elevated Namma Metro Purple Line viaduct, Vidhana Soudha, and the Silk Board flyover gantry.
 
 ### Key Gameplay Pillars
-- **Player Vehicle**: Authentic Bengaluru Bajaj RE Auto-Rickshaw (canary-yellow canopy `#FFD000` + emerald-green lower chassis `#009A44` + bilingual rear hood stencil) with 3 independent wheels that can snap off on heavy impacts and be repaired with `R`.
+- **Player Vehicle**: Authentic Bengaluru Vayuputra RE Compact (ವಾಯುಪುತ್ರ) Auto-Rickshaw (canary-yellow canopy `#FFD000` + emerald-green lower chassis `#009A44` + bilingual rear hood stencil) with 3 independent wheels that can snap off on heavy impacts and be repaired with `R`.
 - **Bilingual Kannada + English Hoardings & Gantries (60:40 Rule)**:
   - 8 procedural canvas-textured roadside commercial hoardings (Rameshwaram Cafe, Namma Yatri, KMF Nandini, Namma Metro, Mysore Sandal Soap, BTP Alert, Zepto/Blinkit, Vidyarthi Bhavan) and 2 overhead National Highway gantries (`SILK BOARD JUNCTION` and `HEBBAL FLYOVER`) displaying bold Kannada (`ಕನ್ನಡ`) primary headlines above English subtitles.
+- **Interactive BTP Red/Yellow/Green Traffic Signal Junctions**:
+  - Overhead & roadside BTP traffic signal gantries with live digital countdown timers and painted white road stop lines across the highway.
+  - Players must brake to a full **`0 KM/H`** stop before the stop line using **`S`**, **`ArrowDown`**, or **`B`** (Handbrake) during a red phase to earn a **`+₹100` Lawful Stop Bonus**.
+  - Jumping a red light triggers a **`-₹150` Red-Light Jump Camera Challan** penalty with camera flash & siren feedback. Testable directly via `?redlight=1`.
 - **Bengaluru Traffic Police (BTP) Sudden License Check (`traffic_police.glb`)**:
   - Articulated BTP officer in white pith helmet, lime-green hi-vis reflective vest, khaki uniform, aviator sunglasses, and red LED baton standing beside a bilingual BTP checkpost barricade with flashing red/blue strobes.
   - Blows a synthesized pea-whistle (`playPoliceWhistle`) and steps out into the lane (`#hud-cop-alert`). Players can press **`L`** (or click **`🪪 Show DL [L]`**) to verify their DigiLocker DL & RC for `+₹100`, swerve to evade (`+₹60`), or get busted with a `-₹100` e-Challan fine on collision.
 - **Occasional Darting Stray Dog (`stray_dog.glb`)**:
   - Articulated Indian Pariah Dog (Indie dog) with 4 galloping legs (`Dog_Leg_FL`, `Dog_Leg_FR`, `Dog_Leg_RL`, `Dog_Leg_RR`) and curled tail that suddenly darts across the highway with a double-bark (`playDogBark`).
   - Honking (`H`) makes the dog bolt 2x faster; jumping cleanly over the dog with `SPACE` awards a `+₹75` Good Boy Hop Bonus.
+- **User-Configurable Camera Views & Finite Route Trips with Final Trip Scoreboard**:
+  - **Dual Camera Perspectives**: Toggle dynamically between **3rd-Person Chase Camera** (`chase`) and **1st-Person Cockpit Dashcam** (`dashcam`, featuring windshield frame, digital fare meter, and handlebars) via **`V`**, the HUD camera button, the main menu selector, or `?view=dashcam`.
+  - **Finite Route Trips & Final Trip Scoreboard**: Each route difficulty (`low` = 1.5 km, `medium` = 2.0 km, `complex` = 2.5 km) concludes at the destination gantry with an interactive **Final Trip Scoreboard** (`?gameover=1`) detailing base meter fare, lawful stop bonuses, challan penalties, driver rank badge, and replay/share actions.
+- **Viral Growth & Accessibility Features**:
+  - **1-Click Shareable PNG Fare Receipt & Driver Score Card**: Procedural HTML5 Canvas generator renders a thermal-style Bengaluru Auto Fare Receipt & Driver License Score Card downloadable as a `.png` or shareable via Web Share API / clipboard.
+  - **Mobile/Tablet On-Screen Touch Controls**: Responsive multi-touch D-pad & action buttons (Steer Left/Right, Accelerate, Handbrake `0 KM/H` Stop, Gravity Hop, Horn, Show DL, Repair, Camera View) for seamless play on phones and tablets.
+  - **Persistent Local High-Score Leaderboard**: Saves top trip fares, ranks, and routes in `localStorage` and displays them on the menu and post-trip scoreboard.
+  - **Social OpenGraph & Twitter Card Meta Tags**: Rich preview metadata (`og:title`, `og:description`, `og:image`, `twitter:card`) embedded in `index.html` for instant social link previews.
 - **Two-Way Indian Traffic & Sudden Jaywalkers**:
   - **Left Side (`LANES[0..2]` at `x = -9.5, -5.7, -1.9`)**: Drives **forward** (`-Z`, same direction as the player).
   - **Right Side (`LANES[3..5]` at `x = +1.9, +5.7, +9.5`)**: Drives **oncoming** (`+Z`, rotated `180°`).
@@ -103,7 +115,10 @@ python3 -m http.server 8765
 ```
 Query parameters supported by `index.html`:
 - `?autostart=low|medium|complex` — Boots directly into the specified difficulty profile.
+- `&view=chase|dashcam` — Starts in 3rd-person Chase Camera (`chase`) or 1st-person Cockpit Dashcam (`dashcam`).
 - `&rain=1` — Activates monsoon downpour (`0%` tire grip).
 - `&snapwheel=1` — Snaps off one player wheel at boot.
 - `&copcheck=1` — Triggers an immediate BTP Traffic Police license checkpost ahead.
+- `&redlight=1` — Spawns an immediate BTP Red-Light Traffic Signal junction ahead for stop/challan verification.
 - `&hop=1` — Launches the player auto into a mid-air Gravity Hop with active comic callout bubbles.
+- `&gameover=1` — Opens the Final Trip Scoreboard modal immediately for UI & receipt verification.

@@ -21,8 +21,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Bangalore Gravity Glitch — Pro 3D WebGL Arcade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Namma Auto Traffic — Vayuputra RE 3D WebGL Arcade</title>
+  <meta name="description" content="Drive the Vayuputra RE Compact (ವಾಯುಪುತ್ರ) Auto-Rickshaw through 6-lane Bengaluru traffic with BTP Red-Light Signal stops, sudden cop checks, darting Indie stray dogs, and configurable Dash Cam POV!">
+  <meta property="og:title" content="ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Namma Auto Traffic (Pro 3D WebGL Edition)">
+  <meta property="og:description" content="Navigate Silk Board & Indiranagar in a Vayuputra RE Auto-Rickshaw! Obey BTP Red-Light Signals, flash your DigiLocker DL to cops, dodge Indie stray dogs, and share your Namma Auto Fare Receipt!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="screenshots/pro_hero_banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ಒಂದು ಸೆಕೆಂಡ್ | Ondu Second: Namma Auto Traffic (3D WebGL)">
+  <meta name="twitter:description" content="Can you survive Silk Board rush hour in a Vayuputra RE Auto? Play free in your browser with Chase & Dash Cam POV!">
+  <meta name="twitter:image" content="screenshots/pro_hero_banner.jpg">
   <style>
     :root {
       --in-oklab: ;
@@ -925,7 +934,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     /* Dash Cam REC Timestamp OSD Badge */
     .dashcam-rec-osd {
       position: absolute;
-      bottom: 92px;
+      bottom: 176px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(9, 13, 22, 0.85);
@@ -974,11 +983,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     /* Bottom Auto Dashboard Cowling & Steering Handlebar */
     .dashcam-bottom-dash {
       position: absolute;
-      bottom: -14px;
+      bottom: 84px;
       left: 50%;
       transform: translateX(-50%);
       width: min(680px, 72vw);
-      height: 96px;
+      height: 80px;
       background: linear-gradient(180deg, #009a44 0%, #00682d 38%, #111827 38%, #090d16 100%);
       border-top: 4px solid #ffd000;
       border-left: 4px solid #090d16;
@@ -1005,7 +1014,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     .dashcam-dash-label {
-      margin-top: 10px;
+      margin-top: 8px;
       font-size: 0.68rem;
       font-weight: 900;
       color: #fde047;
@@ -1017,8 +1026,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
        ========================================================================= */
     dialog#score-modal {
       margin: auto;
-      width: min(720px, 93vw);
-      max-height: 91vh;
+      width: min(740px, 93vw);
+      max-height: 94vh;
       overflow-y: auto;
       background: linear-gradient(160deg var(--in-oklab), rgba(15, 23, 42, 0.98), rgba(9, 13, 24, 0.99));
       color: #f8fafc;
@@ -1026,6 +1035,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       border-radius: 22px;
       padding: 0;
       box-shadow: 0 28px 75px rgba(0, 0, 0, 0.85);
+    }
+
+    dialog#score-modal .modal-inner {
+      padding: 16px 24px;
     }
 
     dialog#score-modal::backdrop {
@@ -1038,16 +1051,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 14px;
-      margin: 14px 0;
-      padding: 16px 20px;
-      border-radius: 16px;
+      gap: 12px;
+      margin: 10px 0;
+      padding: 12px 18px;
+      border-radius: 14px;
       background: rgba(30, 41, 59, 0.75);
       border: 1px solid rgba(255, 208, 0, 0.35);
     }
 
     .score-big-num {
-      font-size: 2.4rem;
+      font-size: 2.15rem;
       font-weight: 900;
       color: #ffd000;
       font-variant-numeric: tabular-nums;
@@ -1060,9 +1073,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       background: rgba(34, 197, 94, 0.2);
       border: 1px solid #4ade80;
       color: #86efac;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 900;
-      padding: 4px 12px;
+      padding: 3px 11px;
       border-radius: 99px;
       letter-spacing: 0.05em;
     }
@@ -1070,13 +1083,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     .score-breakdown-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 12px 0 18px 0;
-      font-size: 0.82rem;
+      margin: 8px 0 12px 0;
+      font-size: 0.80rem;
     }
 
     .score-breakdown-table th,
     .score-breakdown-table td {
-      padding: 9px 12px;
+      padding: 7px 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       text-align: left;
     }
@@ -1103,13 +1116,195 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .score-actions .launch-btn {
       flex: 1;
-      min-width: 170px;
+      min-width: 155px;
     }
 
     .score-actions .secondary-btn {
       background: rgba(30, 41, 59, 0.95);
       color: #f8fafc;
       border: 1.5px solid rgba(255, 208, 0, 0.55);
+    }
+
+    .score-actions .share-receipt-btn {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #052e16;
+      border: 1.5px solid #86efac;
+      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+    }
+
+    /* BTP Traffic Signal Junction HUD Banner */
+    .signal-alert-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.96));
+      border: 2px solid #ef4444;
+      color: #ffffff;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+    }
+
+    .signal-alert-banner.visible {
+      display: flex;
+    }
+
+    .signal-lights-mini {
+      display: flex;
+      gap: 6px;
+      background: #090d16;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .sig-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      opacity: 0.22;
+      transition: opacity 0.15s, box-shadow 0.15s;
+    }
+
+    .sig-dot.red { background: #ff2a2a; }
+    .sig-dot.yellow { background: #ffd000; }
+    .sig-dot.green { background: #10f560; }
+
+    .sig-dot.active {
+      opacity: 1;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .signal-timer-box {
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 1.05rem;
+      font-weight: 900;
+      padding: 3px 9px;
+      border-radius: 8px;
+      background: #090d16;
+      color: #ff4d4d;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      min-width: 56px;
+      text-align: center;
+    }
+
+    .signal-action-btn {
+      background: #ffd000;
+      color: #090d16;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Responsive On-Screen Touch / Arcade Control Bar */
+    .touch-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--hud-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(255, 208, 0, 0.42);
+      border-radius: 16px;
+      padding: 8px 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+      pointer-events: auto;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .touch-btn {
+      appearance: none;
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      background: rgba(30, 41, 59, 0.92);
+      color: #f8fafc;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      min-width: 58px;
+      transition: transform 0.08s, background 0.12s, border-color 0.12s;
+      touch-action: manipulation;
+    }
+
+    .touch-btn span.sub-key {
+      font-size: 0.58rem;
+      color: #94a3b8;
+      font-family: ui-monospace, monospace;
+    }
+
+    .touch-btn:active,
+    .touch-btn.pressed {
+      transform: scale(0.95);
+      background: var(--auto-yellow);
+      color: #090d16;
+      border-color: #ffffff;
+    }
+
+    .touch-btn.brake-btn {
+      background: rgba(153, 27, 27, 0.9);
+      border-color: #f87171;
+      color: #fef2f2;
+    }
+
+    .touch-btn.brake-btn.active-brake {
+      background: #ef4444;
+      color: #ffffff;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.75);
+    }
+
+    .touch-btn.go-btn {
+      background: rgba(6, 95, 70, 0.92);
+      border-color: #34d399;
+      color: #ecfdf5;
+    }
+
+    .leaderboard-strip {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(255, 208, 0, 0.28);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.76rem;
+    }
+
+    .leaderboard-strip strong {
+      color: var(--auto-yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .leaderboard-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lb-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 4px 9px;
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+      color: #e2e8f0;
     }
 
     .asset-status-bar {
@@ -1146,6 +1341,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       border-color: rgba(34, 197, 94, 0.55);
       color: #86efac;
     }
+
+    @media (max-width: 920px) {
+      .controls-card {
+        display: none;
+      }
+      .hud-bottom-row {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
   </style>
 
   <script type="importmap">
@@ -1166,7 +1372,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <!-- Top-Left: Authentic Bengaluru Auto Digital Fare Meter + Trip Destination Progress -->
       <div class="auto-fare-unit interactive">
         <div class="meter-header">
-          <span>ನಮ್ಮ ಆಟೋ • KA-01 METER</span>
+          <span>ನಮ್ಮ ಆಟೋ • VAYUPUTRA RE</span>
           <span class="meter-status-dot" id="surge-badge">1.0x HIRE</span>
         </div>
         <div class="meter-screen">
@@ -1188,7 +1394,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Top-Center: Bilingual (Kannada + English) National Highway Sign & BTP Cop Alert -->
+      <!-- Top-Center: Bilingual (Kannada + English) National Highway Sign, Traffic Signal & BTP Cop Alert -->
       <div class="highway-sign-cluster">
         <div class="nh-sign-board">
           <span class="nh-shield">NH 44</span>
@@ -1197,6 +1403,22 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="nh-en" id="hud-landmark">SILK BOARD FLYOVER GANTRY • 45m</span>
           </div>
         </div>
+
+        <!-- Interactive BTP Red-Light Traffic Signal Banner -->
+        <div class="signal-alert-banner interactive" id="hud-signal-banner">
+          <div class="signal-lights-mini" aria-hidden="true">
+            <span class="sig-dot red active" id="hud-sig-red"></span>
+            <span class="sig-dot yellow" id="hud-sig-yellow"></span>
+            <span class="sig-dot green" id="hud-sig-green"></span>
+          </div>
+          <div class="cop-alert-text">
+            <span class="cop-alert-kn" id="hud-sig-kn">🚦 ಕೆಂಪು ಸಿಗ್ನಲ್! ನಿಲ್ಲಿಸಿ! (RED SIGNAL AHEAD — STOP BEFORE LINE!)</span>
+            <span class="cop-alert-en" id="hud-sig-en">HOLD [S] OR PRESS [B] TO STOP • PRESS [W] WHEN GREEN (+₹100 BONUS)</span>
+          </div>
+          <span class="signal-timer-box" id="hud-sig-timer">05s</span>
+          <button type="button" class="signal-action-btn" id="btn-sig-brake-start">🛑 STOP [B]</button>
+        </div>
+
         <div class="cop-alert-banner interactive" id="hud-cop-alert">
           <div class="cop-alert-text">
             <span class="cop-alert-kn">👮‍♂️ ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್: "ಏಯ್ ಆಟೋ! ಸೈಡ್ ಹಾಕಿ! DL ತೋರಿಸಿ!"</span>
@@ -1217,6 +1439,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           <button type="button" class="tool-btn" data-quick-mode="complex">Peak Hour</button>
         </div>
         <button type="button" class="tool-btn action-pill" id="btn-camera-toggle">🎥 View: Chase [V]</button>
+        <button type="button" class="tool-btn action-pill" id="btn-signal-test">🚦 Red Light</button>
+        <button type="button" class="tool-btn action-pill" id="btn-handbrake">🛑 Brake [B]</button>
         <button type="button" class="tool-btn action-pill" id="btn-horn-test">📯 Horn</button>
         <button type="button" class="tool-btn action-pill" id="btn-cop-test">👮 Cop Check</button>
         <button type="button" class="tool-btn action-pill" id="btn-rain-toggle">🌧️ Rain</button>
@@ -1229,12 +1453,40 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <footer class="hud-bottom-row">
       <!-- Bottom-Left: Controls Guide -->
       <div class="controls-card interactive">
-        <span class="key-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Steer &amp; Throttle</span>
-        <span class="key-item"><kbd>V</kbd> Toggle Dash Cam / Chase View</span>
-        <span class="key-item"><kbd>SPACE</kbd> Turbo Gap Boost</span>
-        <span class="key-item"><kbd>H</kbd> Auto Horn ("Pa-Pa-Paarp!")</span>
-        <span class="key-item"><kbd>L</kbd> Flash License to Cop</span>
-        <span class="key-item"><kbd>R</kbd> Fix Wheel</span>
+        <span class="key-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Steer, Stop &amp; Start</span>
+        <span class="key-item"><kbd>B</kbd> Handbrake Stop / Release</span>
+        <span class="key-item"><kbd>V</kbd> Dash Cam / Chase View</span>
+        <span class="key-item"><kbd>SPACE</kbd> Start / Turbo Boost</span>
+        <span class="key-item"><kbd>H</kbd> Horn</span>
+        <span class="key-item"><kbd>L</kbd> Show DL</span>
+      </div>
+
+      <!-- Bottom-Center: Interactive On-Screen Touch & Mouse Driving Controls -->
+      <div class="touch-controls-bar interactive" id="touch-controls-bar" role="group" aria-label="On-Screen Driving and Signal Stop/Start Controls">
+        <button type="button" class="touch-btn" id="tbtn-left">
+          <span>◀ LEFT</span>
+          <span class="sub-key">[A / ←]</span>
+        </button>
+        <button type="button" class="touch-btn" id="tbtn-right">
+          <span>RIGHT ▶</span>
+          <span class="sub-key">[D / →]</span>
+        </button>
+        <button type="button" class="touch-btn brake-btn" id="tbtn-brake">
+          <span id="tbtn-brake-label">🛑 STOP</span>
+          <span class="sub-key">[S / B]</span>
+        </button>
+        <button type="button" class="touch-btn go-btn" id="tbtn-go">
+          <span>🟢 GO / START</span>
+          <span class="sub-key">[W / ↑]</span>
+        </button>
+        <button type="button" class="touch-btn" id="tbtn-horn">
+          <span>📯 HORN</span>
+          <span class="sub-key">[H]</span>
+        </button>
+        <button type="button" class="touch-btn" id="tbtn-dl">
+          <span>🪪 SHOW DL</span>
+          <span class="sub-key">[L]</span>
+        </button>
       </div>
 
       <!-- Bottom-Right: Speedometer, Grip & 3-Wheel Status -->
@@ -1279,15 +1531,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <div class="dashcam-wiper" id="dashcam-wiper"></div>
       <div class="dashcam-garland">
         <div class="garland-strands">🌼🌿🍋🌶️🌿🌼</div>
-        <div class="garland-tag">ನಮ್ಮ ಬೆಂಗಳೂರು ಆಟೋ • KA-01</div>
+        <div class="garland-tag">ನಮ್ಮ ಬೆಂಗಳೂರು ಆಟೋ • ವಾಯುಪುತ್ರ</div>
       </div>
       <div class="dashcam-rec-osd">
         <span class="rec-dot"></span>
-        <span id="dashcam-osd-text">REC • KA-01-AG-9999 AUTO DASHCAM • 1080P 60FPS</span>
+        <span id="dashcam-osd-text">REC • KA-01-AG-9999 VAYUPUTRA RE DASHCAM • 1080P 60FPS</span>
       </div>
       <div class="dashcam-bottom-dash">
         <div class="dashcam-handlebar"></div>
-        <div class="dashcam-dash-label">🛺 BAJAJ RE COCKPIT • PRESS [V] FOR CHASE VIEW</div>
+        <div class="dashcam-dash-label">🛺 VAYUPUTRA RE COCKPIT • ವಾಯುಪುತ್ರ • PRESS [V] FOR CHASE VIEW</div>
       </div>
     </div>
     <div id="callout-layer" aria-hidden="true"></div>
@@ -1298,11 +1550,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="hazard-trim"></div>
     <div class="modal-inner">
       <div class="modal-top">
-        <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • KA-01 BENGALURU TRAFFIC PRO EDITION</span>
+        <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • VAYUPUTRA RE (ವಾಯುಪುತ್ರ) TRAFFIC PRO EDITION</span>
       </div>
       <h1 id="modal-title">ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: NAMMA AUTO TRAFFIC</h1>
       <p class="modal-lead">
-        Drive the iconic emerald-and-canary Bengaluru Auto-Rickshaw down a realistic grounded highway lined with bilingual <strong>Kannada + English hoardings</strong>, sudden <strong>Bengaluru Traffic Police (BTP) license checks</strong>, darting <strong>Indie stray dogs</strong>, and "Ondu Second!" jaywalkers. Complete your trip destination to lock in your final meter fare and driver score!
+        Drive the iconic emerald-and-canary <strong>Vayuputra RE Compact (ವಾಯುಪುತ್ರ)</strong> Auto-Rickshaw down a realistic grounded Bengaluru highway! Stop at <strong>BTP Red-Light Signal Junctions</strong> (<kbd>S</kbd> or <kbd>B</kbd>) and accelerate when Green (<kbd>W</kbd>), read <strong>Kannada + English hoardings</strong>, flash your <strong>DigiLocker DL</strong> to traffic cops, and dodge darting <strong>Indie stray dogs</strong>!
       </p>
 
       <!-- User-Configurable Camera Perspective Selector -->
@@ -1310,7 +1562,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <span class="camera-config-title">🎥 Camera Perspective (Configurable Anytime with [V]):</span>
         <div class="camera-config-btns">
           <button type="button" class="cam-opt-btn active-cam" data-set-cam="chase">🎥 Regular Chase View (3rd Person)</button>
-          <button type="button" class="cam-opt-btn" data-set-cam="dashcam">🛺 Auto Dash Cam View (Driver Cockpit POV)</button>
+          <button type="button" class="cam-opt-btn" data-set-cam="dashcam">🛺 Vayuputra RE Dash Cam View (Driver Cockpit POV)</button>
         </div>
       </div>
 
@@ -1320,11 +1572,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="mode-tag tag-low">Low • Easy Route (1.2 KM)</span>
             <h2>ಕಬ್ಬನ್ ಪಾರ್ಕ್ ಬೆಳಿಗ್ಗೆ | Cubbon Park Morning</h2>
             <p class="mode-desc">
-              Cruising morning ride with bilingual Kannada hoardings, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
+              Cruising morning ride with bilingual Kannada hoardings, BTP traffic signal junctions, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
             </p>
             <ul class="mode-stats">
               <li><strong>Trip Distance:</strong> 1.2 KM (MG Road → Cubbon Park)</li>
-              <li><strong>Traffic:</strong> 12 Grounded Two-Way Vehicles</li>
+              <li><strong>Traffic &amp; Signals:</strong> 12 Grounded Vehicles • 2 Traffic Signals</li>
               <li><strong>Hazards:</strong> 5 Jaywalkers • 3 Stray Dogs • 1 BTP Cop</li>
             </ul>
           </div>
@@ -1336,11 +1588,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="mode-tag tag-med">Medium • Normal Route (1.8 KM)</span>
             <h2>ಇಂದಿರಾನಗರ ಸಂಜೆ ರಶ್ | Indiranagar 6 PM Rush</h2>
             <p class="mode-desc">
-              Bustling evening rush with oncoming BMTC 500D buses, sudden BTP Traffic Cop license stops, darting Indie stray dogs, and Zepto/Blinkit cut-offs.
+              Bustling evening rush with BTP Red-Light Signal Junctions, oncoming BMTC 500D buses, sudden BTP license stops, darting Indie stray dogs, and Zepto/Blinkit cut-offs.
             </p>
             <ul class="mode-stats">
               <li><strong>Trip Distance:</strong> 1.8 KM (Silk Board → Indiranagar)</li>
-              <li><strong>Traffic:</strong> 20 Grounded Two-Way Vehicles</li>
+              <li><strong>Traffic &amp; Signals:</strong> 20 Grounded Vehicles • 2 Traffic Signals</li>
               <li><strong>Hazards:</strong> 8 Jaywalkers • 5 Stray Dogs • 2 BTP Cops</li>
             </ul>
           </div>
@@ -1352,11 +1604,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             <span class="mode-tag tag-complex">Complex • Peak Hour (2.5 KM)</span>
             <h2>ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಟ್ರಾಫಿಕ್ | Silk Board 8 PM Gridlock</h2>
             <p class="mode-desc">
-              Full Silk Board peak-hour madness! Non-stop BMTC convoys, aggressive BTP e-Challan nakabandis, pack of darting stray dogs, and monsoon hydroplaning.
+              Full Silk Board peak-hour madness! Red-light camera junctions, non-stop BMTC convoys, aggressive BTP e-Challan nakabandis, pack of darting stray dogs, and monsoon hydroplaning.
             </p>
             <ul class="mode-stats">
               <li><strong>Trip Distance:</strong> 2.5 KM (Electronic City → Hebbal)</li>
-              <li><strong>Traffic:</strong> 30 Dense Grounded Vehicles</li>
+              <li><strong>Traffic &amp; Signals:</strong> 30 Dense Vehicles • 3 Traffic Signals</li>
               <li><strong>Hazards:</strong> 12 Jaywalkers • 7 Stray Dogs • 3 BTP Cops</li>
             </ul>
           </div>
@@ -1385,16 +1637,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="hazard-trim"></div>
   </dialog>
 
-  <!-- Native Modal Dialog: End-of-Trip Scoreboard & Final Fare Summary -->
+  <!-- Native Modal Dialog: End-of-Trip Scoreboard, Viral Fare Receipt & Local Leaderboard -->
   <dialog id="score-modal" aria-labelledby="score-modal-title">
     <div class="hazard-trim"></div>
     <div class="modal-inner">
       <div class="modal-top">
-        <span class="modal-badge" id="score-route-badge">🏁 ನಮ್ಮ ಆಟೋ ಮೀಟರ್ ರಸೀದಿ • FINAL TRIP RECEIPT</span>
+        <span class="modal-badge" id="score-route-badge">🏁 ನಮ್ಮ ಆಟೋ ಮೀಟರ್ ರಸೀದಿ • VAYUPUTRA RE TRIP RECEIPT</span>
       </div>
       <h1 id="score-modal-title">🏁 ಪ್ರಯಾಣ ಮುಕ್ತಾಯ! | TRIP COMPLETED — FINAL SCOREBOARD</h1>
       <p class="modal-lead" id="score-modal-subtitle">
-        You navigated Bengaluru traffic and reached your destination! Here is your itemized Namma Auto fare and driver performance breakdown:
+        You navigated Bengaluru traffic in your Vayuputra RE and reached your destination! Download your thermal fare receipt PNG or share your score:
       </p>
 
       <div class="score-hero-row">
@@ -1422,10 +1674,20 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </tbody>
       </table>
 
+      <!-- Persistent Local High-Score Leaderboard Strip -->
+      <div class="leaderboard-strip">
+        <strong>🏆 Local Top Runs (KA-01 Hall of Fame):</strong>
+        <div class="leaderboard-badges" id="score-leaderboard-list">
+          <span class="lb-pill">#1 2,450 PTS • ₹385</span>
+        </div>
+      </div>
+
       <div class="score-actions">
+        <button type="button" class="launch-btn share-receipt-btn" id="btn-download-receipt">🧾 Download Fare Receipt PNG</button>
+        <button type="button" class="launch-btn secondary-btn" id="btn-share-score">📤 Share Challenge Text</button>
         <button type="button" class="launch-btn" id="btn-score-replay">🔄 Play Again (New Trip)</button>
-        <button type="button" class="launch-btn secondary-btn" id="btn-score-switch-cam">🎥 Switch View (Dash Cam / Chase) &amp; Replay</button>
-        <button type="button" class="launch-btn secondary-btn" id="btn-score-menu">⚙️ Change Route / Mode</button>
+        <button type="button" class="launch-btn secondary-btn" id="btn-score-switch-cam">🎥 Switch View &amp; Replay</button>
+        <button type="button" class="launch-btn secondary-btn" id="btn-score-menu">⚙️ Change Route</button>
       </div>
     </div>
     <div class="hazard-trim"></div>
@@ -1915,6 +2177,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         routeTitle: 'MG ROAD → CUBBON PARK',
         targetDistanceKm: 1.2,
         trafficCount: 12,
+        signalCount: 2,
         jaywalkerCount: 5,
         dogCount: 3,
         copCount: 1,
@@ -1934,6 +2197,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         routeTitle: 'SILK BOARD → INDIRANAGAR',
         targetDistanceKm: 1.8,
         trafficCount: 20,
+        signalCount: 2,
         jaywalkerCount: 8,
         dogCount: 5,
         copCount: 2,
@@ -1953,6 +2217,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         routeTitle: 'ELECTRONIC CITY → HEBBAL',
         targetDistanceKm: 2.5,
         trafficCount: 30,
+        signalCount: 3,
         jaywalkerCount: 12,
         dogCount: 7,
         copCount: 3,
@@ -2769,9 +3034,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       hornCooldown: 0,
       dlVerifiedTimer: 0,
       turboBoostTimer: 0,
+      handbrakeLatched: false,
       cameraMode: 'chase', // 'chase' | 'dashcam'
       tripFinished: false,
       stats: {
+        signalsObeyed: 0,
+        signalsJumped: 0,
         copsCleared: 0,
         copsEvaded: 0,
         copsFined: 0,
@@ -2793,8 +3061,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       player.hornCooldown = 0;
       player.dlVerifiedTimer = 0;
       player.turboBoostTimer = 0;
+      player.handbrakeLatched = false;
       player.tripFinished = false;
       player.stats = {
+        signalsObeyed: 0,
+        signalsJumped: 0,
         copsCleared: 0,
         copsEvaded: 0,
         copsFined: 0,
@@ -2803,6 +3074,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         collisions: 0,
         wheelsSnapped: 0
       };
+      updateBrakeButtonsUI();
     }
 
     function createPlayerAuto() {
@@ -3428,14 +3700,212 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 8. COMIC CALLOUTS, LICENSE CHECK ACTION & INPUT CONTROLS
+    // 7F. NEW! BTP RED-LIGHT TRAFFIC SIGNAL JUNCTIONS (STOP ON RED, GO ON GREEN!)
+    // =========================================================================
+    const trafficSignals = [];
+    const signalRedBulbMat = new THREE.MeshBasicMaterial({ color: 0xff2222 });
+    const signalYellowBulbMat = new THREE.MeshBasicMaterial({ color: 0xffd000 });
+    const signalGreenBulbMat = new THREE.MeshBasicMaterial({ color: 0x10f560 });
+    const signalOffBulbMat = new THREE.MeshBasicMaterial({ color: 0x1e293b });
+    const stopLineWhiteMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stopLineRedMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+
+    function createSignalSignageTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 192;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, 512, 192);
+      ctx.strokeStyle = '#ffd000';
+      ctx.lineWidth = 10;
+      ctx.strokeRect(6, 6, 500, 180);
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 34px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('🚦 ಸಂಚಾರ ಸಿಗ್ನಲ್ • ನಿಲ್ಲಿಸಿ', 28, 66);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 26px "Inter", sans-serif';
+      ctx.fillText('BTP SIGNAL • STOP ON RED [S / B]', 28, 118);
+      ctx.fillStyle = '#4ade80';
+      ctx.font = '800 22px "Inter", sans-serif';
+      ctx.fillText('WAIT FOR GREEN [W] (+₹100 BONUS)', 28, 158);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const signalSignageTex = createSignalSignageTexture();
+
+    function spawnTrafficSignalJunction(index, total) {
+      const group = new THREE.Group();
+
+      // 1. Thick Painted White Road Stop Line + Red Hazard Band across Forward Lanes (X = -11.2 to 0)
+      const stopLine = new THREE.Mesh(new THREE.BoxGeometry(11.0, 0.028, 0.75), stopLineWhiteMat);
+      stopLine.position.set(-5.6, 0.015, 0);
+      group.add(stopLine);
+
+      const redStopBand = new THREE.Mesh(new THREE.BoxGeometry(11.0, 0.024, 0.45), stopLineRedMat);
+      redStopBand.position.set(-5.6, 0.014, 0.72);
+      group.add(redStopBand);
+
+      // Zebra stripes immediately ahead of the stop line
+      const zGeo = new THREE.BoxGeometry(0.85, 0.025, 2.8);
+      for (let zx = -10.2; zx <= -0.8; zx += 1.55) {
+        const zs = new THREE.Mesh(zGeo, stopLineWhiteMat);
+        zs.position.set(zx, 0.015, -2.1);
+        group.add(zs);
+      }
+
+      // 2. Left Kerb Cantilever Signal Mast + Overhead Horizontal Boom Arm
+      const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 6.8, 12), poleMetalMat);
+      mast.position.set(-ROAD_WIDTH / 2 - 0.85, 3.4, 0);
+      group.add(mast);
+
+      const boom = new THREE.Mesh(new THREE.BoxGeometry(8.6, 0.22, 0.22), poleMetalMat);
+      boom.position.set(-ROAD_WIDTH / 2 + 3.4, 6.4, 0);
+      group.add(boom);
+
+      // 3. Bilingual BTP Signal Instruction Board on Boom
+      const signBoard = new THREE.Mesh(
+        new THREE.BoxGeometry(4.4, 1.55, 0.14),
+        new THREE.MeshBasicMaterial({ map: signalSignageTex })
+      );
+      signBoard.position.set(-5.8, 6.4, 0.18);
+      group.add(signBoard);
+
+      // 4. Dual Signal Light Heads (Kerb Eye-Level Head + Overhead Cantilever Head)
+      const housingMat = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.4, metalness: 0.6 });
+      const redBulbs = [];
+      const yellowBulbs = [];
+      const greenBulbs = [];
+
+      for (const posCfg of [
+        { x: -ROAD_WIDTH / 2 - 0.85, y: 3.9, z: 0.26, scale: 1.0 },
+        { x: -2.2, y: 6.1, z: 0.24, scale: 1.22 }
+      ]) {
+        const head = new THREE.Group();
+        const box = new THREE.Mesh(new THREE.BoxGeometry(0.78, 2.15, 0.36), housingMat);
+        head.add(box);
+
+        const rBulb = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 12), signalRedBulbMat);
+        rBulb.position.set(0, 0.62, 0.18);
+        const yBulb = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 12), signalOffBulbMat);
+        yBulb.position.set(0, 0.0, 0.18);
+        const gBulb = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 12), signalOffBulbMat);
+        gBulb.position.set(0, -0.62, 0.18);
+
+        head.add(rBulb, yBulb, gBulb);
+        head.position.set(posCfg.x, posCfg.y, posCfg.z);
+        head.scale.setScalar(posCfg.scale);
+        group.add(head);
+
+        redBulbs.push(rBulb);
+        yellowBulbs.push(yBulb);
+        greenBulbs.push(gBulb);
+      }
+
+      const startZ = index === 0 ? -78 : -78 - index * (CORRIDOR_LENGTH / Math.max(2, total));
+      group.position.set(0, 0, startZ);
+      scene.add(group);
+
+      return {
+        group,
+        pos: group.position,
+        redBulbs,
+        yellowBulbs,
+        greenBulbs,
+        phase: 'red', // 'red' | 'yellow' | 'green'
+        timer: 6.0,
+        armedOnApproach: false,
+        stoppedOnRed: false,
+        bonusAwarded: false,
+        violated: false
+      };
+    }
+
+    function updateSignalBulbMaterials(sig) {
+      const isR = sig.phase === 'red';
+      const isY = sig.phase === 'yellow';
+      const isG = sig.phase === 'green';
+      sig.redBulbs.forEach((b) => {
+        b.material = isR ? signalRedBulbMat : signalOffBulbMat;
+        b.scale.setScalar(isR ? 1.25 : 0.92);
+      });
+      sig.yellowBulbs.forEach((b) => {
+        b.material = isY ? signalYellowBulbMat : signalOffBulbMat;
+        b.scale.setScalar(isY ? 1.25 : 0.92);
+      });
+      sig.greenBulbs.forEach((b) => {
+        b.material = isG ? signalGreenBulbMat : signalOffBulbMat;
+        b.scale.setScalar(isG ? 1.25 : 0.92);
+      });
+    }
+
+    function rebuildTrafficSignals(count) {
+      trafficSignals.forEach((s) => scene.remove(s.group));
+      trafficSignals.length = 0;
+      for (let i = 0; i < count; i++) {
+        const sig = spawnTrafficSignalJunction(i, count);
+        updateSignalBulbMaterials(sig);
+        trafficSignals.push(sig);
+      }
+    }
+
+    function resetTrafficSignalJunction(sig) {
+      sig.pos.z -= CORRIDOR_LENGTH + 20 + Math.random() * 25;
+      sig.phase = 'red';
+      sig.timer = 6.0;
+      sig.armedOnApproach = false;
+      sig.stoppedOnRed = false;
+      sig.bonusAwarded = false;
+      sig.violated = false;
+      updateSignalBulbMaterials(sig);
+    }
+
+    function triggerRedLightSignalAheadNow(autoBrake = false) {
+      audio.init();
+      if (trafficSignals.length === 0) return;
+      const sig = trafficSignals[0];
+      sig.pos.z = -16.5;
+      sig.phase = 'red';
+      sig.timer = 5.5;
+      sig.armedOnApproach = true;
+      sig.stoppedOnRed = false;
+      sig.bonusAwarded = false;
+      sig.violated = false;
+      updateSignalBulbMaterials(sig);
+      if (autoBrake) {
+        player.handbrakeLatched = true;
+        player.forwardSpeed = 0;
+        updateBrakeButtonsUI();
+      }
+      spawnComicCallout(
+        sig.pos,
+        '🚦 ಕೆಂಪು ಸಿಗ್ನಲ್! RED SIGNAL AHEAD — PRESS [B] OR HOLD [S] TO STOP!',
+        '#ef4444'
+      );
+    }
+
+    // =========================================================================
+    // 8. POOLED 60FPS COMIC CALLOUTS, LICENSE CHECK, BRAKE/START & TOUCH CONTROLS
     // =========================================================================
     const calloutLayer = document.getElementById('callout-layer');
     let lastCalloutTime = 0;
+    const CALLOUT_POOL_SIZE = 8;
+    const calloutPool = [];
+    let calloutPoolIdx = 0;
+
+    for (let i = 0; i < CALLOUT_POOL_SIZE; i++) {
+      const el = document.createElement('div');
+      el.className = 'comic-pop';
+      el.style.display = 'none';
+      calloutLayer.appendChild(el);
+      calloutPool.push({ el, timerId: null });
+    }
 
     function spawnComicCallout(worldPos, text, bgColor = '#ffd000') {
       const now = performance.now();
-      if (now - lastCalloutTime < 190) return;
+      if (now - lastCalloutTime < 180) return;
       lastCalloutTime = now;
 
       const proj = worldPos.clone().add(new THREE.Vector3(0, 2.0, 0)).project(camera);
@@ -3443,14 +3913,63 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const x = (proj.x * 0.5 + 0.5) * window.innerWidth;
       const y = (-proj.y * 0.5 + 0.5) * window.innerHeight;
 
-      const el = document.createElement('div');
-      el.className = 'comic-pop';
+      const slot = calloutPool[calloutPoolIdx];
+      calloutPoolIdx = (calloutPoolIdx + 1) % CALLOUT_POOL_SIZE;
+      if (slot.timerId) clearTimeout(slot.timerId);
+
+      const el = slot.el;
+      el.style.display = 'none';
+      void el.offsetWidth; // Restart CSS animation cleanly without DOM creation
       el.textContent = text;
       el.style.left = `${Math.min(window.innerWidth - 150, Math.max(150, x))}px`;
       el.style.top = `${Math.min(window.innerHeight - 95, Math.max(95, y))}px`;
       el.style.backgroundColor = bgColor;
-      calloutLayer.appendChild(el);
-      setTimeout(() => el.remove(), 1250);
+      el.style.display = 'block';
+
+      slot.timerId = setTimeout(() => {
+        el.style.display = 'none';
+      }, 1220);
+    }
+
+    function updateBrakeButtonsUI() {
+      const isBraking = Boolean(player.handbrakeLatched);
+      const hbBtn = document.getElementById('btn-handbrake');
+      if (hbBtn) {
+        hbBtn.textContent = isBraking ? '🟢 Start [W/B]' : '🛑 Brake [B]';
+        hbBtn.classList.toggle('active-mode', isBraking);
+      }
+      const tBrake = document.getElementById('tbtn-brake');
+      const tBrakeLabel = document.getElementById('tbtn-brake-label');
+      if (tBrake) tBrake.classList.toggle('active-brake', isBraking);
+      if (tBrakeLabel) tBrakeLabel.textContent = isBraking ? '🛑 STOPPED' : '🛑 STOP';
+
+      const sigBtn = document.getElementById('btn-sig-brake-start');
+      if (sigBtn) {
+        sigBtn.textContent = isBraking ? '🟢 GO / START [W]' : '🛑 STOP [B]';
+        sigBtn.style.background = isBraking ? '#4ade80' : '#ffd000';
+      }
+    }
+
+    function toggleHandbrakeStop() {
+      audio.init();
+      player.handbrakeLatched = !player.handbrakeLatched;
+      updateBrakeButtonsUI();
+      if (player.handbrakeLatched) {
+        spawnComicCallout(player.pos, '🛑 HANDBRAKE APPLIED — STOPPING AUTO (PRESS [W] TO START)', '#ef4444');
+      } else {
+        spawnComicCallout(player.pos, '🟢 BRAKE RELEASED — VAYUPUTRA RE MOVING!', '#4ade80');
+      }
+    }
+
+    function releaseBrakeAndStartMoving() {
+      audio.init();
+      if (player.handbrakeLatched) {
+        player.handbrakeLatched = false;
+        updateBrakeButtonsUI();
+      }
+      if (player.forwardSpeed < 14) {
+        player.forwardSpeed = 18;
+      }
     }
 
     function flashDigiLockerLicenseToCop() {
@@ -3534,7 +4053,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       if (showCallout) {
         spawnComicCallout(
           player.pos,
-          isDash ? '🛺 AUTO DASH CAM VIEW (DRIVER COCKPIT POV)' : '🎥 REGULAR CHASE CAMERA VIEW',
+          isDash ? '🛺 VAYUPUTRA RE DASH CAM VIEW (COCKPIT POV)' : '🎥 REGULAR CHASE CAMERA VIEW',
           '#38bdf8'
         );
       }
@@ -3557,10 +4076,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         case 'KeyW':
         case 'ArrowUp':
           keys.up = true;
+          releaseBrakeAndStartMoving();
           break;
         case 'KeyS':
         case 'ArrowDown':
           keys.down = true;
+          updateBrakeButtonsUI();
+          break;
+        case 'KeyB':
+          toggleHandbrakeStop();
           break;
         case 'KeyA':
         case 'ArrowLeft':
@@ -3572,15 +4096,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           break;
         case 'Space':
           e.preventDefault();
+          releaseBrakeAndStartMoving();
           if (!keys.space && player.turboBoostTimer <= 0) {
             player.turboBoostTimer = 1.6;
             audio.playBeepBeepHorn('auto');
-            spawnComicCallout(player.pos, '⚡ TURBO GAP BOOST! (GROUNDED)', '#38bdf8');
+            spawnComicCallout(player.pos, '⚡ VAYUPUTRA TURBO GAP BOOST! (GROUNDED)', '#38bdf8');
           }
           keys.space = true;
           break;
         case 'KeyV':
           toggleCameraMode();
+          break;
+        case 'KeyG':
+          triggerRedLightSignalAheadNow(false);
           break;
         case 'KeyE':
           if (!gamePaused) {
@@ -3614,6 +4142,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         case 'KeyS':
         case 'ArrowDown':
           keys.down = false;
+          updateBrakeButtonsUI();
           break;
         case 'KeyA':
         case 'ArrowLeft':
@@ -3626,6 +4155,63 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         case 'Space':
           keys.space = false;
           break;
+      }
+    });
+
+    // Wire On-Screen Touch / Mouse Controls for Mobile, Tablet & Desktop Clickers
+    function bindHoldButton(btnId, onDown, onUp) {
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+      const start = (ev) => {
+        ev.preventDefault();
+        audio.init();
+        btn.classList.add('pressed');
+        onDown();
+      };
+      const end = (ev) => {
+        ev.preventDefault();
+        btn.classList.remove('pressed');
+        if (onUp) onUp();
+      };
+      btn.addEventListener('pointerdown', start);
+      btn.addEventListener('pointerup', end);
+      btn.addEventListener('pointerleave', end);
+      btn.addEventListener('pointercancel', end);
+    }
+
+    bindHoldButton('tbtn-left', () => { keys.left = true; }, () => { keys.left = false; });
+    bindHoldButton('tbtn-right', () => { keys.right = true; }, () => { keys.right = false; });
+    bindHoldButton(
+      'tbtn-brake',
+      () => {
+        keys.down = true;
+        player.handbrakeLatched = true;
+        updateBrakeButtonsUI();
+      },
+      () => {
+        keys.down = false;
+      }
+    );
+    bindHoldButton(
+      'tbtn-go',
+      () => {
+        keys.up = true;
+        releaseBrakeAndStartMoving();
+      },
+      () => {
+        keys.up = false;
+      }
+    );
+    document.getElementById('tbtn-horn')?.addEventListener('click', () => triggerPlayerHorn());
+    document.getElementById('tbtn-dl')?.addEventListener('click', () => flashDigiLockerLicenseToCop());
+    document.getElementById('btn-handbrake')?.addEventListener('click', () => toggleHandbrakeStop());
+    document.getElementById('btn-signal-test')?.addEventListener('click', () => triggerRedLightSignalAheadNow(false));
+    document.getElementById('btn-sig-brake-start')?.addEventListener('click', () => {
+      if (player.handbrakeLatched || player.forwardSpeed < 3) {
+        releaseBrakeAndStartMoving();
+      } else {
+        player.handbrakeLatched = true;
+        updateBrakeButtonsUI();
       }
     });
 
@@ -3666,10 +4252,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       });
     }
 
-    // Weather, Modal & End-of-Trip Scoreboard Controls
+    // Weather, Modal, Local Leaderboard & End-of-Trip Viral Receipt Controls
     let rainActive = false;
     let rainIntensity = 0.0;
     let weatherTimer = 14.0;
+    let lastCompletedTripSummary = null;
 
     function toggleManualRainStorm() {
       rainActive = !rainActive;
@@ -3684,6 +4271,38 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     const modal = document.getElementById('gravity-modal');
     const scoreModal = document.getElementById('score-modal');
     let gamePaused = true;
+
+    const LEADERBOARD_KEY = 'blr_vayuputra_leaderboard_v1';
+
+    function saveAndRenderLeaderboard(newEntry) {
+      let list = [];
+      try {
+        const raw = localStorage.getItem(LEADERBOARD_KEY);
+        if (raw) list = JSON.parse(raw);
+      } catch (_) {}
+
+      if (newEntry) {
+        list.push(newEntry);
+        list.sort((a, b) => b.score - a.score);
+        list = list.slice(0, 5);
+        try {
+          localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(list));
+        } catch (_) {}
+      }
+
+      const container = document.getElementById('score-leaderboard-list');
+      if (!container) return;
+      if (list.length === 0) {
+        container.innerHTML = '<span class="lb-pill">No trips recorded yet</span>';
+        return;
+      }
+      container.innerHTML = list
+        .map(
+          (item, idx) =>
+            `<span class="lb-pill">#${idx + 1} ${item.score.toLocaleString()} PTS • ₹${item.fare.toFixed(0)} (${item.mode.toUpperCase()})</span>`
+        )
+        .join('');
+    }
 
     function updateTripProgressHUD() {
       const targetKm = currentProfile.targetDistanceKm || 1.8;
@@ -3706,10 +4325,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const targetKm = currentProfile.targetDistanceKm || 1.8;
       const distPts = Math.round(player.distanceKm * 600);
       const farePts = Math.round(player.fareRupees * 3.5);
+      const sigPts = player.stats.signalsObeyed * 250;
       const copPts = player.stats.copsCleared * 300 + player.stats.copsEvaded * 150;
       const dogPts = player.stats.dogsDodged * 200 + player.stats.closeOvertakes * 80;
-      const penaltyPts = player.stats.collisions * 75 + player.stats.copsFined * 250;
-      const totalScore = Math.max(150, distPts + farePts + copPts + dogPts - penaltyPts);
+      const penaltyPts =
+        player.stats.collisions * 75 +
+        player.stats.copsFined * 250 +
+        player.stats.signalsJumped * 300;
+      const totalScore = Math.max(150, distPts + farePts + sigPts + copPts + dogPts - penaltyPts);
 
       let rankText = '🏆 S-RANK • ನಮ್ಮ ಆಟೋ ರಾಜ (BENGALURU AUTO LEGEND)';
       if (totalScore < 1400) {
@@ -3717,6 +4340,31 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       } else if (totalScore < 2200) {
         rankText = '🥇 A-RANK • INDIRANAGAR METER BOSS (ಮೀಟರ್ ಬಾಸ್)';
       }
+
+      lastCompletedTripSummary = {
+        routeTitle: currentProfile.routeTitle,
+        mode: currentProfile.id,
+        reason,
+        distanceKm: player.distanceKm,
+        targetKm,
+        fare: player.fareRupees,
+        score: totalScore,
+        rankText,
+        distPts,
+        farePts,
+        sigPts,
+        copPts,
+        dogPts,
+        penaltyPts,
+        stats: { ...player.stats }
+      };
+
+      saveAndRenderLeaderboard({
+        score: totalScore,
+        fare: player.fareRupees,
+        mode: currentProfile.id,
+        ts: Date.now()
+      });
 
       document.getElementById('score-route-badge').textContent =
         `🏁 ${currentProfile.routeTitle} • ${reason.toUpperCase()}`;
@@ -3734,9 +4382,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           <td class="pts-pos">+${distPts} PTS</td>
         </tr>
         <tr>
-          <td>📟 Namma Auto Meter Fare (${currentProfile.fareRateMult.toFixed(1)}x Rate)</td>
+          <td>📟 Vayuputra RE Meter Fare (${currentProfile.fareRateMult.toFixed(1)}x Rate)</td>
           <td>₹${player.fareRupees.toFixed(2)} Collected</td>
           <td class="pts-pos">+${farePts} PTS</td>
+        </tr>
+        <tr>
+          <td>🚦 BTP Red-Light Signal Discipline</td>
+          <td>${player.stats.signalsObeyed} Stopped on Red • ${player.stats.signalsJumped} Jumped</td>
+          <td class="${sigPts >= player.stats.signalsJumped * 300 ? 'pts-pos' : 'pts-neg'}">+${sigPts} PTS</td>
         </tr>
         <tr>
           <td>👮‍♂️ BTP Traffic Cop License Checks</td>
@@ -3750,16 +4403,157 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </tr>
         <tr>
           <td>💥 Traffic Bumps &amp; e-Challan Penalties</td>
-          <td>${player.stats.collisions} Bumps • ${player.stats.copsFined} Fines</td>
+          <td>${player.stats.collisions} Bumps • ${player.stats.copsFined + player.stats.signalsJumped} Challans</td>
           <td class="${penaltyPts > 0 ? 'pts-neg' : 'pts-pos'}">${penaltyPts > 0 ? '-' + penaltyPts : '0 (CLEAN!)'} PTS</td>
         </tr>
       `;
 
       document.getElementById('hud-cop-alert').classList.remove('visible');
+      document.getElementById('hud-signal-banner').classList.remove('visible');
       document.getElementById('vignette-fx').classList.remove('cop-strobe');
 
       if (modal.open) modal.close();
       if (!scoreModal.open) scoreModal.showModal();
+      scoreModal.scrollTop = 0;
+    }
+
+    // Generate & Download Viral Shareable Namma Auto Thermal Fare Receipt PNG
+    function downloadTripReceiptPng() {
+      const s = lastCompletedTripSummary || {
+        routeTitle: currentProfile.routeTitle,
+        distanceKm: player.distanceKm,
+        targetKm: currentProfile.targetDistanceKm,
+        fare: player.fareRupees,
+        score: 2550,
+        rankText: '🏆 S-RANK • ನಮ್ಮ ಆಟೋ ರಾಜ (BENGALURU AUTO LEGEND)',
+        stats: player.stats
+      };
+
+      const c = document.createElement('canvas');
+      c.width = 800;
+      c.height = 980;
+      const ctx = c.getContext('2d');
+
+      // Outer Dark Charcoal & Auto Canary Yellow Border
+      ctx.fillStyle = '#090d16';
+      ctx.fillRect(0, 0, 800, 980);
+      ctx.strokeStyle = '#ffd000';
+      ctx.lineWidth = 14;
+      ctx.strokeRect(18, 18, 764, 944);
+
+      // Top Hazard Banner
+      ctx.fillStyle = '#ffd000';
+      ctx.fillRect(34, 34, 732, 86);
+      ctx.fillStyle = '#090d16';
+      ctx.font = '900 32px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('🛺 ನಮ್ಮ ಬೆಂಗಳೂರು ಆಟೋ ಮೀಟರ್ ರಸೀದಿ • KA-01', 56, 74);
+      ctx.font = '900 20px "Inter", sans-serif';
+      ctx.fillText('VAYUPUTRA RE COMPACT (ವಾಯುಪುತ್ರ) • OFFICIAL DRIVER SCORE CARD', 56, 105);
+
+      // Route & Vehicle Info Box
+      ctx.fillStyle = '#111827';
+      ctx.fillRect(42, 142, 716, 130);
+      ctx.strokeStyle = 'rgba(255, 208, 0, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(42, 142, 716, 130);
+
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 28px "Inter", sans-serif';
+      ctx.fillText(`ROUTE: ${s.routeTitle}`, 64, 188);
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 21px "Inter", monospace';
+      ctx.fillText(`VEHICLE: KA-01-AG-9999 (VAYUPUTRA RE) • DIST: ${s.distanceKm.toFixed(2)}/${s.targetKm.toFixed(1)} KM`, 64, 226);
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 20px "Inter", sans-serif';
+      ctx.fillText(s.rankText, 64, 256);
+
+      // Hero Score & Meter Fare Blocks
+      ctx.fillStyle = '#052e16';
+      ctx.fillRect(42, 292, 348, 140);
+      ctx.strokeStyle = '#4ade80';
+      ctx.strokeRect(42, 292, 348, 140);
+      ctx.fillStyle = '#86efac';
+      ctx.font = '800 18px "Inter", sans-serif';
+      ctx.fillText('FINAL METER FARE COLLECTED', 64, 328);
+      ctx.fillStyle = '#4ade80';
+      ctx.font = '900 58px "Inter", monospace';
+      ctx.fillText(`₹${s.fare.toFixed(2)}`, 64, 402);
+
+      ctx.fillStyle = '#1e1b4b';
+      ctx.fillRect(410, 292, 348, 140);
+      ctx.strokeStyle = '#ffd000';
+      ctx.strokeRect(410, 292, 348, 140);
+      ctx.fillStyle = '#fde047';
+      ctx.font = '800 18px "Inter", sans-serif';
+      ctx.fillText('FINAL DRIVER SCORE', 432, 328);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 58px "Inter", monospace';
+      ctx.fillText(`${s.score.toLocaleString()} PTS`, 432, 402);
+
+      // Itemized Breakdown Rows
+      const rows = [
+        ['🚦 Red-Light Signals Obeyed', `${s.stats.signalsObeyed} Stopped (+₹${s.stats.signalsObeyed * 100})`],
+        ['👮‍♂️ BTP License Checks Cleared', `${s.stats.copsCleared} Verified • ${s.stats.copsEvaded} Dodged`],
+        ['🐕 Indie Stray Dogs Dodged', `${s.stats.dogsDodged} Clean Swerves`],
+        ['⚡ Close Traffic Overtakes', `${s.stats.closeOvertakes} Vehicles Passed`],
+        ['💥 Bumps & e-Challan Fines', `${s.stats.collisions} Bumps • ${s.stats.copsFined + s.stats.signalsJumped} Challans`]
+      ];
+
+      let ry = 485;
+      rows.forEach(([label, val]) => {
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(42, ry - 34, 716, 56);
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = '800 23px "Inter", sans-serif';
+        ctx.fillText(label, 64, ry);
+        ctx.fillStyle = '#fde047';
+        ctx.textAlign = 'right';
+        ctx.fillText(val, 736, ry);
+        ctx.textAlign = 'left';
+        ry += 72;
+      });
+
+      // Footer Challenge Call to Action
+      ctx.fillStyle = '#ffd000';
+      ctx.font = '900 24px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: BENGALURU TRAFFIC PRO', 42, 885);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 18px "Inter", monospace';
+      ctx.fillText('Built with Google Antigravity & Gemini • github.com/cmanikandan/blr-traffic-blender', 42, 922);
+
+      const link = document.createElement('a');
+      link.download = `vayuputra-auto-receipt-${s.score}pts.png`;
+      link.href = c.toDataURL('image/png');
+      link.click();
+    }
+
+    async function shareTripScoreText() {
+      const s = lastCompletedTripSummary || {
+        routeTitle: currentProfile.routeTitle,
+        fare: player.fareRupees,
+        score: 2550,
+        stats: player.stats
+      };
+      const shareText =
+        `🛺 I scored ${s.score.toLocaleString()} PTS (Meter Fare ₹${s.fare.toFixed(2)}) driving the Vayuputra RE Auto on ${s.routeTitle} in Ondu Second: Bengaluru Traffic Pro! ` +
+        `🚦 ${s.stats.signalsObeyed} Red Lights Obeyed • 👮‍♂️ ${s.stats.copsCleared} BTP Checks Cleared • 🐕 ${s.stats.dogsDodged} Stray Dogs Dodged! ` +
+        `Can you beat my meter? https://github.com/cmanikandan/blr-traffic-blender`;
+
+      const shareBtn = document.getElementById('btn-share-score');
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'Ondu Second: Vayuputra RE Auto Score', text: shareText });
+          return;
+        } catch (_) {}
+      }
+      try {
+        await navigator.clipboard.writeText(shareText);
+        if (shareBtn) {
+          const orig = shareBtn.textContent;
+          shareBtn.textContent = '✅ Copied Challenge to Clipboard!';
+          setTimeout(() => { shareBtn.textContent = orig; }, 2200);
+        }
+      } catch (_) {}
     }
 
     function applyGravityProfile(modeKey, closeDialog = true) {
@@ -3775,6 +4569,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       resetPlayerStatsAndTrip();
       rebuildPotholes(currentProfile.potholeCount);
       rebuildTrafficForProfile(currentProfile);
+      rebuildTrafficSignals(currentProfile.signalCount || 2);
       rebuildJaywalkers(currentProfile.jaywalkerCount);
       rebuildTrafficCops(currentProfile.copCount);
       rebuildStrayDogs(currentProfile.dogCount);
@@ -3787,6 +4582,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       weatherTimer = currentProfile.rainCycleDuration;
       updateWeatherBanner();
       document.getElementById('hud-cop-alert').classList.remove('visible');
+      document.getElementById('hud-signal-banner').classList.remove('visible');
       document.getElementById('vignette-fx').classList.remove('cop-strobe');
 
       if (scoreModal && scoreModal.open) {
@@ -3848,6 +4644,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     document.getElementById('btn-end-trip').addEventListener('click', () => {
       finishTripAndShowScoreboard('Meter Stopped by Driver');
     });
+    document.getElementById('btn-download-receipt')?.addEventListener('click', () => downloadTripReceiptPng());
+    document.getElementById('btn-share-score')?.addEventListener('click', () => shareTripScoreText());
     document.getElementById('btn-score-replay').addEventListener('click', () => {
       applyGravityProfile(currentProfile.id, true);
     });
@@ -3875,10 +4673,30 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     });
 
     // =========================================================================
-    // 9. SIMULATION, STRICT GROUNDED TRAFFIC, BTP COPS & STRAY DOGS LOOP
+    // 9. SIMULATION, STRICT GROUNDED TRAFFIC, RED-LIGHT SIGNALS, BTP COPS & STRAY DOGS
     // =========================================================================
     let cameraShake = 0;
     const clock = new THREE.Clock();
+
+    // Cached HUD DOM references for 60 FPS zero-overhead updates
+    const hudEls = {
+      dlStatus: document.getElementById('hud-dl-status'),
+      gripText: document.getElementById('hud-grip-text'),
+      landmark: document.getElementById('hud-landmark'),
+      landmarkKn: document.getElementById('hud-landmark-kn'),
+      copAlert: document.getElementById('hud-cop-alert'),
+      vignette: document.getElementById('vignette-fx'),
+      fare: document.getElementById('hud-fare'),
+      surge: document.getElementById('surge-badge'),
+      speed: document.getElementById('hud-speed'),
+      sigBanner: document.getElementById('hud-signal-banner'),
+      sigRed: document.getElementById('hud-sig-red'),
+      sigYellow: document.getElementById('hud-sig-yellow'),
+      sigGreen: document.getElementById('hud-sig-green'),
+      sigKn: document.getElementById('hud-sig-kn'),
+      sigEn: document.getElementById('hud-sig-en'),
+      sigTimer: document.getElementById('hud-sig-timer')
+    };
 
     function updateSimulation(dt, elapsed) {
       if (player.tripFinished) return;
@@ -3888,7 +4706,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       if (player.dlVerifiedTimer > 0) {
         player.dlVerifiedTimer -= dt;
         if (player.dlVerifiedTimer <= 0) {
-          document.getElementById('hud-dl-status').textContent = 'VALID • PRESS [L]';
+          hudEls.dlStatus.textContent = 'VALID • PRESS [L]';
         }
       }
 
@@ -3935,20 +4753,32 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const gripPct = Math.round(tireGrip * 100);
       document.documentElement.style.setProperty('--grip-pct', `${Math.max(5, gripPct)}%`);
       document.documentElement.style.setProperty('--grip-hue', String(Math.round(tireGrip * 145)));
-      document.getElementById('hud-grip-text').textContent =
+      hudEls.gripText.textContent =
         gripPct < 15 ? '0% HYDROPLANING!' : `${gripPct}% DRY ASPHALT`;
 
-      // 2. Player Auto-Rickshaw Strictly Grounded Physics (NO FLYING AUTOS!)
-      const baseTargetSpeed = keys.up ? 48 : keys.down ? 16 : 32;
-      const targetSpeed = player.turboBoostTimer > 0 ? 56 : baseTargetSpeed;
-      player.forwardSpeed += (targetSpeed - player.forwardSpeed) * dt * 3.8;
+      // 2. Vayuputra RE Strictly Grounded Physics + Full 0 KM/H Stop & Start Controls!
+      const isBrakingToStop = keys.down || player.handbrakeLatched;
+      let targetSpeed = 32;
+      if (isBrakingToStop) {
+        targetSpeed = 0;
+      } else if (player.turboBoostTimer > 0) {
+        targetSpeed = 56;
+      } else if (keys.up) {
+        targetSpeed = 48;
+      }
+      const accelRate = isBrakingToStop ? 7.2 : 4.2;
+      player.forwardSpeed += (targetSpeed - player.forwardSpeed) * Math.min(1, dt * accelRate);
+      if (player.forwardSpeed < 0.35 && isBrakingToStop) {
+        player.forwardSpeed = 0;
+      }
       player.distanceKm += (player.forwardSpeed * dt) / 1000;
 
       const steerInput = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
       const attachedWheelCount = player.wheels.filter((w) => w.attached).length;
       const wheelStability = 0.45 + 0.55 * (attachedWheelCount / 3);
+      const speedSteerFactor = Math.min(1.0, 0.25 + player.forwardSpeed / 24);
 
-      const steerAccel = (24 + (1 - tireGrip) * 8) * wheelStability;
+      const steerAccel = (24 + (1 - tireGrip) * 8) * wheelStability * speedSteerFactor;
       player.vel.x += steerInput * steerAccel * dt;
 
       if (attachedWheelCount < 3) {
@@ -3971,7 +4801,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
 
       const missingWheelTilt = (3 - attachedWheelCount) * 0.10;
-      const targetPitch = THREE.MathUtils.clamp((keys.up || player.turboBoostTimer > 0 ? -0.025 : keys.down ? 0.03 : 0), -0.12, 0.12);
+      const targetPitch = THREE.MathUtils.clamp(
+        (keys.up || player.turboBoostTimer > 0 ? -0.025 : isBrakingToStop && player.forwardSpeed > 2 ? 0.045 : 0),
+        -0.12,
+        0.12
+      );
       const targetYaw = THREE.MathUtils.clamp(-steerInput * 0.10 - player.vel.x * 0.012, -0.32, 0.32);
       const targetRoll = THREE.MathUtils.clamp(-steerInput * 0.11 + missingWheelTilt, -0.25, 0.25);
 
@@ -4032,8 +4866,118 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
       const distMeters = Math.max(0, Math.round(nearestDist));
-      document.getElementById('hud-landmark').textContent = `${nearestName} • ${distMeters}m`;
-      document.getElementById('hud-landmark-kn').textContent = `${nearestKn} • ${distMeters}m`;
+      hudEls.landmark.textContent = `${nearestName} • ${distMeters}m`;
+      hudEls.landmarkKn.textContent = `${nearestKn} • ${distMeters}m`;
+
+      // 3B. Interactive BTP Red-Light Traffic Signal Junctions
+      let activeSignalForHUD = null;
+      for (let i = 0; i < trafficSignals.length; i++) {
+        const sig = trafficSignals[i];
+        sig.pos.z += scrollStep;
+        const distAhead = -sig.pos.z;
+
+        // Arm a fresh Red signal countdown when player approaches within 58m
+        if (!sig.armedOnApproach && distAhead < 58 && distAhead > 15) {
+          sig.armedOnApproach = true;
+          sig.phase = 'red';
+          sig.timer = 5.5;
+          updateSignalBulbMaterials(sig);
+          spawnComicCallout(
+            sig.pos,
+            '🚦 ಕೆಂಪು ಸಿಗ್ನಲ್! RED SIGNAL AHEAD — HOLD [S] OR PRESS [B] TO STOP!',
+            '#ef4444'
+          );
+        }
+
+        if (sig.armedOnApproach) {
+          sig.timer -= dt;
+          if (sig.phase === 'red' && sig.timer <= 0) {
+            sig.phase = 'yellow';
+            sig.timer = 1.0;
+            updateSignalBulbMaterials(sig);
+          } else if (sig.phase === 'yellow' && sig.timer <= 0) {
+            sig.phase = 'green';
+            sig.timer = 9.0;
+            updateSignalBulbMaterials(sig);
+            if (distAhead > -6 && distAhead < 38) {
+              audio.playLicenseVerified();
+              spawnComicCallout(
+                sig.pos,
+                '🟢 ಹಸಿರು ಸಿಗ್ನಲ್! GREEN SIGNAL — PRESS [W] OR [SPACE] TO START!',
+                '#4ade80'
+              );
+            }
+          }
+
+          // Check if player lawfully stopped before the stop line on Red/Yellow
+          if ((sig.phase === 'red' || sig.phase === 'yellow') && distAhead > 0.8 && distAhead < 24 && player.forwardSpeed < 2.2) {
+            if (!sig.stoppedOnRed) {
+              sig.stoppedOnRed = true;
+              sig.bonusAwarded = true;
+              player.fareRupees += 100;
+              player.stats.signalsObeyed++;
+              // Shorten wait time once stopped so gameplay stays snappy!
+              if (sig.phase === 'red' && sig.timer > 1.8) {
+                sig.timer = 1.8;
+              }
+              audio.playLicenseVerified();
+              spawnComicCallout(
+                player.pos,
+                '🛑 LAWFUL STOP AT RED SIGNAL! +₹100 BONUS (WAIT FOR GREEN!)',
+                '#4ade80'
+              );
+            }
+          }
+
+          // Check if player jumped the Red signal stop line at speed!
+          if (sig.phase === 'red' && !sig.stoppedOnRed && !sig.violated && distAhead <= 0.2 && distAhead > -4.5 && player.forwardSpeed > 5.0) {
+            sig.violated = true;
+            player.stats.signalsJumped++;
+            player.fareRupees = Math.max(30, player.fareRupees - 150);
+            cameraShake = 0.38;
+            audio.playPoliceWhistle(true);
+            spawnComicCallout(
+              sig.pos,
+              '📸 ಕೆಂಪು ಸಿಗ್ನಲ್ ಜಂಪ್! BTP RED-LIGHT CAMERA CHALLAN -₹150!',
+              '#ef4444'
+            );
+          }
+        }
+
+        if (distAhead > -4 && distAhead < 62 && !activeSignalForHUD) {
+          activeSignalForHUD = { sig, distAhead };
+        }
+
+        if (sig.pos.z > 24) {
+          resetTrafficSignalJunction(sig);
+        }
+      }
+
+      if (activeSignalForHUD) {
+        const { sig, distAhead } = activeSignalForHUD;
+        hudEls.sigBanner.classList.add('visible');
+        hudEls.sigRed.classList.toggle('active', sig.phase === 'red');
+        hudEls.sigYellow.classList.toggle('active', sig.phase === 'yellow');
+        hudEls.sigGreen.classList.toggle('active', sig.phase === 'green');
+        const secs = Math.max(0, Math.ceil(sig.timer));
+        hudEls.sigTimer.textContent = `${String(secs).padStart(2, '0')}s`;
+        hudEls.sigTimer.style.color = sig.phase === 'green' ? '#4ade80' : sig.phase === 'yellow' ? '#ffd000' : '#ff4d4d';
+        hudEls.sigBanner.style.borderColor = sig.phase === 'green' ? '#22c55e' : sig.phase === 'yellow' ? '#ffd000' : '#ef4444';
+
+        if (sig.phase === 'green') {
+          hudEls.sigKn.textContent = `🟢 ಹಸಿರು ಸಿಗ್ನಲ್! ಮುಂದೆ ಹೋಗಿ! (GREEN LIGHT • ${Math.max(0, Math.round(distAhead))}m)`;
+          hudEls.sigEn.textContent = player.forwardSpeed < 5
+            ? 'SIGNAL IS GREEN! PRESS [W], [SPACE] OR CLICK [GO / START] TO ACCELERATE!'
+            : 'GREEN SIGNAL CLEAR — CRUISING THROUGH JUNCTION';
+        } else {
+          hudEls.sigKn.textContent = `🚦 ಕೆಂಪು ಸಿಗ್ನಲ್! ನಿಲ್ಲಿಸಿ! (RED SIGNAL ${Math.max(0, Math.round(distAhead))}m — STOP!)`;
+          hudEls.sigEn.textContent = sig.stoppedOnRed
+            ? '✅ STOPPED AT LINE (+₹100 BONUS) • WAIT FOR GREEN THEN PRESS [W]'
+            : 'HOLD [S] OR PRESS [B] TO STOP BEFORE WHITE LINE (+₹100 BONUS)';
+        }
+      } else {
+        hudEls.sigBanner.classList.remove('visible');
+      }
 
       // 4. Realistic Potholes with Lateral Pull & Grounded Suspension Jolt
       potholes.forEach((p) => {
@@ -4048,13 +4992,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const dz = p.group.position.z - player.pos.z;
         const distSq = dx * dx + dz * dz;
         const pullR = currentProfile.potholeRadius;
-        if (distSq < pullR * pullR) {
+        if (distSq < pullR * pullR && player.forwardSpeed > 4) {
           const dist = Math.max(0.5, Math.sqrt(distSq));
           const falloff = 1 - dist / pullR;
           player.vel.x += (dx / dist) * currentProfile.potholePullStrength * falloff * dt;
 
           if (dist < 1.35 && cameraShake < 0.15) {
-            player.forwardSpeed = Math.max(18, player.forwardSpeed * 0.85);
+            player.forwardSpeed = Math.max(12, player.forwardSpeed * 0.85);
             cameraShake = 0.32;
             audio.playBounceImpact(false);
             spawnComicCallout(player.pos, '🕳️ BBMP POTHOLE SUSPENSION JOLT!', '#38bdf8');
@@ -4098,7 +5042,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
         const pdx = player.pos.x - p.pos.x;
         const pdz = player.pos.z - p.pos.z;
-        if (Math.abs(pdx) < 1.1 && Math.abs(pdz) < 1.15 && p.hitCooldown <= 0) {
+        if (Math.abs(pdx) < 1.1 && Math.abs(pdz) < 1.15 && p.hitCooldown <= 0 && player.forwardSpeed > 2) {
           p.hitCooldown = 0.8;
           player.stats.collisions++;
           const push = pdx >= 0 ? 1 : -1;
@@ -4183,7 +5127,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             cameraShake = 0.42;
             audio.playPoliceWhistle(true);
             spawnCollisionSparks(cop.pos, 14, 0x3b82f6);
-            document.getElementById('hud-dl-status').textContent = 'e-CHALLAN -₹100!';
+            hudEls.dlStatus.textContent = 'e-CHALLAN -₹100!';
             player.dlVerifiedTimer = 4.0;
             spawnComicCallout(
               cop.pos,
@@ -4215,8 +5159,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      document.getElementById('hud-cop-alert').classList.toggle('visible', anyCopAlertActive);
-      document.getElementById('vignette-fx').classList.toggle('cop-strobe', anyCopAlertActive);
+      hudEls.copAlert.classList.toggle('visible', anyCopAlertActive);
+      hudEls.vignette.classList.toggle('cop-strobe', anyCopAlertActive);
 
       // 5C. Sudden Darting Bengaluru Indie Stray Dogs (Grounded)
       for (let i = 0; i < strayDogs.length; i++) {
@@ -4253,7 +5197,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
         const ddx = player.pos.x - d.pos.x;
         const ddz = player.pos.z - d.pos.z;
-        if (Math.abs(ddx) < 1.15 && Math.abs(ddz) < 1.2 && d.hitCooldown <= 0) {
+        if (Math.abs(ddx) < 1.15 && Math.abs(ddz) < 1.2 && d.hitCooldown <= 0 && player.forwardSpeed > 2) {
           d.hitCooldown = 0.85;
           player.stats.collisions++;
           const push = ddx >= 0 ? 1 : -1;
@@ -4277,7 +5221,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 6. Two-Way Strictly Grounded Lane Traffic AI (Left Side Forward -Z, Right Side Oncoming +Z)
+      // 6. Two-Way Strictly Grounded Lane Traffic AI (With Red-Light Queueing!)
       for (let i = 0; i < trafficPool.length; i++) {
         const v = trafficPool[i];
         if (v.hitCooldown > 0) v.hitCooldown -= dt;
@@ -4285,13 +5229,28 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const minLane = v.isOncoming ? 3 : 0;
         const maxLane = v.isOncoming ? 5 : 2;
 
+        // Check if same-direction NPC vehicle should stop behind an active Red/Yellow signal
+        let stoppedByRedSignal = false;
+        if (!v.isOncoming) {
+          for (let s = 0; s < trafficSignals.length; s++) {
+            const sig = trafficSignals[s];
+            if (sig.phase === 'red' || sig.phase === 'yellow') {
+              const distToStopLine = v.pos.z - sig.pos.z; // positive when vehicle is behind stop line (+Z side)
+              if (distToStopLine > 2.0 && distToStopLine < 18.0) {
+                stoppedByRedSignal = true;
+                break;
+              }
+            }
+          }
+        }
+
         for (let j = 0; j < trafficPool.length; j++) {
           if (i === j) continue;
           const other = trafficPool[j];
           if (other.isOncoming !== v.isOncoming) continue;
           const dz = v.isOncoming ? (other.pos.z - v.pos.z) : (v.pos.z - other.pos.z);
           if (dz > 0 && dz < 14 && Math.abs(v.pos.x - other.pos.x) < 2.2) {
-            if (v.baseSpeed > other.baseSpeed) {
+            if (v.baseSpeed > other.baseSpeed && !stoppedByRedSignal) {
               const nextLane = minLane + ((v.laneIdx - minLane + 1) % 3);
               v.laneIdx = nextLane;
               v.targetLaneX = LANES[nextLane];
@@ -4300,7 +5259,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
 
         v.weaveTimer -= dt;
-        if (v.spec.isHyperDelivery && v.weaveTimer <= 0) {
+        if (v.spec.isHyperDelivery && v.weaveTimer <= 0 && !stoppedByRedSignal) {
           v.weaveTimer = 1.2 + Math.random() * 1.4;
           if (Math.abs(v.pos.z - player.pos.z) < 38 && Math.random() < currentProfile.cutOffAggression) {
             const shift = Math.random() < 0.5 ? -1 : 1;
@@ -4308,6 +5267,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             v.targetLaneX = LANES[v.laneIdx];
           }
         }
+
+        const targetVelZ = stoppedByRedSignal
+          ? 0
+          : v.isOncoming
+            ? v.baseSpeed * 0.42
+            : -v.baseSpeed;
+        v.vel.z += (targetVelZ - v.vel.z) * dt * (stoppedByRedSignal ? 5.5 : 2.5);
 
         const relZSpeed = player.forwardSpeed + v.vel.z;
         v.pos.z += relZSpeed * dt;
@@ -4320,9 +5286,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         v.vel.x += laneErr * 7.5 * dt;
         v.vel.x *= Math.exp(-4.2 * dt);
 
-        const targetVelZ = v.isOncoming ? v.baseSpeed * 0.42 : -v.baseSpeed;
-        v.vel.z += (targetVelZ - v.vel.z) * dt * 2.5;
-
         const dirSign = v.isOncoming ? -1 : 1;
         const npcYaw = v.baseYaw + THREE.MathUtils.clamp(-v.vel.x * 0.025 * dirSign, -0.25, 0.25);
         const npcRoll = THREE.MathUtils.clamp(-v.vel.x * 0.03 * dirSign, -0.18, 0.18);
@@ -4331,8 +5294,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         v.mesh.position.copy(v.pos);
         v.mesh.rotation.copy(v.rot);
 
+        const wheelSpinSpeed = Math.abs(v.vel.z);
         v.wheels.forEach((w) => {
-          if (w.attached) w.node.rotation.x -= (v.baseSpeed * dt) / 0.26;
+          if (w.attached) w.node.rotation.x -= (wheelSpinSpeed * dt) / 0.26;
         });
 
         // Player <-> NPC Grounded Collision Check
@@ -4412,20 +5376,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       }
 
-      // 8. Configurable Camera (Regular Chase View vs First-Person Auto Dash Cam View)
+      // 8. Configurable Camera (Regular Chase View vs First-Person Vayuputra RE Dash Cam View)
       if (cameraShake > 0) cameraShake = Math.max(0, cameraShake - dt * 1.8);
       const shakeX = (Math.random() - 0.5) * cameraShake;
       const shakeY = (Math.random() - 0.5) * cameraShake;
 
       if (player.cameraMode === 'dashcam') {
-        // First-Person Driver Dash Cam View from inside the Auto-Rickshaw Cabin
-        const engineVibY = Math.sin(elapsed * 32) * 0.006;
+        const engineVibY = Math.sin(elapsed * 32) * (player.forwardSpeed > 2 ? 0.006 : 0.002);
         camera.position.x = player.pos.x + shakeX * 0.35;
         camera.position.y = 1.48 + engineVibY + shakeY * 0.35;
         camera.position.z = -0.35;
         camera.lookAt(player.pos.x - steerInput * 2.2, 1.32, -38);
       } else {
-        // Regular 3rd-Person Chase Camera View
         camera.position.x += (player.pos.x * 0.58 - camera.position.x) * dt * 7.5 + shakeX;
         camera.position.y += (3.85 - camera.position.y) * dt * 6.5 + shakeY;
         camera.position.z = 7.2;
@@ -4438,10 +5400,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       player.fareRupees += (player.forwardSpeed * 0.14 * surgeMult) * dt;
       const speedKmh = Math.round(player.forwardSpeed * 2.1);
 
-      document.getElementById('hud-fare').textContent = `₹${player.fareRupees.toFixed(2)}`;
-      document.getElementById('surge-badge').textContent =
+      hudEls.fare.textContent = `₹${player.fareRupees.toFixed(2)}`;
+      hudEls.surge.textContent =
         rainActive ? `${surgeMult.toFixed(1)}x SURGE` : `${surgeMult.toFixed(1)}x HIRE`;
-      document.getElementById('hud-speed').textContent = String(speedKmh);
+      hudEls.speed.textContent = String(speedKmh);
       updateTripProgressHUD();
 
       audio.updateContinuous(speedKmh, rainIntensity, 0);
@@ -4539,6 +5501,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (params.get('copcheck') === '1') {
           triggerSuddenCopEncounterNow();
         }
+        if (params.get('redlight') === '1') {
+          triggerRedLightSignalAheadNow(true);
+        }
         if (params.get('action') === '1' || params.get('hop') === '1') {
           player.turboBoostTimer = 1.4;
           setTimeout(() => {
@@ -4559,7 +5524,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
         if (params.get('gameover') === '1') {
           player.distanceKm = currentProfile.targetDistanceKm;
-          player.fareRupees = 425.50;
+          player.fareRupees = 485.50;
+          player.stats.signalsObeyed = 2;
           player.stats.copsCleared = 2;
           player.stats.copsEvaded = 1;
           player.stats.dogsDodged = 3;

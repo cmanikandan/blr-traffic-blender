@@ -167,7 +167,7 @@ def export_hierarchy_glb(root_obj, filename):
 # ---------------------------------------------------------------------------
 def init_materials():
     M = {}
-    # Authentic Bengaluru Bajaj RE Auto-Rickshaw colors (Automotive Gloss Clearcoat)
+    # Authentic Bengaluru Vayuputra RE Compact (ವಾಯುಪುತ್ರ) Auto-Rickshaw colors (Automotive Gloss Clearcoat)
     M['auto_green'] = make_mat("Auto_EmeraldGreen", (0.0, 0.54, 0.21), roughness=0.18, metallic=0.22)
     M['auto_yellow'] = make_mat("Auto_CanaryYellow", (1.0, 0.78, 0.0), roughness=0.20, metallic=0.15)
     M['auto_hood_yellow'] = make_mat("Auto_HoodYellow", (0.96, 0.72, 0.02), roughness=0.42, metallic=0.02)
@@ -227,7 +227,7 @@ def init_materials():
     return M
 
 # ---------------------------------------------------------------------------
-# 1. Authentic Bengaluru Auto-Rickshaw (Bajaj RE Compact 4S)
+# 1. Authentic Bengaluru Auto-Rickshaw (Vayuputra RE Compact (ವಾಯುಪುತ್ರ) 4S)
 # ---------------------------------------------------------------------------
 def build_auto_rickshaw(M):
     bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0, 0, 0))
