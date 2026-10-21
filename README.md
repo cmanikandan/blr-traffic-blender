@@ -10,10 +10,11 @@
   <a href="https://www.blender.org/"><img src="https://img.shields.io/badge/3D_Assets-Blender_5.2_PBR_.glb-EA7600?style=for-the-badge&logo=blender&logoColor=white" alt="Blender 5.2 PBR GLB" /></a>
   <a href="https://threejs.org/"><img src="https://img.shields.io/badge/Engine-Three.js_r170_4K_HDR_MSAA-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js r170 4K HDR MSAA" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge" alt="License: MIT" /></a>
+  <a href="agents.md"><img src="https://img.shields.io/badge/AI_Agent_Guide-agents.md-F59E0B?style=for-the-badge" alt="AI Agent Guide: agents.md" /></a>
 </p>
 
 > [!IMPORTANT]
-> **🤖 Created with [Google Antigravity](https://antigravity.google/) & [Google Gemini Models](https://deepmind.google/technologies/gemini/)**: Every layer of this game—its **12 procedural Blender 3D PBR `.glb` models** (authored via [Blender MCP](https://github.com/ahujasid/blender-mcp)), **Old Bengaluru narrow-gully heritage architecture**, **2K bilingual Kannada + English canvas textures**, **Three.js WebGL2 4x MSAA HDR engine**, **procedural Web Audio synthesizer**, and **2K HD key art**—was autonomously designed, engineered, and verified using **[Google Antigravity](https://antigravity.google/)**, Google's agentic AI coding platform powered by **[Google Gemini models](https://deepmind.google/technologies/gemini/)** ([Google AI for Developers](https://ai.google.dev/)).
+> **🤖 Created with [Google Antigravity](https://antigravity.google/) & [Google Gemini Models](https://deepmind.google/technologies/gemini/)**: Every layer of this game—its **12 procedural Blender 3D PBR `.glb` models** (authored via [Blender MCP](https://github.com/ahujasid/blender-mcp)), **Old Bengaluru narrow-gully heritage architecture**, **2K bilingual Kannada + English canvas textures**, **Three.js WebGL2 4x MSAA HDR engine**, **procedural Web Audio synthesizer**, and **2K HD key art**—was autonomously designed, engineered, and verified using **[Google Antigravity](https://antigravity.google/)**, Google's agentic AI coding platform powered by **[Google Gemini models](https://deepmind.google/technologies/gemini/)** ([Google AI for Developers](https://ai.google.dev/)). See **[`agents.md`](agents.md)** for full AI coding agent instructions, multi-agent roles, and Blender/Three.js conventions.
 
 <p align="center">
   <img src="screenshots/old_blr_gully_banner.jpg" alt="Ondu Second: Old Bengaluru Narrow Gullies (Chickpet to Malleshwaram) — 2K HD Key Art" width="100%" />
@@ -163,6 +164,7 @@ This project was created end-to-end using **[Google Antigravity](https://antigra
 - **[Google Antigravity (`antigravity.google`)](https://antigravity.google/)**: Agentic AI coding environment used to architect the Three.js WebGL2 4x MSAA simulation, automate Blender 3D asset generation, synthesize 2K bilingual Kannada + English highway & bazaar typography, and verify gameplay via Retina GPU browser renders.
 - **[Google Gemini Models (`deepmind.google/technologies/gemini`)](https://deepmind.google/technologies/gemini/) & [Google AI for Developers (`ai.google.dev`)](https://ai.google.dev/)**: Multimodal reasoning, procedural 3D geometry scripting (`bpy`), Web Audio synthesis, and Ultra-HD key art generation.
 - **[Blender MCP (`github.com/ahujasid/blender-mcp`)](https://github.com/ahujasid/blender-mcp)**: Model Context Protocol integration connecting Google Antigravity and Gemini models to Blender for live 3D `.glb` asset authoring.
+- **[AI Coding Agent Guide (`agents.md`)](agents.md)**: Complete repository guide for AI coding agents covering multi-agent roles, cultural/physics guardrails, Blender-to-Three.js coordinate math, and Retina GPU screenshot verification.
 
 ---
 
