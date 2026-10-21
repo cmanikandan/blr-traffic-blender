@@ -845,8 +845,8 @@ def render_studio_showcase(M, models):
     bpy.context.scene.camera = cam
 
     scene = bpy.context.scene
-    scene.render.resolution_x = 1600
-    scene.render.resolution_y = 900
+    scene.render.resolution_x = 2560
+    scene.render.resolution_y = 1440
     scene.render.resolution_percentage = 100
     out_img = os.path.join(SCREENSHOTS_DIR, "blender_assets_upgraded.png")
     scene.render.filepath = out_img

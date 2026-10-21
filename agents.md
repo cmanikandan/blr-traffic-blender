@@ -1,40 +1,30 @@
-# AGENTS.md — Ondu Second: Bangalore Gravity Glitch (Pro Edition)
+# AGENTS.md — Ondu Second: Namma Auto Traffic (Ultra-HD Pro Edition)
 
-This document provides context, architectural conventions, coordinate systems, and build workflows for AI coding agents working on **Ondu Second: Bangalore Gravity Glitch**.
+This document provides context, architectural conventions, coordinate systems, and build workflows for AI coding agents working on **Ondu Second: Namma Auto Traffic**.
 
 ---
 
 ## 1. Project Overview
 
-**Ondu Second: Bangalore Gravity Glitch** is a self-contained 3D WebGL (Three.js r170) arcade traffic game set on a bustling 6-lane Bengaluru highway corridor alongside the elevated Namma Metro Purple Line viaduct, Vidhana Soudha, and the Silk Board flyover gantry.
+**Ondu Second: Namma Auto Traffic** is a self-contained Ultra-HD 3D WebGL2 (Three.js r170) arcade traffic game featuring two distinct Bengaluru street environments:
+1. **Old Bengaluru Narrow Gullies (`old_blr`, `0.5 km`)**: A tight **`9.6m` 2-lane bazaar street** (`CHICKPET → MALLESHWARAM`) lined with 2-storey Mangalore clay-tile heritage shopfronts, wooden verandah pillars, marigold & jasmine flower vendor carts, overhead festival marigold & mango-leaf toranas, and Chickpet/Malleshwaram bazaar archway gates (no wide buses).
+2. **6-Lane Highway Corridor (`low` = `1.2 km`, `medium` = `1.8 km`, `complex` = `2.5 km`)**: A `22.8m` 6-lane highway alongside the elevated Namma Metro Purple Line viaduct, Vidhana Soudha, and NH-44 Silk Board / Hebbal flyover gantries.
 
-### Key Gameplay Pillars
-- **Player Vehicle**: Authentic Bengaluru Vayuputra RE Compact (ವಾಯುಪುತ್ರ) Auto-Rickshaw (canary-yellow canopy `#FFD000` + emerald-green lower chassis `#009A44` + bilingual rear hood stencil) with 3 independent wheels that can snap off on heavy impacts and be repaired with `R`.
-- **Bilingual Kannada + English Hoardings & Gantries (60:40 Rule)**:
-  - 8 procedural canvas-textured roadside commercial hoardings (Rameshwaram Cafe, Namma Yatri, KMF Nandini, Namma Metro, Mysore Sandal Soap, BTP Alert, Zepto/Blinkit, Vidyarthi Bhavan) and 2 overhead National Highway gantries (`SILK BOARD JUNCTION` and `HEBBAL FLYOVER`) displaying bold Kannada (`ಕನ್ನಡ`) primary headlines above English subtitles.
+### Key Gameplay & Engineering Pillars
+- **Fictitious Branding Only**: The player drives the emerald-and-canary **Vayuputra RE Compact (`ವಾಯುಪುತ್ರ`)** Auto-Rickshaw (`auto_rickshaw.glb`). Never use real-world auto manufacturer trademarks.
+- **100% Grounded Vehicle Physics**: All vehicles stay strictly grounded (`pos.y = 0`). `SPACE` triggers a grounded **Vayuputra Turbo Gap Boost** (`turboBoostTimer`) rather than vertical jumping.
+- **Ultra-HD 4x MSAA WebGL2 Pipeline & 2K Procedural Textures**:
+  - `renderer.setPixelRatio(MAX_DPR)` (`up to 2.5`), `4096×4096` PCFSoftShadowMap, and a multi-sampled `WebGLRenderTarget(..., { samples: 4, type: THREE.HalfFloatType })` passed into `EffectComposer`.
+  - All procedural `CanvasTexture` surfaces pass through `finalizeHDTexture()` (`LinearMipmapLinearFilter` + `maxAnisotropy`), including `2048×1024` illustrated Kannada + English hoardings, `2048×2048` bump-mapped asphalt, and `2048×1024` dusk sky dome.
 - **Interactive BTP Red/Yellow/Green Traffic Signal Junctions**:
-  - Overhead & roadside BTP traffic signal gantries with live digital countdown timers and painted white road stop lines across the highway.
-  - Players must brake to a full **`0 KM/H`** stop before the stop line using **`S`**, **`ArrowDown`**, or **`B`** (Handbrake) during a red phase to earn a **`+₹100` Lawful Stop Bonus**.
-  - Jumping a red light triggers a **`-₹150` Red-Light Jump Camera Challan** penalty with camera flash & siren feedback. Testable directly via `?redlight=1`.
-- **Bengaluru Traffic Police (BTP) Sudden License Check (`traffic_police.glb`)**:
-  - Articulated BTP officer in white pith helmet, lime-green hi-vis reflective vest, khaki uniform, aviator sunglasses, and red LED baton standing beside a bilingual BTP checkpost barricade with flashing red/blue strobes.
-  - Blows a synthesized pea-whistle (`playPoliceWhistle`) and steps out into the lane (`#hud-cop-alert`). Players can press **`L`** (or click **`🪪 Show DL [L]`**) to verify their DigiLocker DL & RC for `+₹100`, swerve to evade (`+₹60`), or get busted with a `-₹100` e-Challan fine on collision.
-- **Occasional Darting Stray Dog (`stray_dog.glb`)**:
-  - Articulated Indian Pariah Dog (Indie dog) with 4 galloping legs (`Dog_Leg_FL`, `Dog_Leg_FR`, `Dog_Leg_RL`, `Dog_Leg_RR`) and curled tail that suddenly darts across the highway with a double-bark (`playDogBark`).
-  - Honking (`H`) makes the dog bolt 2x faster; jumping cleanly over the dog with `SPACE` awards a `+₹75` Good Boy Hop Bonus.
-- **User-Configurable Camera Views & Finite Route Trips with Final Trip Scoreboard**:
-  - **Dual Camera Perspectives**: Toggle dynamically between **3rd-Person Chase Camera** (`chase`) and **1st-Person Cockpit Dashcam** (`dashcam`, featuring windshield frame, digital fare meter, and handlebars) via **`V`**, the HUD camera button, the main menu selector, or `?view=dashcam`.
-  - **Finite Route Trips & Final Trip Scoreboard**: Each route difficulty (`low` = 1.5 km, `medium` = 2.0 km, `complex` = 2.5 km) concludes at the destination gantry with an interactive **Final Trip Scoreboard** (`?gameover=1`) detailing base meter fare, lawful stop bonuses, challan penalties, driver rank badge, and replay/share actions.
-- **Viral Growth & Accessibility Features**:
-  - **1-Click Shareable PNG Fare Receipt & Driver Score Card**: Procedural HTML5 Canvas generator renders a thermal-style Bengaluru Auto Fare Receipt & Driver License Score Card downloadable as a `.png` or shareable via Web Share API / clipboard.
-  - **Mobile/Tablet On-Screen Touch Controls**: Responsive multi-touch D-pad & action buttons (Steer Left/Right, Accelerate, Handbrake `0 KM/H` Stop, Gravity Hop, Horn, Show DL, Repair, Camera View) for seamless play on phones and tablets.
-  - **Persistent Local High-Score Leaderboard**: Saves top trip fares, ranks, and routes in `localStorage` and displays them on the menu and post-trip scoreboard.
-  - **Social OpenGraph & Twitter Card Meta Tags**: Rich preview metadata (`og:title`, `og:description`, `og:image`, `twitter:card`) embedded in `index.html` for instant social link previews.
-- **Two-Way Indian Traffic & Sudden Jaywalkers**:
-  - **Left Side (`LANES[0..2]` at `x = -9.5, -5.7, -1.9`)**: Drives **forward** (`-Z`, same direction as the player).
-  - **Right Side (`LANES[3..5]` at `x = +1.9, +5.7, +9.5`)**: Drives **oncoming** (`+Z`, rotated `180°`).
-  - **Jaywalkers (`pedestrian_jaywalker.glb`)**: Cross the highway raising the *"Ondu Second!"* stop hand.
-- **Procedural Web Audio Engine**: Zero external audio files. Synthesizes ambient city drone, 2-stroke auto *"tuk-tuk"* engine, pink-noise monsoon downpour layer, 3-burst Bengaluru Auto-Rickshaw reed/bulb horn (`"PA-PA-PAAARP!"`), BTP police pea-whistle & siren, DigiLocker verification chime, and Indie stray dog double-bark.
+  - Overhead & roadside BTP traffic signal gantries with live countdown timers and painted white road stop lines (dynamically scaled for both `22.8m` highway and `9.6m` gully widths).
+  - Brake to **`0 KM/H`** before the stop line using **`S`**, **`ArrowDown`**, or **`B`** (Handbrake) on Red for `+₹100` (`+250 PTS`), and press **`W`** / **`SPACE`** on Green to accelerate. Jumping Red triggers a `-₹150` camera challan.
+- **BTP Sudden License Check (`traffic_police.glb`) & Darting Indie Stray Dogs (`stray_dog.glb`)**:
+  - Press **`L`** to verify DigiLocker DL & RC (`+₹100`), swerve (`+₹60`), or take a `-₹100` challan on collision.
+  - Stray dogs bolt across lanes with a synthesized double-bark (`+₹75` clean swerve bonus).
+- **Dual Camera Views & Viral PNG Fare Receipt**:
+  - Toggle between **3rd-Person Chase (`chase`)** and **1st-Person Vayuputra RE Dash Cam (`dashcam`)** via **`V`**.
+  - Finite trips conclude with a **Final Trip Scoreboard**, `localStorage` Top-5 Leaderboard, and downloadable **`800×980` Thermal PNG Fare Receipt**.
 
 ---
 
@@ -42,64 +32,53 @@ This document provides context, architectural conventions, coordinate systems, a
 
 ```text
 blr-traffic-blender/
-├── README.md                  # Full documentation, screenshots & controls
-├── agents.md                  # Agent architecture, conventions & build instructions
-├── build_assets_blender.py    # Blender Python (bpy) procedural 3D asset generator (12 models)
+├── README.md                  # Full documentation, 2K/Retina HD screenshots & controls
+├── agents.md                  # Agent architecture, coordinate conventions & build workflow
+├── build_assets_blender.py    # Blender Python (bpy) procedural 3D asset generator (12 models + 2560x1440 QHD render)
 ├── build_game_html.py         # Compiler that embeds assets/*.glb into index.html
-├── index.html                 # Unified playable 3D WebGL game (Three.js + Web Audio + HUD)
-├── screenshots/               # AAA hero banner, Blender studio render & live WebGL screenshots
+├── index.html                 # Unified playable 3D WebGL2 game (Three.js + Web Audio + HUD)
+├── screenshots/               # 2K HD key art banners, 2560x1440 Blender render & 2880x1800 Retina WebGL screenshots
+│   ├── old_blr_gully_banner.jpg
 │   ├── pro_hero_banner.jpg
 │   ├── blender_assets_upgraded.png
-│   ├── gameplay_medium_clear.png
+│   ├── gameplay_old_blr.png
+│   ├── gameplay_old_blr_dashcam.png
+│   ├── gameplay_menu.png
 │   ├── gameplay_action.png
+│   ├── gameplay_redlight.png
+│   ├── gameplay_dashcam.png
+│   ├── gameplay_medium_clear.png
 │   ├── gameplay_peak_hour.png
-│   └── gameplay_menu.png
+│   └── gameplay_scoreboard.png
 ├── assets/                    # Exported Blender .glb binary 3D models (12 total)
-│   ├── auto_rickshaw.glb
-│   ├── bmtc_bus.glb
-│   ├── commuter_techie.glb
-│   ├── delivery_blinkit.glb
-│   ├── delivery_swiggy.glb
-│   ├── delivery_zepto.glb
-│   ├── metro_station.glb
-│   ├── pedestrian_jaywalker.glb
-│   ├── silk_board_sign.glb
-│   ├── stray_dog.glb
-│   ├── traffic_police.glb
-│   └── vidhana_soudha.glb
 └── *.glb                      # Root-level copies of the 12 .glb models for direct relative fetch
 ```
 
-> **Important**: Never edit `index.html` directly if you plan to re-run `build_game_html.py`. Always make HTML/CSS/JS changes inside `build_game_html.py` and run `python3 build_game_html.py` to regenerate `index.html`.
+> **Important**: Never edit `index.html` directly. Always edit `build_game_html.py` and run `python3 build_game_html.py` to regenerate `index.html`.
 
 ---
 
-## 3. Blender & 3D Asset Conventions (`build_assets_blender.py`)
+## 3. Blender & Three.js Coordinate Conventions
 
 All 12 `.glb` models are procedurally modeled in Blender (`bpy`) and exported with `export_yup=True` and `export_apply=True`.
 
 ### Coordinate System Mapping (Blender $\rightarrow$ Three.js)
-- **Blender `+Y`** $\rightarrow$ **Three.js `-Z`** (Forward, driving away from the chase camera).
-- **Blender `-Y`** $\rightarrow$ **Three.js `+Z`** (Rear, facing the chase camera at `z = +7.2`).
-- **Blender `+Z`** $\rightarrow$ **Three.js `+Y`** (Vertical Up; `z = 0` in Blender is the road surface `y = 0` in Three.js).
+- **Blender `+Y`** $\rightarrow$ **Three.js `-Z`** (Forward, facing away from the chase camera).
+- **Blender `-Y`** $\rightarrow$ **Three.js `+Z`** (Rear, facing toward the chase camera).
+- **Blender `+Z`** $\rightarrow$ **Three.js `+Y`** (Vertical Up; `y = 0` is the asphalt road surface).
 - **Blender `+X`** $\rightarrow$ **Three.js `+X`** (Right lateral axis).
 
-### Mandatory Scene-Graph Naming & Pivot Rules
-1. **Detachable Vehicle Wheels (`Wheel_*`)**:
-   - Every vehicle exports wheels as separate child mesh objects of the root empty (`Wheel_Front`, `Wheel_Rear_L`, `Wheel_Rear_R`, `Wheel_FL`, `Wheel_FR`, `Wheel_RL`, `Wheel_RR`).
-   - Build wheel cylinders at `(0, 0, 0)`, join with `apply_loc=False`, and then set `wheel.location = (x, y, radius)` before parenting to `root`.
-2. **Articulated Jaywalker (`pedestrian_jaywalker.glb`) & BTP Traffic Cop (`traffic_police.glb`)**:
-   - Jaywalker child nodes: `Leg_L`, `Leg_R`, `Arm_L`, `Arm_R`, `Ped_Torso`.
-   - BTP Traffic Cop child nodes: `Cop_Leg_L`, `Cop_Leg_R` (pivoted at hip `z = 0.78`), `Cop_Arm_L`, `Cop_Arm_R` (pivoted at shoulder `z = 1.34`, holding glowing red LED baton), `Cop_Torso`.
-3. **Articulated Indie Stray Dog (`stray_dog.glb`)**:
-   - Child nodes `Dog_Leg_FL`, `Dog_Leg_FR`, `Dog_Leg_RL`, `Dog_Leg_RR` have pivots at shoulder/hip height (`z = 0.34`) so `rotation.x` animates a realistic 4-leg bounding gallop cycle in Three.js.
-   - Body mesh is named `Dog_Body` to support coat color variations.
+### Critical Character Heading Rule (`pedestrian_jaywalker.glb`, `stray_dog.glb`, `traffic_police.glb`)
+Because characters face `+Y` in Blender (`(0, 0, -1)` in Three.js), rotating around `+Y` by `yaw` produces a forward world vector of `(-sin(yaw), 0, -cos(yaw))`:
+- Moving **Left-to-Right (`+X`, `dirX > 0`)** requires **negative yaw** (`-Math.PI * 0.54`, handled by `getJaywalkerForwardYaw(dirX)`).
+- Moving **Right-to-Left (`-X`, `dirX < 0`)** requires **positive yaw** (`+Math.PI * 0.54`).
+- Inverting this sign causes characters to moonwalk backwards!
 
 ---
 
-## 4. Build, Run & Verification Workflow
+## 4. Build, Run & Retina HD Screenshot Workflow
 
-### Step 1: Regenerate 12 3D `.glb` Assets & Showcase Render in Blender
+### Step 1: Regenerate 12 `.glb` Models & `2560×1440` Studio Render
 ```bash
 /Applications/Blender.app/Contents/MacOS/Blender --background --python build_assets_blender.py
 ```
@@ -109,16 +88,23 @@ All 12 `.glb` models are procedurally modeled in Blender (`bpy`) and exported wi
 python3 build_game_html.py
 ```
 
-### Step 3: Serve Locally & Verify Visually
+### Step 3: Serve & Capture `2880×1800` Retina HD Screenshots (macOS Metal WebGL)
+Always omit `--disable-gpu` and pass `--use-angle=metal --force-device-scale-factor=2`:
 ```bash
-python3 -m http.server 8765
+python3 -m http.server 8765 --bind 127.0.0.1 &
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --use-angle=metal --enable-webgl --ignore-gpu-blocklist \
+  --window-size=1440,900 --force-device-scale-factor=2 --hide-scrollbars \
+  --virtual-time-budget=4200 \
+  --screenshot=screenshots/gameplay_old_blr.png \
+  "http://127.0.0.1:8765/index.html?autostart=old_blr&view=chase&jaywalker=1"
 ```
-Query parameters supported by `index.html`:
-- `?autostart=low|medium|complex` — Boots directly into the specified difficulty profile.
-- `&view=chase|dashcam` — Starts in 3rd-person Chase Camera (`chase`) or 1st-person Cockpit Dashcam (`dashcam`).
+
+Supported URL query parameters:
+- `?autostart=old_blr|low|medium|complex` — Boots directly into the selected route (`old_blr` = `0.5 km` narrow gullies).
+- `&view=chase|dashcam` — Selects 3rd-person Chase or 1st-person Vayuputra RE Dash Cam POV.
+- `&redlight=1` — Stages an active BTP Red-Light Signal Junction ahead (`0 KM/H` stop).
+- `&copcheck=1` — Stages an immediate BTP Traffic Police license checkpost ahead.
+- `&jaywalker=1` — Stages a forward-walking pedestrian mid-crossing ahead.
 - `&rain=1` — Activates monsoon downpour (`0%` tire grip).
-- `&snapwheel=1` — Snaps off one player wheel at boot.
-- `&copcheck=1` — Triggers an immediate BTP Traffic Police license checkpost ahead.
-- `&redlight=1` — Spawns an immediate BTP Red-Light Traffic Signal junction ahead for stop/challan verification.
-- `&hop=1` — Launches the player auto into a mid-air Gravity Hop with active comic callout bubbles.
-- `&gameover=1` — Opens the Final Trip Scoreboard modal immediately for UI & receipt verification.
+- `&gameover=1` — Opens the Final Trip Scoreboard & Receipt modal immediately.

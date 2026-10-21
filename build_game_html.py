@@ -615,8 +615,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
        ========================================================================= */
     dialog#gravity-modal {
       margin: auto;
-      width: min(900px, 93vw);
-      max-height: 91vh;
+      width: min(1160px, 95vw);
+      max-height: 94vh;
       overflow-y: auto;
       background: linear-gradient(160deg var(--in-oklab), rgba(15, 23, 42, 0.97), rgba(9, 13, 24, 0.99));
       color: #f8fafc;
@@ -640,7 +640,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     .modal-inner {
-      padding: 22px 26px;
+      padding: 18px 24px;
     }
 
     .modal-top {
@@ -665,7 +665,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     .modal-inner h1 {
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 900;
       letter-spacing: -0.01em;
       color: #ffffff;
@@ -673,27 +673,27 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .modal-lead {
       color: #94a3b8;
-      font-size: 0.86rem;
-      line-height: 1.45;
+      font-size: 0.84rem;
+      line-height: 1.42;
       margin-top: 4px;
     }
 
     .mode-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin: 16px 0;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
     }
 
     .mode-card {
       background: rgba(30, 41, 59, 0.68);
       border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 16px;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
       transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
     }
@@ -707,31 +707,32 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     .mode-tag {
       display: inline-block;
-      font-size: 0.66rem;
+      font-size: 0.64rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       padding: 3px 8px;
       border-radius: 6px;
       margin-bottom: 6px;
     }
 
+    .tag-oldblr { background: rgba(249, 115, 22, 0.22); color: #fdba74; border: 1px solid rgba(251, 146, 60, 0.42); }
     .tag-low { background: rgba(34, 197, 94, 0.18); color: #4ade80; }
     .tag-med { background: rgba(255, 208, 0, 0.18); color: #ffd000; }
     .tag-complex { background: rgba(255, 59, 92, 0.2); color: #fb7185; }
 
     .mode-card h2 {
-      font-size: 1.1rem;
+      font-size: 1.02rem;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 4px;
     }
 
     .mode-desc {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #cbd5e1;
-      line-height: 1.4;
-      margin-bottom: 10px;
+      line-height: 1.38;
+      margin-bottom: 8px;
     }
 
     .mode-stats {
@@ -1434,6 +1435,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <!-- Top-Right: Compact Glass Pill Toolbar -->
       <nav class="top-toolbar interactive" aria-label="Game Mode, Camera View and Audio Controls">
         <div class="mode-segmented">
+          <button type="button" class="tool-btn" data-quick-mode="old_blr">🏘️ Old Blr (0.5km)</button>
           <button type="button" class="tool-btn" data-quick-mode="low">Low</button>
           <button type="button" class="tool-btn active-mode" data-quick-mode="medium">Medium</button>
           <button type="button" class="tool-btn" data-quick-mode="complex">Peak Hour</button>
@@ -1535,7 +1537,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
       <div class="dashcam-rec-osd">
         <span class="rec-dot"></span>
-        <span id="dashcam-osd-text">REC • KA-01-AG-9999 VAYUPUTRA RE DASHCAM • 1080P 60FPS</span>
+        <span id="dashcam-osd-text">REC • KA-01-AG-9999 VAYUPUTRA RE DASHCAM • 4K HDR 60FPS</span>
       </div>
       <div class="dashcam-bottom-dash">
         <div class="dashcam-handlebar"></div>
@@ -1550,11 +1552,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="hazard-trim"></div>
     <div class="modal-inner">
       <div class="modal-top">
-        <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • VAYUPUTRA RE (ವಾಯುಪುತ್ರ) TRAFFIC PRO EDITION</span>
+        <span class="modal-badge">ನಮ್ಮ ಬೆಂಗಳೂರು • VAYUPUTRA RE (ವಾಯುಪುತ್ರ) HD TRAFFIC EDITION</span>
       </div>
       <h1 id="modal-title">ಒಂದು ಸೆಕೆಂಡ್ | ONDU SECOND: NAMMA AUTO TRAFFIC</h1>
       <p class="modal-lead">
-        Drive the iconic emerald-and-canary <strong>Vayuputra RE Compact (ವಾಯುಪುತ್ರ)</strong> Auto-Rickshaw down a realistic grounded Bengaluru highway! Stop at <strong>BTP Red-Light Signal Junctions</strong> (<kbd>S</kbd> or <kbd>B</kbd>) and accelerate when Green (<kbd>W</kbd>), read <strong>Kannada + English hoardings</strong>, flash your <strong>DigiLocker DL</strong> to traffic cops, and dodge darting <strong>Indie stray dogs</strong>!
+        Drive the iconic emerald-and-canary <strong>Vayuputra RE Compact (ವಾಯುಪುತ್ರ)</strong> Auto-Rickshaw through <strong>Old Bengaluru narrow gullies</strong> or wide highways! Stop at <strong>BTP Red-Light Signal Junctions</strong> (<kbd>S</kbd> or <kbd>B</kbd>) and start on Green (<kbd>W</kbd>), read <strong>HD Kannada + English hoardings</strong>, flash your <strong>DigiLocker DL</strong>, and dodge darting <strong>Indie stray dogs</strong>!
       </p>
 
       <!-- User-Configurable Camera Perspective Selector -->
@@ -1567,12 +1569,28 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       </div>
 
       <div class="mode-grid">
+        <article class="mode-card" data-mode="old_blr">
+          <div>
+            <span class="mode-tag tag-oldblr">Heritage • Narrow Gully (0.5 KM)</span>
+            <h2>ಹಳೆಯ ಬೆಂಗಳೂರು ಗಲ್ಲಿ | Old Bengaluru Gullies</h2>
+            <p class="mode-desc">
+              Short 0.5 KM squeeze through narrow Chickpet &amp; Malleshwaram bazaar lanes! Mangalore-tiled silk &amp; filter-kaapi shops, flower stalls, overhead marigold toranas, shoppers &amp; stray dogs.
+            </p>
+            <ul class="mode-stats">
+              <li><strong>Trip Distance:</strong> 0.5 KM (Chickpet → Malleshwaram)</li>
+              <li><strong>Narrow Lane:</strong> 2-Lane Heritage Gully • 11 Vehicles • 1 Signal</li>
+              <li><strong>Hazards:</strong> 7 Bazaar Shoppers • 4 Stray Dogs • 1 Beat Cop</li>
+            </ul>
+          </div>
+          <button type="button" class="launch-btn" data-select-mode="old_blr">Start 0.5 KM Gully Trip</button>
+        </article>
+
         <article class="mode-card" data-mode="low">
           <div>
             <span class="mode-tag tag-low">Low • Easy Route (1.2 KM)</span>
             <h2>ಕಬ್ಬನ್ ಪಾರ್ಕ್ ಬೆಳಿಗ್ಗೆ | Cubbon Park Morning</h2>
             <p class="mode-desc">
-              Cruising morning ride with bilingual Kannada hoardings, BTP traffic signal junctions, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
+              Cruising morning ride with HD bilingual Kannada hoardings, BTP traffic signal junctions, occasional stray dogs &amp; jaywalkers, and friendly BTP patrol checkposts.
             </p>
             <ul class="mode-stats">
               <li><strong>Trip Distance:</strong> 1.2 KM (MG Road → Cubbon Park)</li>
@@ -2172,9 +2190,37 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     // 3. DIFFICULTY & ROUTE PROFILES (Finite Trips + Two-Way Traffic + Cops + Stray Dogs)
     // =========================================================================
     const GRAVITY_PROFILES = {
+      old_blr: {
+        id: 'old_blr',
+        isNarrowGully: true,
+        roadWidth: 9.6,
+        cruiseSpeed: 19.5,
+        routeTitle: 'CHICKPET → MALLESHWARAM',
+        shieldCode: 'BLR 02',
+        targetDistanceKm: 0.5,
+        trafficCount: 11,
+        signalCount: 1,
+        jaywalkerCount: 7,
+        dogCount: 4,
+        copCount: 1,
+        busRatio: 0.0,
+        deliveryRatio: 0.50,
+        deliverySpeedMult: 1.12,
+        cutOffAggression: 0.42,
+        potholeCount: 4,
+        potholePullStrength: 13.0,
+        potholeRadius: 3.3,
+        rainCycleDuration: 26,
+        rainStormDuration: 7,
+        fareRateMult: 1.8
+      },
       low: {
         id: 'low',
+        isNarrowGully: false,
+        roadWidth: 22.8,
+        cruiseSpeed: 30,
         routeTitle: 'MG ROAD → CUBBON PARK',
+        shieldCode: 'NH 44',
         targetDistanceKm: 1.2,
         trafficCount: 12,
         signalCount: 2,
@@ -2194,7 +2240,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       },
       medium: {
         id: 'medium',
+        isNarrowGully: false,
+        roadWidth: 22.8,
+        cruiseSpeed: 32,
         routeTitle: 'SILK BOARD → INDIRANAGAR',
+        shieldCode: 'NH 44',
         targetDistanceKm: 1.8,
         trafficCount: 20,
         signalCount: 2,
@@ -2214,7 +2264,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       },
       complex: {
         id: 'complex',
+        isNarrowGully: false,
+        roadWidth: 22.8,
+        cruiseSpeed: 34,
         routeTitle: 'ELECTRONIC CITY → HEBBAL',
+        shieldCode: 'NH 44',
         targetDistanceKm: 2.5,
         trafficCount: 30,
         signalCount: 3,
@@ -2237,151 +2291,220 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     let currentProfile = GRAVITY_PROFILES.medium;
 
     // =========================================================================
-    // 4. PRO THREE.JS SCENE, PMREM ENVIRONMENT, UNREAL BLOOM & SKY DOME
+    // 4. ULTRA-HD THREE.JS SCENE, 4X MSAA HDR COMPOSER, PMREM & 4K SHADOWS
     // =========================================================================
     const canvas = document.getElementById('game-canvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const MAX_DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setPixelRatio(MAX_DPR);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.95;
+    renderer.toneMappingExposure = 0.98;
+
+    function finalizeHDTexture(canvasEl, repeatX = 1, repeatY = 1) {
+      const tex = new THREE.CanvasTexture(canvasEl);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.generateMipmaps = true;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      if (repeatX !== 1 || repeatY !== 1) {
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(repeatX, repeatY);
+      }
+      return tex;
+    }
 
     const scene = new THREE.Scene();
     const drySkyColor = new THREE.Color(0x1b2b48);
+    const gullySkyColor = new THREE.Color(0x282138);
     const rainSkyColor = new THREE.Color(0x0d1524);
     scene.background = drySkyColor.clone();
-    scene.fog = new THREE.FogExp2(0x1b2b48, 0.0038);
+    scene.fog = new THREE.FogExp2(0x1b2b48, 0.0034);
 
     // PMREM Metallic & Glass Reflections (Pro-Game PBR Lighting)
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.28;
+    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.035).texture;
+    scene.environmentIntensity = 0.32;
 
     const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 440);
     camera.position.set(0, 4.2, 7.8);
 
-    // Post-Processing Composer with Subtle UnrealBloomPass
-    const composer = new EffectComposer(renderer);
+    // Hardware 4x MSAA + HalfFloat HDR Post-Processing Composer for Razor-Sharp HD Edges
+    const msaaRenderTarget = new THREE.WebGLRenderTarget(
+      Math.floor(window.innerWidth * MAX_DPR),
+      Math.floor(window.innerHeight * MAX_DPR),
+      {
+        samples: 4,
+        type: THREE.HalfFloatType,
+        colorSpace: THREE.SRGBColorSpace
+      }
+    );
+    const composer = new EffectComposer(renderer, msaaRenderTarget);
+    composer.setPixelRatio(MAX_DPR);
+    composer.setSize(window.innerWidth, window.innerHeight);
     composer.addPass(new RenderPass(scene, camera));
     const bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(window.innerWidth, window.innerHeight),
-      0.16, // strength
-      0.32, // radius
-      0.94  // threshold (only bright lights/neon/LEDs bloom!)
+      new THREE.Vector2(window.innerWidth * MAX_DPR, window.innerHeight * MAX_DPR),
+      0.14, // subtle crisp HDR glow
+      0.28,
+      0.94  // high threshold so text & hoardings stay razor-sharp!
     );
     composer.addPass(bloomPass);
     composer.addPass(new OutputPass());
 
-    const hemiLight = new THREE.HemisphereLight(0x9ec5ff, 0x362c24, 0.95);
+    const hemiLight = new THREE.HemisphereLight(0xa5cbff, 0x3b2f26, 0.98);
     scene.add(hemiLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffe6bd, 1.85);
-    sunLight.position.set(36, 58, 28);
+    const sunLight = new THREE.DirectionalLight(0xffe8c2, 1.9);
+    sunLight.position.set(34, 58, 28);
     sunLight.castShadow = true;
-    sunLight.shadow.mapSize.set(2048, 2048);
+    sunLight.shadow.mapSize.set(4096, 4096);
     sunLight.shadow.camera.near = 1;
-    sunLight.shadow.camera.far = 190;
-    const d = 48;
+    sunLight.shadow.camera.far = 185;
+    const d = 42;
     sunLight.shadow.camera.left = -d;
     sunLight.shadow.camera.right = d;
     sunLight.shadow.camera.top = d;
     sunLight.shadow.camera.bottom = -d;
-    sunLight.shadow.bias = -0.0005;
+    sunLight.shadow.bias = -0.0003;
+    sunLight.shadow.normalBias = 0.018;
     scene.add(sunLight);
 
-    // Procedural Bengaluru Golden-Hour / Dusk Horizon Sky Dome
+    // Procedural 2K HD Bengaluru Golden-Hour / Dusk Horizon Sky Dome
     function createSkyDomeTexture() {
       const c = document.createElement('canvas');
-      c.width = 1024;
-      c.height = 512;
+      c.width = 2048;
+      c.height = 1024;
       const ctx = c.getContext('2d');
-      const grad = ctx.createLinearGradient(0, 0, 0, 512);
-      grad.addColorStop(0.0, '#0b1329');
-      grad.addColorStop(0.35, '#192b52');
-      grad.addColorStop(0.47, '#3b4d7a');
-      grad.addColorStop(0.53, '#d97745');
-      grad.addColorStop(0.58, '#2b354f');
+      const grad = ctx.createLinearGradient(0, 0, 0, 1024);
+      grad.addColorStop(0.0, '#091024');
+      grad.addColorStop(0.32, '#16274c');
+      grad.addColorStop(0.46, '#3b4e7d');
+      grad.addColorStop(0.515, '#e6844e');
+      grad.addColorStop(0.545, '#f6b26b');
+      grad.addColorStop(0.585, '#2b354f');
       grad.addColorStop(1.0, '#111827');
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 1024, 512);
+      ctx.fillRect(0, 0, 2048, 1024);
 
-      // Soft dusk clouds near horizon
-      for (let i = 0; i < 40; i++) {
-        const cx = Math.random() * 1024;
-        const cy = 150 + Math.random() * 110;
-        const rw = 60 + Math.random() * 140;
-        const rh = 8 + Math.random() * 20;
-        const cg = ctx.createRadialGradient(cx, cy, 2, cx, cy, rw);
-        cg.addColorStop(0, 'rgba(255, 196, 138, 0.16)');
+      // Crisp twilight stars near upper sky
+      for (let s = 0; s < 140; s++) {
+        const sx = Math.random() * 2048;
+        const sy = Math.random() * 340;
+        const sr = 0.7 + Math.random() * 1.4;
+        ctx.fillStyle = `rgba(255, 250, 240, ${0.25 + Math.random() * 0.55})`;
+        ctx.beginPath();
+        ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Layered golden-hour clouds near horizon
+      for (let i = 0; i < 65; i++) {
+        const cx = Math.random() * 2048;
+        const cy = 310 + Math.random() * 210;
+        const rw = 100 + Math.random() * 260;
+        const rh = 14 + Math.random() * 36;
+        const cg = ctx.createRadialGradient(cx, cy, 4, cx, cy, rw);
+        cg.addColorStop(0, 'rgba(255, 205, 148, 0.20)');
+        cg.addColorStop(0.55, 'rgba(232, 132, 88, 0.09)');
         cg.addColorStop(1, 'rgba(255, 196, 138, 0.0)');
         ctx.fillStyle = cg;
         ctx.beginPath();
         ctx.ellipse(cx, cy, rw, rh, 0, 0, Math.PI * 2);
         ctx.fill();
       }
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      return finalizeHDTexture(c);
     }
 
     const skyDome = new THREE.Mesh(
-      new THREE.SphereGeometry(380, 32, 20),
+      new THREE.SphereGeometry(380, 40, 24),
       new THREE.MeshBasicMaterial({ map: createSkyDomeTexture(), side: THREE.BackSide, fog: false })
     );
     scene.add(skyDome);
 
     // =========================================================================
-    // 5. PROCEDURAL PBR ASPHALT HIGHWAY, SKYLINE, & BILINGUAL KANNADA HOARDINGS
+    // 5. 2K HD PBR ASPHALT HIGHWAY, NARROW OLD BENGALURU GULLIES & HD HOARDINGS
     // =========================================================================
-    const ROAD_WIDTH = 22.8; // 6 lanes * 3.8m
+    const ROAD_WIDTH = 22.8; // 6-lane highway * 3.8m
+    const GULLY_ROAD_WIDTH = 9.6; // Narrow 2-lane Old Bengaluru bazaar gully!
     const LANES = [-9.5, -5.7, -1.9, 1.9, 5.7, 9.5];
+    const GULLY_LANES = [-3.1, -1.35, 1.35, 3.1]; // 2 tight forward streams + 2 tight oncoming streams
     const CORRIDOR_LENGTH = 360;
+
+    function getActiveRoadWidth() {
+      return currentProfile && currentProfile.isNarrowGully ? GULLY_ROAD_WIDTH : ROAD_WIDTH;
+    }
+
+    function getActiveLanes() {
+      return currentProfile && currentProfile.isNarrowGully ? GULLY_LANES : LANES;
+    }
 
     function createAsphaltTextures() {
       const c = document.createElement('canvas');
-      c.width = 1024;
-      c.height = 1024;
+      c.width = 2048;
+      c.height = 2048;
       const ctx = c.getContext('2d');
-      ctx.fillStyle = '#242935';
-      ctx.fillRect(0, 0, 1024, 1024);
+      ctx.fillStyle = '#232834';
+      ctx.fillRect(0, 0, 2048, 2048);
 
-      // Micro-aggregate asphalt grain & tar patches
-      for (let i = 0; i < 28000; i++) {
-        const x = Math.random() * 1024;
-        const y = Math.random() * 1024;
-        const v = 28 + Math.floor(Math.random() * 30);
+      const bumpCanvas = document.createElement('canvas');
+      bumpCanvas.width = 1024;
+      bumpCanvas.height = 1024;
+      const bctx = bumpCanvas.getContext('2d');
+      bctx.fillStyle = '#808080';
+      bctx.fillRect(0, 0, 1024, 1024);
+
+      // High-definition micro-aggregate tarmac grain & tar seal lines
+      for (let i = 0; i < 65000; i++) {
+        const x = Math.random() * 2048;
+        const y = Math.random() * 2048;
+        const v = 26 + Math.floor(Math.random() * 34);
         ctx.fillStyle = `rgb(${v}, ${v + 3}, ${v + 9})`;
         ctx.fillRect(x, y, 2, 2);
-      }
-
-      // Subtle glossy tire wear tracks down each of the 6 lanes
-      for (let lane = 0; lane < 6; lane++) {
-        const lx = ((lane + 0.5) / 6) * 1024;
-        for (const wheelOffset of [-32, 32]) {
-          const tg = ctx.createLinearGradient(lx + wheelOffset - 22, 0, lx + wheelOffset + 22, 0);
-          tg.addColorStop(0, 'rgba(15, 18, 25, 0)');
-          tg.addColorStop(0.5, 'rgba(14, 17, 24, 0.42)');
-          tg.addColorStop(1, 'rgba(15, 18, 25, 0)');
-          ctx.fillStyle = tg;
-          ctx.fillRect(lx + wheelOffset - 22, 0, 44, 1024);
+        if (i < 28000) {
+          const bv = 105 + Math.floor(Math.random() * 50);
+          bctx.fillStyle = `rgb(${bv},${bv},${bv})`;
+          bctx.fillRect(x * 0.5, y * 0.5, 2, 2);
         }
       }
 
-      const tex = new THREE.CanvasTexture(c);
-      tex.wrapS = THREE.RepeatWrapping;
-      tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(1, 28);
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      // Subtle glossy tire wear tracks down each lane
+      for (let lane = 0; lane < 6; lane++) {
+        const lx = ((lane + 0.5) / 6) * 2048;
+        for (const wheelOffset of [-64, 64]) {
+          const tg = ctx.createLinearGradient(lx + wheelOffset - 44, 0, lx + wheelOffset + 44, 0);
+          tg.addColorStop(0, 'rgba(15, 18, 25, 0)');
+          tg.addColorStop(0.5, 'rgba(13, 16, 23, 0.44)');
+          tg.addColorStop(1, 'rgba(15, 18, 25, 0)');
+          ctx.fillStyle = tg;
+          ctx.fillRect(lx + wheelOffset - 44, 0, 88, 2048);
+        }
+      }
+
+      const colorMap = finalizeHDTexture(c, 1, 28);
+      const bumpMap = new THREE.CanvasTexture(bumpCanvas);
+      bumpMap.wrapS = THREE.RepeatWrapping;
+      bumpMap.wrapT = THREE.RepeatWrapping;
+      bumpMap.repeat.set(2, 56);
+      bumpMap.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return { colorMap, bumpMap };
     }
 
+    const asphaltMaps = createAsphaltTextures();
     const roadMat = new THREE.MeshStandardMaterial({
-      map: createAsphaltTextures(),
-      color: 0xd8dee9,
-      roughness: 0.68,
+      map: asphaltMaps.colorMap,
+      bumpMap: asphaltMaps.bumpMap,
+      bumpScale: 0.016,
+      color: 0xdce2ec,
+      roughness: 0.66,
       metalness: 0.14
     });
     const roadMesh = new THREE.Mesh(new THREE.PlaneGeometry(ROAD_WIDTH, CORRIDOR_LENGTH * 1.6), roadMat);
@@ -2398,10 +2521,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     scene.add(groundMesh);
 
     // =========================================================================
-    // 5B. BILINGUAL KANNADA + ENGLISH (60:40 RULE) HOARDINGS & HIGHWAY GANTRIES
+    // 5B. 2K ULTRA-HD ILLUSTRATED BILINGUAL (KANNADA + ENGLISH) HOARDINGS
     // =========================================================================
     const BILINGUAL_HOARDING_ADS = [
       {
+        artType: 'dosa',
         bgTop: '#7c1d1d',
         bgBot: '#3b0a0a',
         border: '#fbbf24',
@@ -2413,6 +2537,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#fde047'
       },
       {
+        artType: 'auto',
         bgTop: '#064e3b',
         bgBot: '#022c22',
         border: '#ffd000',
@@ -2424,6 +2549,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#ffd000'
       },
       {
+        artType: 'milk',
         bgTop: '#1e3a8a',
         bgBot: '#0f172a',
         border: '#38bdf8',
@@ -2435,6 +2561,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#7dd3fc'
       },
       {
+        artType: 'metro',
         bgTop: '#4c1d95',
         bgBot: '#1e1b4b',
         border: '#c084fc',
@@ -2446,6 +2573,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#e9d5ff'
       },
       {
+        artType: 'sandal',
         bgTop: '#78350f',
         bgBot: '#451a03',
         border: '#f59e0b',
@@ -2457,6 +2585,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#fde68a'
       },
       {
+        artType: 'btp',
         bgTop: '#0f172a',
         bgBot: '#1e293b',
         border: '#ef4444',
@@ -2468,6 +2597,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#bef264'
       },
       {
+        artType: 'delivery',
         bgTop: '#581c87',
         bgBot: '#2e1065',
         border: '#10f560',
@@ -2479,6 +2609,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         accent: '#10f560'
       },
       {
+        artType: 'dosa',
         bgTop: '#431407',
         bgBot: '#1c0a00',
         border: '#fb923c',
@@ -2491,11 +2622,132 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
     ];
 
+    function drawHoardingVectorIllustration(ctx, artType, cx, cy, borderCol, accentCol) {
+      ctx.save();
+      // Glowing circular medallion backdrop on right side of hoarding
+      const rad = ctx.createRadialGradient(cx, cy, 24, cx, cy, 195);
+      rad.addColorStop(0, 'rgba(255,255,255,0.22)');
+      rad.addColorStop(0.7, 'rgba(0,0,0,0.28)');
+      rad.addColorStop(1, 'rgba(0,0,0,0.48)');
+      ctx.fillStyle = rad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 185, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = borderCol;
+      ctx.lineWidth = 6;
+      ctx.stroke();
+
+      if (artType === 'dosa') {
+        // Banana leaf
+        ctx.fillStyle = '#15803d';
+        ctx.beginPath();
+        ctx.ellipse(cx, cy + 34, 145, 76, -0.08, 0, Math.PI * 2);
+        ctx.fill();
+        // Crispy golden masala dosa cone/roll
+        const dg = ctx.createLinearGradient(cx - 125, cy - 10, cx + 125, cy + 45);
+        dg.addColorStop(0, '#f59e0b');
+        dg.addColorStop(0.5, '#fbbf24');
+        dg.addColorStop(1, '#b45309');
+        ctx.fillStyle = dg;
+        ctx.beginPath();
+        ctx.moveTo(cx - 130, cy + 36);
+        ctx.lineTo(cx + 120, cy - 18);
+        ctx.lineTo(cx + 132, cy + 38);
+        ctx.closePath();
+        ctx.fill();
+        // Melting white butter dollop + chutney bowls
+        ctx.fillStyle = '#fef9c3';
+        ctx.beginPath();
+        ctx.arc(cx - 6, cy + 14, 18, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#f8fafc';
+        ctx.beginPath();
+        ctx.arc(cx - 58, cy + 68, 22, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#dc2626';
+        ctx.beginPath();
+        ctx.arc(cx, cy + 74, 22, 0, Math.PI * 2);
+        ctx.fill();
+        // Brass Filter Kaapi Davara-Tumbler + rising steam
+        ctx.fillStyle = '#eab308';
+        ctx.fillRect(cx + 55, cy - 82, 46, 58);
+        ctx.beginPath();
+        ctx.ellipse(cx + 78, cy - 22, 36, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+        ctx.lineWidth = 4;
+        for (const sx of [cx + 66, cx + 86]) {
+          ctx.beginPath();
+          ctx.moveTo(sx, cy - 92);
+          ctx.quadraticCurveTo(sx - 10, cy - 115, sx + 6, cy - 135);
+          ctx.stroke();
+        }
+      } else if (artType === 'auto') {
+        // Stylized Emerald & Canary Vayuputra RE Auto Emblem
+        ctx.fillStyle = '#ffd000';
+        ctx.beginPath();
+        ctx.roundRect(cx - 95, cy - 88, 190, 74, 26);
+        ctx.fill();
+        ctx.fillStyle = '#009a44';
+        ctx.beginPath();
+        ctx.roundRect(cx - 102, cy - 18, 204, 86, 18);
+        ctx.fill();
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.roundRect(cx - 72, cy - 68, 144, 48, 10);
+        ctx.fill();
+        ctx.fillStyle = '#fef08a';
+        ctx.beginPath();
+        ctx.arc(cx, cy + 24, 20, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(cx - 74, cy + 76, 24, 0, Math.PI * 2);
+        ctx.arc(cx + 74, cy + 76, 24, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (artType === 'metro') {
+        // Sleek Namma Metro Purple Train Front
+        ctx.fillStyle = '#e2e8f0';
+        ctx.beginPath();
+        ctx.roundRect(cx - 88, cy - 105, 176, 185, 34);
+        ctx.fill();
+        ctx.fillStyle = '#7c3aed';
+        ctx.fillRect(cx - 88, cy - 2, 176, 36);
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.roundRect(cx - 68, cy - 82, 136, 66, 14);
+        ctx.fill();
+        ctx.fillStyle = '#fde047';
+        ctx.beginPath();
+        ctx.arc(cx - 52, cy + 54, 14, 0, Math.PI * 2);
+        ctx.arc(cx + 52, cy + 54, 14, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Golden Heritage Crest / Emblem
+        ctx.fillStyle = accentCol;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 108, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#090d16';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 82, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = borderCol;
+        ctx.font = '900 72px "Noto Sans Kannada", "Inter", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const glyph = artType === 'milk' ? 'ನಂದಿನಿ' : artType === 'sandal' ? '೧೯೧೬' : artType === 'btp' ? 'BTP' : '10m';
+        ctx.fillText(glyph, cx, cy + 4);
+      }
+      ctx.restore();
+    }
+
     function createBilingualHoardingTexture(ad) {
       const c = document.createElement('canvas');
-      c.width = 1024;
-      c.height = 512;
+      c.width = 2048;
+      c.height = 1024;
       const ctx = c.getContext('2d');
+      ctx.scale(2, 2); // Author in crisp 1024x512 coordinates rendered at true 2048x1024 2K HD!
 
       const grad = ctx.createLinearGradient(0, 0, 1024, 512);
       grad.addColorStop(0, ad.bgTop);
@@ -2503,66 +2755,79 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 1024, 512);
 
+      // Subtle glossy studio spotlight sheen
+      const sheen = ctx.createLinearGradient(0, 0, 620, 512);
+      sheen.addColorStop(0, 'rgba(255,255,255,0.10)');
+      sheen.addColorStop(0.45, 'rgba(255,255,255,0.02)');
+      sheen.addColorStop(1, 'rgba(0,0,0,0.18)');
+      ctx.fillStyle = sheen;
+      ctx.fillRect(0, 0, 1024, 512);
+
       // Outer & inner neon border
       ctx.strokeStyle = ad.border;
-      ctx.lineWidth = 14;
+      ctx.lineWidth = 12;
       ctx.strokeRect(14, 14, 996, 484);
-      ctx.strokeStyle = 'rgba(255,255,255,0.28)';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(30, 30, 964, 452);
+      ctx.strokeStyle = 'rgba(255,255,255,0.32)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(28, 28, 968, 456);
+
+      // Draw HD Vector Artwork Medallion on Right Side (x = 805, y = 278)
+      drawHoardingVectorIllustration(ctx, ad.artType, 812, 284, ad.border, ad.accent);
 
       // Top 60% Kannada Header Pill
       ctx.fillStyle = ad.border;
       ctx.beginPath();
-      ctx.roundRect(52, 46, 460, 48, 10);
+      ctx.roundRect(48, 44, 470, 48, 10);
       ctx.fill();
       ctx.fillStyle = '#090d16';
-      ctx.font = '900 24px "Noto Sans Kannada", "Inter", sans-serif';
-      ctx.fillText(ad.badge, 70, 79);
+      ctx.font = '900 23px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText(ad.badge, 66, 76);
 
       // 60:40 Rule Tag on top-right
-      ctx.fillStyle = 'rgba(255,255,255,0.14)';
+      ctx.fillStyle = 'rgba(9,13,22,0.68)';
       ctx.beginPath();
-      ctx.roundRect(750, 46, 220, 46, 8);
+      ctx.roundRect(720, 42, 256, 44, 8);
       ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
       ctx.fillStyle = '#ffffff';
-      ctx.font = '800 20px "Inter", sans-serif';
-      ctx.fillText('ಕನ್ನಡ 60% • BBMP', 772, 76);
+      ctx.font = '800 19px "Inter", sans-serif';
+      ctx.fillText('ಕನ್ನಡ 60% • HD ULTRA', 740, 70);
 
       // Prominent Kannada Headline (60% Primary Display)
+      ctx.save();
       ctx.fillStyle = ad.accent;
-      ctx.shadowColor = 'rgba(0,0,0,0.65)';
-      ctx.shadowBlur = 10;
-      ctx.font = '900 66px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
-      ctx.fillText(ad.knTitle, 54, 185);
+      ctx.shadowColor = 'rgba(0,0,0,0.75)';
+      ctx.shadowBlur = 12;
+      ctx.font = '900 54px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
+      ctx.fillText(ad.knTitle, 48, 178, 560);
 
       // Kannada Sub-headline
       ctx.fillStyle = '#ffffff';
-      ctx.font = '700 34px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
-      ctx.fillText(ad.knSub, 54, 248);
+      ctx.font = '700 28px "Noto Sans Kannada", "Arial Unicode MS", sans-serif';
+      ctx.fillText(ad.knSub, 48, 236, 560);
+      ctx.restore();
 
       // Divider rule
       ctx.strokeStyle = ad.border;
       ctx.lineWidth = 4;
       ctx.beginPath();
-      ctx.moveTo(54, 285);
-      ctx.lineTo(968, 285);
+      ctx.moveTo(48, 274);
+      ctx.lineTo(604, 274);
       ctx.stroke();
 
       // English Headline (40% Secondary Display)
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 48px "Inter", -apple-system, sans-serif';
-      ctx.fillText(ad.enTitle, 54, 360);
+      ctx.font = '900 40px "Inter", -apple-system, sans-serif';
+      ctx.fillText(ad.enTitle, 48, 344, 560);
 
       // English Sub-headline
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '800 27px "Inter", -apple-system, sans-serif';
-      ctx.fillText(ad.enSub, 54, 422);
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '800 22px "Inter", -apple-system, sans-serif';
+      ctx.fillText(ad.enSub, 48, 404, 560);
 
-      const tex = new THREE.CanvasTexture(c);
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      return finalizeHDTexture(c);
     }
 
     function createBilingualGantrySignTexture(isHebbal = false) {
@@ -2643,14 +2908,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         ctx.fillText(col.en, col.x, 425);
       });
 
-      const tex = new THREE.CanvasTexture(c);
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      return finalizeHDTexture(c);
     }
 
-    // Build Scrolling Corridor Segments (6m each) — Includes Viaduct, Streetlamps & Skyline
+    // Build Scrolling Corridor Segments (6m each) — Highway + Narrow Old Bengaluru Gully Support
     const scrollingStrips = [];
+    const highwayOnlyObjects = [];
     const whiteDashMat = new THREE.MeshBasicMaterial({ color: 0xf1f5f9 });
     const yellowLineMat = new THREE.MeshBasicMaterial({ color: 0xffd000 });
     const kerbYellowMat = new THREE.MeshStandardMaterial({ color: 0xffd000, roughness: 0.42 });
@@ -2682,39 +2945,44 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const row = new THREE.Group();
       row.position.z = z;
 
-      // Lane Divider Dashes between the 6 lanes
-      for (const lx of [-7.6, -3.8, 0.0, 3.8, 7.6]) {
-        if (lx === 0.0) {
-          const cl = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 6.02), yellowLineMat);
-          cl.position.set(0, 0.012, 0);
-          row.add(cl);
-        } else if (segIdx % 2 === 0) {
+      const hwySubGroup = new THREE.Group();
+      row.add(hwySubGroup);
+      highwayOnlyObjects.push(hwySubGroup);
+
+      // Center Yellow Divider (shared by both 6-lane highway and 2-lane narrow Old Bengaluru gully!)
+      const cl = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.022, 6.02), yellowLineMat);
+      cl.position.set(0, 0.012, 0);
+      row.add(cl);
+
+      // Outer 6-lane Highway Dashes
+      for (const lx of [-7.6, -3.8, 3.8, 7.6]) {
+        if (segIdx % 2 === 0) {
           const dash = new THREE.Mesh(dashGeo, whiteDashMat);
           dash.position.set(lx, 0.012, 0);
-          row.add(dash);
+          hwySubGroup.add(dash);
         }
       }
 
-      // Yellow-and-Black Bengaluru Roadside Kerbs
+      // Yellow-and-Black Highway Kerbs
       const kMat = segIdx % 2 === 0 ? kerbYellowMat : kerbBlackMat;
       const kerbL = new THREE.Mesh(kerbGeo, kMat);
       kerbL.position.set(-ROAD_WIDTH / 2 - 0.28, 0.13, 0);
       const kerbR = new THREE.Mesh(kerbGeo, kMat);
       kerbR.position.set(ROAD_WIDTH / 2 + 0.28, 0.13, 0);
-      row.add(kerbL, kerbR);
+      hwySubGroup.add(kerbL, kerbR);
 
-      // Painted White Zebra Crossings at key pedestrian crossing intervals
+      // Painted White Zebra Crossings on Highway
       if (segIdx % 14 === 3) {
         const zebraGeo = new THREE.BoxGeometry(0.95, 0.024, 3.8);
         for (let zx = -9.6; zx <= 9.6; zx += 1.6) {
           if (Math.abs(zx) < 0.5) continue;
           const stripe = new THREE.Mesh(zebraGeo, whiteDashMat);
           stripe.position.set(zx, 0.014, 0);
-          row.add(stripe);
+          hwySubGroup.add(stripe);
         }
       }
 
-      // Continuous Unbroken Namma Metro Elevated Viaduct along X = +18.5
+      // Continuous Unbroken Namma Metro Elevated Viaduct along X = +18.5 (Highway modes)
       const vDeck = new THREE.Mesh(viaductDeckGeo, concreteMat);
       vDeck.position.set(METRO_X, 8.2, 0);
       vDeck.receiveShadow = true;
@@ -2722,38 +2990,303 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       vWallL.position.set(METRO_X - 3.3, 9.1, 0);
       const vWallR = new THREE.Mesh(viaductWallGeo, metroPurpleMat);
       vWallR.position.set(METRO_X + 3.3, 9.1, 0);
-      row.add(vDeck, vWallL, vWallR);
+      hwySubGroup.add(vDeck, vWallL, vWallR);
 
       if (segIdx % 3 === 0) {
         const pier = new THREE.Mesh(viaductPierGeo, concreteMat);
         pier.position.set(METRO_X, 3.8, 0);
         const cap = new THREE.Mesh(viaductCapGeo, concreteMat);
         cap.position.set(METRO_X, 7.3, 0);
-        row.add(pier, cap);
+        hwySubGroup.add(pier, cap);
       }
 
-      // Lush Bengaluru Rain Trees (set behind hoardings) & Warm LED Highway Streetlamps
+      // Lush Bengaluru Rain Trees & Warm LED Highway Streetlamps
       if (segIdx % 5 === 0) {
         const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.38, 3.6, 8), treeTrunkMat);
         trunk.position.set(-ROAD_WIDTH / 2 - 11.2, 1.8, 0);
         const crown1 = new THREE.Mesh(new THREE.SphereGeometry(2.6, 12, 10), segIdx % 10 === 0 ? treeLeafMat : gulmoharLeafMat);
         crown1.scale.set(1.25, 0.68, 1.25);
         crown1.position.set(-ROAD_WIDTH / 2 - 11.2, 4.6, 0);
-        row.add(trunk, crown1);
+        hwySubGroup.add(trunk, crown1);
 
-        // Dual Boulevard Streetlamp
         const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.13, 7.5, 8), poleMetalMat);
         pole.position.set(-ROAD_WIDTH / 2 - 1.2, 3.75, 2.2);
         const arm = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.10, 0.10), poleMetalMat);
         arm.position.set(-ROAD_WIDTH / 2 - 0.4, 7.4, 2.2);
         const bulb = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.08, 0.24), lampBulbMat);
         bulb.position.set(-ROAD_WIDTH / 2 + 0.2, 7.34, 2.2);
-        row.add(pole, arm, bulb);
+        hwySubGroup.add(pole, arm, bulb);
       }
 
       scene.add(row);
       scrollingStrips.push(row);
     }
+
+    // =========================================================================
+    // 5C. NEW! OLD BENGALURU NARROW HERITAGE GULLY (CHICKPET / MALLESHWARAM 0.5KM)
+    // =========================================================================
+    const oldBlrGullyGroup = new THREE.Group();
+    oldBlrGullyGroup.visible = false;
+    scene.add(oldBlrGullyGroup);
+    const gullyScrollingRows = [];
+    const gullyLandmarkInstances = [];
+
+    const OLD_BLR_SHOPS = [
+      {
+        bg: '#7c2d12',
+        border: '#fbbf24',
+        kn: 'ಚಿಕ್ಕಪೇಟೆ ರೇಷ್ಮೆ ಸೀರೆ ಮಂದಿರ',
+        en: 'CHICKPET KANCHIPURAM SILKS • ESTD 1928',
+        wallHex: 0xd97706
+      },
+      {
+        bg: '#14532d',
+        border: '#fde047',
+        kn: 'ಮಲ್ಲೇಶ್ವರಂ ಹೂವಿನ ಮಾರುಕಟ್ಟೆ',
+        en: 'MALLESHWARAM JASMINE & MARIGOLD BAZAAR',
+        wallHex: 0xb45309
+      },
+      {
+        bg: '#1e3a8a',
+        border: '#38bdf8',
+        kn: 'ಶ್ರೀ ರಾಘವೇಂದ್ರ ಫಿಲ್ಟರ್ ಕಾಫಿ',
+        en: 'HERITAGE DEGREE FILTER KAAPI & BENNE DOSA',
+        wallHex: 0xeab308
+      },
+      {
+        bg: '#581c87',
+        border: '#f472b6',
+        kn: 'ಬಳೇಪೇಟೆ ಬಳೆ ಮತ್ತು ಅಲಂಕಾರ',
+        en: 'BALEPET GLASS BANGLES & KUMKUM EMPORIUM',
+        wallHex: 0x9a3412
+      },
+      {
+        bg: '#3f6212',
+        border: '#bef264',
+        kn: 'ಅವೆನ್ಯೂ ರಸ್ತೆ ಪುಸ್ತಕ ಬಜಾರ್',
+        en: 'AVENUE ROAD RARE BOOKS & STATIONERY',
+        wallHex: 0x0f766e
+      },
+      {
+        bg: '#7f1d1d',
+        border: '#fde68a',
+        kn: 'ಗಾಂಧಿ ಬಜಾರ್ ಮಸಾಲೆ ಭಂಡಾರ',
+        en: 'GANDHI BAZAAR SPICES, AGARBATTI & SANDAL',
+        wallHex: 0xc2410c
+      }
+    ];
+
+    function createHeritageShopSignTexture(shop) {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = shop.bg;
+      ctx.fillRect(0, 0, 1024, 256);
+      ctx.strokeStyle = shop.border;
+      ctx.lineWidth = 12;
+      ctx.strokeRect(10, 10, 1004, 236);
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(22, 22, 980, 212);
+
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 54px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText(shop.kn, 42, 114, 940);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 32px "Inter", sans-serif';
+      ctx.fillText(shop.en, 42, 192, 940);
+      return finalizeHDTexture(c);
+    }
+
+    function createHeritageArchBannerTexture(knText, enText) {
+      const c = document.createElement('canvas');
+      c.width = 1536;
+      c.height = 320;
+      const ctx = c.getContext('2d');
+      const g = ctx.createLinearGradient(0, 0, 0, 320);
+      g.addColorStop(0, '#7c2d12');
+      g.addColorStop(1, '#431407');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 1536, 320);
+      ctx.strokeStyle = '#ffd000';
+      ctx.lineWidth = 14;
+      ctx.strokeRect(12, 12, 1512, 296);
+
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 66px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(knText, 768, 138, 1440);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 40px "Inter", sans-serif';
+      ctx.fillText(enText, 768, 236, 1440);
+      return finalizeHDTexture(c);
+    }
+
+    function buildOldBengaluruNarrowGullies() {
+      const shopTextures = OLD_BLR_SHOPS.map((s) => createHeritageShopSignTexture(s));
+      const graniteFootpathMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.85 });
+      const mangaloreTileMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.62 });
+      const woodPillarMat = new THREE.MeshStandardMaterial({ color: 0x451a03, roughness: 0.78 });
+      const windowLitMat = new THREE.MeshBasicMaterial({ color: 0xfef08a });
+      const marigoldMat = new THREE.MeshBasicMaterial({ color: 0xf97316 });
+      const jasmineMat = new THREE.MeshBasicMaterial({ color: 0xfef9c3 });
+      const mangoLeafMat = new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 0.6 });
+
+      const footpathGeo = new THREE.BoxGeometry(5.6, 0.28, 12.04);
+      const gullyKerbGeo = new THREE.BoxGeometry(0.38, 0.30, 12.04);
+      const shopBodyGeo = new THREE.BoxGeometry(4.2, 6.4, 11.4);
+      const roofAwningGeo = new THREE.BoxGeometry(2.4, 0.22, 11.6);
+      const upperRoofGeo = new THREE.ConeGeometry(3.4, 1.5, 4);
+
+      for (let z = 36; z > -CORRIDOR_LENGTH + 36; z -= 12) {
+        const segIdx = Math.round(Math.abs(z) / 12);
+        const gRow = new THREE.Group();
+        gRow.position.z = z;
+
+        // Raised Granite Stone Bazaar Footpaths hugging the narrow 9.6m lane (X = ±4.8m edge!)
+        const kMat = segIdx % 2 === 0 ? kerbYellowMat : kerbBlackMat;
+        for (const side of [-1, 1]) {
+          const kerb = new THREE.Mesh(gullyKerbGeo, kMat);
+          kerb.position.set(side * (GULLY_ROAD_WIDTH / 2 + 0.19), 0.15, 0);
+          const fp = new THREE.Mesh(footpathGeo, graniteFootpathMat);
+          fp.position.set(side * (GULLY_ROAD_WIDTH / 2 + 2.95), 0.14, 0);
+          fp.receiveShadow = true;
+          gRow.add(kerb, fp);
+
+          // 2-Storey Old Bengaluru Heritage Shopfront right alongside the narrow gully (X = ±7.8m)
+          const shopIdx = (segIdx + (side > 0 ? 3 : 0)) % OLD_BLR_SHOPS.length;
+          const shopCfg = OLD_BLR_SHOPS[shopIdx];
+          const wallMat = new THREE.MeshStandardMaterial({ color: shopCfg.wallHex, roughness: 0.78 });
+          const bldg = new THREE.Mesh(shopBodyGeo, wallMat);
+          bldg.position.set(side * 7.85, 3.2, 0);
+          bldg.castShadow = true;
+          bldg.receiveShadow = true;
+          gRow.add(bldg);
+
+          // Sloped Red Mangalore Clay-Tile Verandah Awning overhanging the footpath
+          const awning = new THREE.Mesh(roofAwningGeo, mangaloreTileMat);
+          awning.position.set(side * 5.65, 3.15, 0);
+          awning.rotation.z = side * 0.28;
+          gRow.add(awning);
+
+          // Pitched Mangalore-Tile Top Roof
+          const topRoof = new THREE.Mesh(upperRoofGeo, mangaloreTileMat);
+          topRoof.position.set(side * 7.85, 7.15, 0);
+          topRoof.rotation.y = Math.PI / 4;
+          topRoof.scale.set(1.0, 1.0, 2.35);
+          gRow.add(topRoof);
+
+          // Carved Wooden Verandah Pillars & Glowing Upper-Storey Louvered Windows
+          for (const pz of [-4.2, 0, 4.2]) {
+            const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 3.0, 8), woodPillarMat);
+            pillar.position.set(side * 5.25, 1.5, pz);
+            gRow.add(pillar);
+
+            const win = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 1.35), windowLitMat);
+            win.position.set(side * 5.72, 4.9, pz);
+            win.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
+            gRow.add(win);
+          }
+
+          // Crisp HD Bilingual Kannada + English Shop Signboard facing oncoming driver & gully!
+          const signMesh = new THREE.Mesh(
+            new THREE.BoxGeometry(0.14, 1.25, 5.2),
+            new THREE.MeshBasicMaterial({ map: shopTextures[shopIdx] })
+          );
+          signMesh.position.set(side * 5.52, 3.85, 0);
+          // Also add an angled projecting shop flag-sign so driver reads it straight ahead down the narrow lane!
+          const flagSign = new THREE.Mesh(
+            new THREE.PlaneGeometry(3.2, 0.85),
+            new THREE.MeshBasicMaterial({ map: shopTextures[shopIdx], side: THREE.DoubleSide })
+          );
+          flagSign.position.set(side * 5.05, 4.15, 3.6);
+          flagSign.rotation.y = side * 0.22;
+          gRow.add(signMesh, flagSign);
+
+          // Roadside Flower & Fruit Bazaar Basket Stalls (Marigold & Mysuru Mallige Jasmine!)
+          if ((segIdx + (side > 0 ? 1 : 0)) % 2 === 0) {
+            const cart = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.75, 1.8), woodPillarMat);
+            cart.position.set(side * 5.38, 0.62, -2.2);
+            const mHeap = new THREE.Mesh(new THREE.SphereGeometry(0.42, 10, 8), marigoldMat);
+            mHeap.scale.set(1.0, 0.65, 1.2);
+            mHeap.position.set(side * 5.35, 1.12, -2.55);
+            const jHeap = new THREE.Mesh(new THREE.SphereGeometry(0.38, 10, 8), jasmineMat);
+            jHeap.scale.set(1.0, 0.65, 1.1);
+            jHeap.position.set(side * 5.35, 1.10, -1.80);
+            gRow.add(cart, mHeap, jHeap);
+          }
+        }
+
+        // Overhead Festival Marigold & Mango-Leaf Torana String Lights spanning the Narrow Gully!
+        if (segIdx % 2 === 0) {
+          const wire = new THREE.Mesh(new THREE.BoxGeometry(10.8, 0.05, 0.05), woodPillarMat);
+          wire.position.set(0, 6.15, 0);
+          gRow.add(wire);
+          for (let tx = -4.5; tx <= 4.5; tx += 0.9) {
+            const sag = Math.cos((tx / 4.8) * (Math.PI * 0.5)) * 0.38;
+            const bulbMat = Math.abs(Math.round(tx * 2)) % 2 === 0 ? marigoldMat : jasmineMat;
+            const garland = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 8), bulbMat);
+            garland.position.set(tx, 6.12 - sag, 0);
+            const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.10, 0.28, 6), mangoLeafMat);
+            leaf.position.set(tx + 0.42, 6.04 - sag, 0);
+            leaf.rotation.x = Math.PI;
+            gRow.add(garland, leaf);
+          }
+        }
+
+        // Intimate Overhanging Rain-Tree Boughs shading the Old Bengaluru Gully
+        if (segIdx % 3 === 1) {
+          for (const side of [-1, 1]) {
+            const canopy = new THREE.Mesh(new THREE.SphereGeometry(2.3, 12, 10), side < 0 ? treeLeafMat : gulmoharLeafMat);
+            canopy.scale.set(1.35, 0.62, 1.25);
+            canopy.position.set(side * 5.6, 7.6, 2.5);
+            gRow.add(canopy);
+          }
+        }
+
+        oldBlrGullyGroup.add(gRow);
+        gullyScrollingRows.push(gRow);
+      }
+
+      // Heritage Old Bengaluru Bazaar Archway Landmarks (Chickpet & Malleshwaram)
+      const gullyArches = [
+        {
+          zPos: -38,
+          kn: 'ಚಿಕ್ಕಪೇಟೆ ಪೇಟೆ ದ್ವಾರ • ರೇಷ್ಮೆ ಬಜಾರ್',
+          en: 'CHICKPET HERITAGE BAZAAR GATE'
+        },
+        {
+          zPos: -195,
+          kn: 'ಮಲ್ಲೇಶ್ವರಂ 8ನೇ ಅಡ್ಡರಸ್ತೆ • ಹೂವಿನ ಬಜಾರ್',
+          en: 'MALLESHWARAM 8TH CROSS FLOWER MARKET'
+        }
+      ];
+      gullyArches.forEach((cfg) => {
+        const arch = new THREE.Group();
+        const pillarGeo = new THREE.BoxGeometry(0.65, 6.8, 0.65);
+        const pL = new THREE.Mesh(pillarGeo, mangaloreTileMat);
+        pL.position.set(-5.15, 3.4, 0);
+        const pR = new THREE.Mesh(pillarGeo, mangaloreTileMat);
+        pR.position.set(5.15, 3.4, 0);
+        const bannerTex = createHeritageArchBannerTexture(cfg.kn, cfg.en);
+        const beam = new THREE.Mesh(
+          new THREE.BoxGeometry(10.9, 1.95, 0.36),
+          new THREE.MeshBasicMaterial({ map: bannerTex })
+        );
+        beam.position.set(0, 6.45, 0);
+        arch.add(pL, pR, beam);
+        arch.position.set(0, 0, cfg.zPos);
+        oldBlrGullyGroup.add(arch);
+        gullyLandmarkInstances.push({
+          mesh: arch,
+          kn: cfg.kn,
+          type: cfg.en
+        });
+      });
+    }
+    buildOldBengaluruNarrowGullies();
 
     // Build Illuminated Bilingual (Kannada + English) Roadside Hoardings & Tech Park Skyline
     const hoardingGroup = new THREE.Group();
@@ -2770,8 +3303,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const g = new THREE.Group();
 
         const isLeft = i % 2 === 0;
-        const w = 9.0;
-        const h = 4.5;
+        const w = 9.2;
+        const h = 4.6;
 
         // Steel support pillars
         for (const px of [-w * 0.36, w * 0.36]) {
@@ -2785,7 +3318,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         cabinet.position.set(0, 5.8, 0);
         g.add(cabinet);
 
-        // Illuminated Bilingual Ad Face (Self-lit so Kannada & English text is super crisp day or rain!)
+        // Illuminated 2K HD Bilingual Ad Face
         const faceMat = new THREE.MeshBasicMaterial({ map: tex });
         const faceFront = new THREE.Mesh(new THREE.PlaneGeometry(w, h), faceMat);
         faceFront.position.set(0, 5.8, 0.16);
@@ -2799,7 +3332,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const xPos = isLeft ? (-ROAD_WIDTH / 2 - 5.2) : (ROAD_WIDTH / 2 + 4.4);
         const zPos = -18 - i * (CORRIDOR_LENGTH / BILINGUAL_HOARDING_ADS.length);
         g.position.set(xPos, 0, zPos);
-        // Angle slightly toward the road so driver reads Kannada + English effortlessly
         g.rotation.y = isLeft ? 0.34 : -0.34;
 
         hoardingGroup.add(g);
@@ -2808,12 +3340,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
     buildBilingualHoardings();
 
-    // Dynamic Scrolling Bangalore Landmarks (Silk Board Gantry with Kannada+English, Vidhana Soudha, Metro)
+    // Dynamic Scrolling Bangalore Highway Landmarks (Silk Board Gantry, Vidhana Soudha, Metro)
+    const highwayLandmarksGroup = new THREE.Group();
+    scene.add(highwayLandmarksGroup);
     const landmarkInstances = [];
     let continuousMetroTrain = null;
 
     function spawnLandmarksFromGLB() {
-      // 1. Massive "Silk Board" & "Hebbal" Bilingual Highway Green Sign Gantries
       const gantryConfigs = [
         {
           zPos: -42,
@@ -2834,7 +3367,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const signTex = createBilingualGantrySignTexture(cfg.isHebbal);
         const signMat = new THREE.MeshBasicMaterial({ map: signTex });
 
-        // Attach ultra-crisp Bilingual Kannada+English highway signboard over the 3D gantry frame
         const frontBoard = new THREE.Mesh(new THREE.PlaneGeometry(19.4, 3.75), signMat);
         frontBoard.position.set(0, 8.85, 0.72);
         silk.add(frontBoard);
@@ -2845,7 +3377,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         silk.add(backBoard);
 
         silk.position.set(0, 0, cfg.zPos);
-        scene.add(silk);
+        highwayLandmarksGroup.add(silk);
         landmarkInstances.push({
           mesh: silk,
           kn: cfg.kn,
@@ -2853,12 +3385,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         });
       });
 
-      // 2. Vidhana Soudha Grand Facade along the Left Boulevard Vista
       for (const zPos of [-135, -315]) {
         const vidhana = loadedTemplates['vidhana_soudha.glb'].clone(true);
         vidhana.position.set(-32, 0, zPos);
         vidhana.rotation.y = Math.PI * 0.42;
-        scene.add(vidhana);
+        highwayLandmarksGroup.add(vidhana);
         landmarkInstances.push({
           mesh: vidhana,
           kn: 'ವಿಧಾನ ಸೌಧ • ಬೆಂಗಳೂರು',
@@ -2866,7 +3397,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         });
       }
 
-      // 3. Namma Metro Station seamlessly aligned onto the continuous viaduct at X = METRO_X
       const metro = loadedTemplates['metro_station.glb'].clone(true);
       metro.position.set(METRO_X, 0, -185);
       metro.traverse((child) => {
@@ -2875,10 +3405,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
       if (continuousMetroTrain) {
-        scene.attach(continuousMetroTrain);
+        highwayLandmarksGroup.attach(continuousMetroTrain);
         continuousMetroTrain.position.set(METRO_X - 1.2, 0, -90);
       }
-      scene.add(metro);
+      highwayLandmarksGroup.add(metro);
       landmarkInstances.push({
         mesh: metro,
         kn: 'ನಮ್ಮ ಮೆಟ್ರೋ ನೇರಳೆ ಮಾರ್ಗ ನಿಲ್ದಾಣ',
@@ -2909,6 +3439,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       }
       potholes.length = 0;
 
+      const activeLanes = getActiveLanes();
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+
       for (let i = 0; i < count; i++) {
         const g = new THREE.Group();
         const rim = new THREE.Mesh(new THREE.CylinderGeometry(1.55, 1.75, 0.06, 7), potholeRimMat);
@@ -2925,9 +3458,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         coneBand.position.set(1.45, 0.36, 0.4);
 
         g.add(rim, puddle, anomalyRing, cone, coneBand);
+        if (isGully) g.scale.setScalar(0.76);
 
-        const laneX = LANES[Math.floor(Math.random() * LANES.length)] + (Math.random() - 0.5) * 0.8;
-        g.position.set(laneX, 0, -35 - i * (CORRIDOR_LENGTH / count));
+        const jitter = isGully ? 0.35 : 0.8;
+        const laneX = activeLanes[Math.floor(Math.random() * activeLanes.length)] + (Math.random() - 0.5) * jitter;
+        g.position.set(laneX, 0, -35 - i * (CORRIDOR_LENGTH / Math.max(1, count)));
         potholeGroup.add(g);
         potholes.push({
           group: g,
@@ -2981,7 +3516,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 7. PLAYER AUTO-RICKSHAW (With Bilingual Rear Hood Decal & Headlight Beam)
+    // 7. PLAYER AUTO-RICKSHAW (With HD Bilingual Rear Hood Decal & Grounded Physics)
     // =========================================================================
     function extractWheelNodes(rootMesh) {
       const wheels = [];
@@ -3000,23 +3535,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     function createAutoBackDecalTexture() {
       const c = document.createElement('canvas');
-      c.width = 512;
-      c.height = 160;
+      c.width = 1024;
+      c.height = 320;
       const ctx = c.getContext('2d');
       ctx.fillStyle = '#111827';
-      ctx.fillRect(0, 0, 512, 160);
+      ctx.fillRect(0, 0, 1024, 320);
       ctx.strokeStyle = '#ffd000';
-      ctx.lineWidth = 8;
-      ctx.strokeRect(6, 6, 500, 148);
+      ctx.lineWidth = 16;
+      ctx.strokeRect(12, 12, 1000, 296);
       ctx.fillStyle = '#fde047';
-      ctx.font = '900 42px "Noto Sans Kannada", "Inter", sans-serif';
-      ctx.fillText('ನಮ್ಮ ಬೆಂಗಳೂರು • ಒಂದು ಸೆಕೆಂಡ್', 28, 68);
+      ctx.font = '900 84px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('ನಮ್ಮ ಬೆಂಗಳೂರು • ಒಂದು ಸೆಕೆಂಡ್', 54, 136);
       ctx.fillStyle = '#4ade80';
-      ctx.font = '900 30px "Inter", sans-serif';
-      ctx.fillText('NAMMA BENGALURU • KA-01-AG-9999', 28, 124);
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      ctx.font = '900 60px "Inter", sans-serif';
+      ctx.fillText('VAYUPUTRA RE • KA-01-AG-9999', 54, 248);
+      return finalizeHDTexture(c);
     }
 
     const player = {
@@ -3051,10 +3584,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     };
 
     function resetPlayerStatsAndTrip() {
-      player.pos.set(-1.9, 0, 0);
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      player.pos.set(isGully ? -1.45 : -1.9, 0, 0);
       player.vel.set(0, 0, 0);
       player.rot.set(0, 0, 0);
-      player.forwardSpeed = 32;
+      player.forwardSpeed = (currentProfile && currentProfile.cruiseSpeed) || 32;
       player.distanceKm = 0;
       player.fareRupees = 30.0;
       player.wheelRepairTimer = 0;
@@ -3087,7 +3621,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
 
-      // Add Bilingual Kannada+English Stencil Plate on Rear Canopy Hood
+      // Add HD Bilingual Kannada+English Stencil Plate on Rear Canopy Hood
       const decalMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(0.92, 0.26),
         new THREE.MeshBasicMaterial({ map: createAutoBackDecalTexture() })
@@ -3170,7 +3704,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 7B. TWO-WAY GROUNDED LANE TRAFFIC POOL
+    // 7B. TWO-WAY GROUNDED LANE TRAFFIC POOL (6-Lane Highway + Narrow Gully)
     // =========================================================================
     const trafficPool = [];
 
@@ -3252,40 +3786,50 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (dr < 0.8) return 'blinkit';
         return 'swiggy';
       }
-      return Math.random() < 0.6 ? 'techie' : 'npc_auto';
+      return Math.random() < 0.55 ? 'techie' : 'npc_auto';
     }
 
     function findFreeLaneAndZ(preferBehind = false, forceOncoming = null) {
+      const activeLanes = getActiveLanes();
+      const halfLanes = Math.floor(activeLanes.length / 2);
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const minXGap = isGully ? 1.45 : 2.2;
+
       for (let attempt = 0; attempt < 24; attempt++) {
         let laneIdx;
         if (forceOncoming === true) {
-          laneIdx = 3 + Math.floor(Math.random() * 3);
+          laneIdx = halfLanes + Math.floor(Math.random() * halfLanes);
         } else if (forceOncoming === false) {
-          laneIdx = Math.floor(Math.random() * 3);
+          laneIdx = Math.floor(Math.random() * halfLanes);
         } else {
-          laneIdx = Math.floor(Math.random() * LANES.length);
+          laneIdx = Math.floor(Math.random() * activeLanes.length);
         }
-        const isOncoming = laneIdx >= 3;
-        const laneX = LANES[laneIdx];
+        const isOncoming = laneIdx >= halfLanes;
+        const laneX = activeLanes[laneIdx];
         const z = (!isOncoming && preferBehind)
           ? 16 + Math.random() * 18
           : -32 - Math.random() * (CORRIDOR_LENGTH - 65);
 
         let clear = true;
         for (const other of trafficPool) {
-          if (Math.abs(other.pos.x - laneX) < 2.2 && Math.abs(other.pos.z - z) < 16.0) {
+          if (Math.abs(other.pos.x - laneX) < minXGap && Math.abs(other.pos.z - z) < 16.0) {
             clear = false;
             break;
           }
         }
         if (clear) return { laneIdx, laneX, z, isOncoming };
       }
-      const fallbackLane = forceOncoming === true ? 4 : forceOncoming === false ? 1 : Math.floor(Math.random() * LANES.length);
+      const fallbackLane =
+        forceOncoming === true
+          ? halfLanes
+          : forceOncoming === false
+            ? 0
+            : Math.floor(Math.random() * activeLanes.length);
       return {
         laneIdx: fallbackLane,
-        laneX: LANES[fallbackLane],
+        laneX: activeLanes[fallbackLane],
         z: -45 - Math.random() * (CORRIDOR_LENGTH - 75),
-        isOncoming: fallbackLane >= 3
+        isOncoming: fallbackLane >= halfLanes
       };
     }
 
@@ -3299,8 +3843,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       { type: 'blinkit', laneIdx: 3, z: -29.0 }
     ];
 
+    const GULLY_HERO_SLOTS = [
+      { type: 'npc_auto', laneIdx: 0, z: -13.5 },
+      { type: 'swiggy', laneIdx: 1, z: -23.0 },
+      { type: 'npc_auto', laneIdx: 2, z: -15.5 },
+      { type: 'zepto', laneIdx: 3, z: -11.5 },
+      { type: 'techie', laneIdx: 2, z: -28.0 },
+      { type: 'blinkit', laneIdx: 0, z: -31.5 }
+    ];
+
     function spawnTrafficVehicle(slotIndex, totalSlots) {
-      const hero = slotIndex < HERO_SLOTS.length ? HERO_SLOTS[slotIndex] : null;
+      const activeLanes = getActiveLanes();
+      const halfLanes = Math.floor(activeLanes.length / 2);
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const heroList = isGully ? GULLY_HERO_SLOTS : HERO_SLOTS;
+      const hero = slotIndex < heroList.length ? heroList[slotIndex] : null;
       const vKey = hero ? hero.type : pickVehicleType(currentProfile);
       const spec = VEHICLE_SPECS[vKey];
       const mesh = loadedTemplates[spec.asset].clone(true);
@@ -3312,17 +3869,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       });
 
       const wheels = extractWheelNodes(mesh);
-      const laneIdx = hero ? hero.laneIdx : slotIndex % LANES.length;
-      const isOncoming = laneIdx >= 3;
-      const laneX = LANES[laneIdx];
-      const rowIdx = Math.floor(slotIndex / LANES.length);
-      const zOffset = hero ? hero.z : -30 - rowIdx * 22 - (slotIndex % 3) * 6;
+      const laneIdx = hero ? hero.laneIdx : (slotIndex % activeLanes.length);
+      const isOncoming = laneIdx >= halfLanes;
+      const laneX = activeLanes[laneIdx];
+      const rowIdx = Math.floor(slotIndex / activeLanes.length);
+      const zOffset = hero ? hero.z : -30 - rowIdx * 24 - (slotIndex % 3) * 6;
 
-      const baseSpeed = spec.isHyperDelivery
+      const speedScale = isGully ? 0.65 : 1.0;
+      const baseSpeed = (spec.isHyperDelivery
         ? (28 + Math.random() * 10) * currentProfile.deliverySpeedMult
         : vKey === 'bmtc'
           ? 18 + Math.random() * 4
-          : 22 + Math.random() * 6;
+          : 22 + Math.random() * 6) * speedScale;
 
       const baseYaw = isOncoming ? Math.PI : 0;
       const targetVelZ = isOncoming ? baseSpeed * 0.42 : -baseSpeed;
@@ -3366,6 +3924,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         w.node.quaternion.copy(w.origLocalQuat);
       });
 
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const speedScale = isGully ? 0.65 : 1.0;
       const spawnBehind = !v.isOncoming && v.spec.isHyperDelivery && Math.random() < 0.35;
       const spot = findFreeLaneAndZ(spawnBehind, v.isOncoming);
       v.laneIdx = spot.laneIdx;
@@ -3373,18 +3933,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       v.baseYaw = v.isOncoming ? Math.PI : 0;
       v.targetLaneX = spot.laneX;
       v.pos.set(spot.laneX, 0, spot.z);
-      v.baseSpeed = v.spec.isHyperDelivery
+      v.baseSpeed = (v.spec.isHyperDelivery
         ? (28 + Math.random() * 10) * currentProfile.deliverySpeedMult
         : v.type === 'bmtc'
           ? 18 + Math.random() * 4
-          : 22 + Math.random() * 6;
+          : 22 + Math.random() * 6) * speedScale;
       const targetVelZ = v.isOncoming ? v.baseSpeed * 0.42 : -v.baseSpeed;
       v.vel.set(0, 0, targetVelZ);
       v.rot.set(0, v.baseYaw, 0);
     }
 
     // =========================================================================
-    // 7C. SUDDEN BENGALURU JAYWALKER PEDESTRIANS (Crossing Road + Stop Hand!)
+    // 7C. SUDDEN BENGALURU JAYWALKER PEDESTRIANS (Forward-Walking Orientation!)
     // =========================================================================
     const jaywalkers = [];
     const JAYWALKER_SHIRT_COLORS = [0xf97316, 0x06b6d4, 0xec4899, 0xeab308, 0x22c55e, 0xa855f7];
@@ -3392,8 +3952,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       '✋ "ಒಂದು ಸೆಕೆಂಡ್ ಅಣ್ಣ! ONDU SECOND!"',
       '🚶‍♂️ SUDDEN JAYWALKER ON ROAD!',
       '✋ "ಸ್ವಲ್ಪ ತಡೀರಿ! WAIT MAADI!"',
-      '🛍️ UNCLE CROSSING SILK BOARD!'
+      '🛍️ BAZAAR SHOPPER CROSSING!'
     ];
+
+    function getJaywalkerForwardYaw(dirX) {
+      // In Three.js after Blender export_yup: +Y_blender (pedestrian nose, glasses, toes & stop-palm) -> -Z_threejs (0,0,-1).
+      // Rotating (0,0,-1) around +Y by theta gives forward_x = -sin(theta), forward_z = -cos(theta).
+      // Therefore dirX > 0 (+X travel) MUST use negative yaw (-0.54*PI) to face +X (+7 deg glance toward oncoming +Z),
+      // and dirX < 0 (-X travel) MUST use positive yaw (+0.54*PI) to face -X!
+      return dirX > 0 ? -Math.PI * 0.54 : Math.PI * 0.54;
+    }
 
     function spawnJaywalker(index, total) {
       const mesh = loadedTemplates['pedestrian_jaywalker.glb'].clone(true);
@@ -3415,25 +3983,28 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         if (c.name === 'Arm_R') armR = c;
       });
 
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const halfRoadW = getActiveRoadWidth() / 2;
+
       let startX, startZ, dirX, state;
       if (index === 0) {
-        startX = 0.6;
+        startX = isGully ? -1.1 : 0.6;
         startZ = -19.5;
         dirX = 1;
         state = 'crossing';
       } else if (index === 1) {
-        startX = 3.6;
+        startX = isGully ? 2.1 : 3.6;
         startZ = -34.0;
         dirX = -1;
         state = 'crossing';
       } else {
         dirX = index % 2 === 0 ? 1 : -1;
-        startX = dirX > 0 ? -ROAD_WIDTH / 2 - 0.8 : ROAD_WIDTH / 2 + 0.8;
+        startX = dirX > 0 ? (-halfRoadW - 0.75) : (halfRoadW + 0.75);
         startZ = -48 - (index - 1) * (CORRIDOR_LENGTH / Math.max(4, total));
         state = 'waiting';
       }
 
-      const yaw = dirX > 0 ? Math.PI * 0.42 : -Math.PI * 0.42;
+      const yaw = getJaywalkerForwardYaw(dirX);
       mesh.position.set(startX, 0, startZ);
       mesh.rotation.set(0, yaw, 0);
       scene.add(mesh);
@@ -3447,7 +4018,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         armR,
         dirX,
         state,
-        crossSpeed: 3.6 + (index % 3) * 0.65,
+        crossSpeed: (isGully ? 2.85 : 3.6) + (index % 3) * 0.55,
         speedBoost: 1.0,
         triggerDist: 46 + (index % 4) * 7,
         walkPhase: index * 1.3,
@@ -3467,8 +4038,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     function resetJaywalkerToKerb(p) {
+      const halfRoadW = getActiveRoadWidth() / 2;
       p.dirX = Math.random() < 0.5 ? 1 : -1;
-      p.pos.x = p.dirX > 0 ? -ROAD_WIDTH / 2 - 0.9 : ROAD_WIDTH / 2 + 0.9;
+      p.pos.x = p.dirX > 0 ? (-halfRoadW - 0.75) : (halfRoadW + 0.75);
       p.pos.y = 0;
       p.pos.z -= CORRIDOR_LENGTH + Math.random() * 25;
       p.state = 'waiting';
@@ -3476,38 +4048,39 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       p.vy = 0;
       p.warned = false;
       p.triggerDist = 44 + Math.random() * 24;
-      p.mesh.rotation.set(0, p.dirX > 0 ? Math.PI * 0.42 : -Math.PI * 0.42, 0);
+      if (p.legL) p.legL.rotation.x = 0;
+      if (p.legR) p.legR.rotation.x = 0;
+      if (p.armL) p.armL.rotation.x = 0;
+      p.mesh.rotation.set(0, getJaywalkerForwardYaw(p.dirX), 0);
     }
 
     // =========================================================================
-    // 7D. NEW! BENGALURU TRAFFIC POLICE (BTP) SUDDEN LICENSE CHECK ("DL TORSI!")
+    // 7D. BENGALURU TRAFFIC POLICE (BTP) SUDDEN LICENSE CHECK ("DL TORSI!")
     // =========================================================================
     const trafficCops = [];
 
     function createBtpBarricadeTexture() {
       const c = document.createElement('canvas');
-      c.width = 512;
-      c.height = 256;
+      c.width = 1024;
+      c.height = 512;
       const ctx = c.getContext('2d');
       ctx.fillStyle = '#1e3a8a';
-      ctx.fillRect(0, 0, 512, 256);
+      ctx.fillRect(0, 0, 1024, 512);
       ctx.strokeStyle = '#ffd000';
-      ctx.lineWidth = 12;
-      ctx.strokeRect(8, 8, 496, 240);
+      ctx.lineWidth = 24;
+      ctx.strokeRect(16, 16, 992, 480);
       ctx.fillStyle = '#fde047';
-      ctx.font = '900 36px "Noto Sans Kannada", "Inter", sans-serif';
-      ctx.fillText('ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್', 30, 82);
+      ctx.font = '900 72px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('ಬೆಂಗಳೂರು ಸಂಚಾರ ಪೊಲೀಸ್', 60, 164);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 30px "Inter", sans-serif';
-      ctx.fillText('BENGALURU TRAFFIC POLICE', 28, 140);
+      ctx.font = '900 60px "Inter", sans-serif';
+      ctx.fillText('BENGALURU TRAFFIC POLICE', 56, 280);
       ctx.fillStyle = '#ef4444';
-      ctx.fillRect(28, 165, 456, 62);
+      ctx.fillRect(56, 330, 912, 124);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 30px "Inter", sans-serif';
-      ctx.fillText('STOP • ನಿಲ್ಲಿಸಿ • DL & RC CHECK', 48, 207);
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      ctx.font = '900 60px "Inter", sans-serif';
+      ctx.fillText('STOP • ನಿಲ್ಲಿಸಿ • DL & RC CHECK', 96, 414);
+      return finalizeHDTexture(c);
     }
 
     const btpBarricadeTex = createBtpBarricadeTexture();
@@ -3516,6 +4089,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     function spawnTrafficCopCheckpost(index, total) {
       const group = new THREE.Group();
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const halfRoadW = getActiveRoadWidth() / 2;
+      const activeLanes = getActiveLanes();
 
       // 1. BTP Officer Mesh (`traffic_police.glb`)
       const copMesh = loadedTemplates['traffic_police.glb'].clone(true);
@@ -3551,14 +4127,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const beaconB = new THREE.Mesh(new THREE.SphereGeometry(0.15, 10, 8), strobeBlueMat);
       beaconB.position.set(0.85, 1.75, 0);
       barricade.add(board, leg1, leg2, beaconR, beaconB);
-      barricade.position.set(-1.75, 0, 0.5);
+      if (isGully) barricade.scale.setScalar(0.76);
+      barricade.position.set(isGully ? -1.1 : -1.75, 0, 0.5);
       group.add(barricade);
 
-      // Place first cop at z = -14.5m in Lane 1 so player sees & experiences the BTP checkpost right away!
-      const startZ = index === 0 ? -14.5 : -48 - index * (CORRIDOR_LENGTH / Math.max(2, total));
-      const kerbX = -ROAD_WIDTH / 2 + 1.15;
-      const targetLaneIdx = index === 0 ? 1 : (index % 2 === 0 ? 0 : 1);
-      group.position.set(index === 0 ? LANES[1] : kerbX, 0, startZ);
+      // Place first cop ahead so player sees & experiences the BTP checkpost right away!
+      const startZ = index === 0 ? -16.5 : -54 - index * (CORRIDOR_LENGTH / Math.max(2, total));
+      const kerbX = -halfRoadW + (isGully ? 0.75 : 1.15);
+      const targetLaneIdx = isGully ? 0 : (index === 0 ? 1 : (index % 2 === 0 ? 0 : 1));
+      group.position.set(index === 0 ? activeLanes[targetLaneIdx] : kerbX, 0, startZ);
       scene.add(group);
 
       return {
@@ -3573,7 +4150,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         armR,
         pos: group.position,
         state: index === 0 ? 'stepping_out' : 'waiting', // waiting -> stepping_out -> cleared / fined
-        targetX: LANES[targetLaneIdx],
+        targetX: activeLanes[targetLaneIdx],
         kerbX,
         triggerDist: 58,
         walkPhase: index * 1.7,
@@ -3592,18 +4169,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     function resetCopCheckpost(cop) {
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const activeLanes = getActiveLanes();
       cop.pos.z -= CORRIDOR_LENGTH + Math.random() * 30;
       cop.pos.x = cop.kerbX;
-      cop.targetX = LANES[Math.floor(Math.random() * 2)]; // Left lanes 0 or 1
+      cop.targetX = isGully ? activeLanes[0] : activeLanes[Math.floor(Math.random() * 2)];
       cop.state = 'waiting';
       cop.whistleBlown = false;
       cop.resolved = false;
+      cop.copMesh.rotation.y = Math.PI;
       if (cop.legL) cop.legL.rotation.x = 0;
       if (cop.legR) cop.legR.rotation.x = 0;
     }
 
     // =========================================================================
-    // 7E. NEW! SUDDEN DARTING BENGALURU STRAY DOGS (`stray_dog.glb`)
+    // 7E. SUDDEN DARTING BENGALURU STRAY DOGS (`stray_dog.glb`)
     // =========================================================================
     const strayDogs = [];
     const DOG_COAT_COLORS = [0xb86b35, 0xd99b66, 0x4a3525, 0xe2e8f0];
@@ -3636,15 +4216,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       // Scale slightly so the Indie dog is clearly visible in arcade camera
       mesh.scale.setScalar(1.38);
 
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const halfRoadW = getActiveRoadWidth() / 2;
+
       let dirX, startX, startZ, state;
       if (index === 0) {
         dirX = 1;
-        startX = -0.3;
-        startZ = -9.8;
+        startX = isGully ? -1.2 : -0.3;
+        startZ = -10.2;
         state = 'darting';
       } else {
         dirX = index % 2 === 0 ? 1 : -1;
-        startX = dirX > 0 ? -ROAD_WIDTH / 2 - 1.2 : ROAD_WIDTH / 2 + 1.2;
+        startX = dirX > 0 ? (-halfRoadW - 0.9) : (halfRoadW + 0.9);
         startZ = -36 - index * (CORRIDOR_LENGTH / Math.max(3, total));
         state = 'waiting';
       }
@@ -3665,7 +4248,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         legRR,
         dirX,
         state,
-        runSpeed: 6.4 + (index % 3) * 1.1,
+        runSpeed: (isGully ? 5.2 : 6.4) + (index % 3) * 0.9,
         speedBoost: 1.0,
         triggerDist: 42 + (index % 3) * 9,
         gallopPhase: index * 1.9,
@@ -3686,8 +4269,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     function resetStrayDogToKerb(d) {
+      const halfRoadW = getActiveRoadWidth() / 2;
       d.dirX = Math.random() < 0.5 ? 1 : -1;
-      d.pos.x = d.dirX > 0 ? -ROAD_WIDTH / 2 - 1.2 : ROAD_WIDTH / 2 + 1.2;
+      d.pos.x = d.dirX > 0 ? (-halfRoadW - 0.9) : (halfRoadW + 0.9);
       d.pos.y = 0;
       d.pos.z -= CORRIDOR_LENGTH + Math.random() * 25;
       d.state = 'waiting';
@@ -3696,11 +4280,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       d.barked = false;
       d.hopBonusAwarded = false;
       d.triggerDist = 38 + Math.random() * 24;
+      if (d.legFL) d.legFL.rotation.x = 0;
+      if (d.legFR) d.legFR.rotation.x = 0;
+      if (d.legRL) d.legRL.rotation.x = 0;
+      if (d.legRR) d.legRR.rotation.x = 0;
       d.mesh.rotation.set(0, d.dirX > 0 ? -Math.PI * 0.48 : Math.PI * 0.48, 0);
     }
 
     // =========================================================================
-    // 7F. NEW! BTP RED-LIGHT TRAFFIC SIGNAL JUNCTIONS (STOP ON RED, GO ON GREEN!)
+    // 7F. BTP RED-LIGHT TRAFFIC SIGNAL JUNCTIONS (STOP ON RED, GO ON GREEN!)
     // =========================================================================
     const trafficSignals = [];
     const signalRedBulbMat = new THREE.MeshBasicMaterial({ color: 0xff2222 });
@@ -3712,65 +4300,73 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     function createSignalSignageTexture() {
       const c = document.createElement('canvas');
-      c.width = 512;
-      c.height = 192;
+      c.width = 1024;
+      c.height = 384;
       const ctx = c.getContext('2d');
       ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, 512, 192);
+      ctx.fillRect(0, 0, 1024, 384);
       ctx.strokeStyle = '#ffd000';
-      ctx.lineWidth = 10;
-      ctx.strokeRect(6, 6, 500, 180);
+      ctx.lineWidth = 20;
+      ctx.strokeRect(12, 12, 1000, 360);
       ctx.fillStyle = '#fde047';
-      ctx.font = '900 34px "Noto Sans Kannada", "Inter", sans-serif';
-      ctx.fillText('🚦 ಸಂಚಾರ ಸಿಗ್ನಲ್ • ನಿಲ್ಲಿಸಿ', 28, 66);
+      ctx.font = '900 68px "Noto Sans Kannada", "Inter", sans-serif';
+      ctx.fillText('🚦 ಸಂಚಾರ ಸಿಗ್ನಲ್ • ನಿಲ್ಲಿಸಿ', 54, 132);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 26px "Inter", sans-serif';
-      ctx.fillText('BTP SIGNAL • STOP ON RED [S / B]', 28, 118);
+      ctx.font = '900 52px "Inter", sans-serif';
+      ctx.fillText('BTP SIGNAL • STOP ON RED [S / B]', 54, 236);
       ctx.fillStyle = '#4ade80';
-      ctx.font = '800 22px "Inter", sans-serif';
-      ctx.fillText('WAIT FOR GREEN [W] (+₹100 BONUS)', 28, 158);
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      return tex;
+      ctx.font = '800 44px "Inter", sans-serif';
+      ctx.fillText('WAIT FOR GREEN [W] (+₹100 BONUS)', 54, 316);
+      return finalizeHDTexture(c);
     }
 
     const signalSignageTex = createSignalSignageTexture();
 
     function spawnTrafficSignalJunction(index, total) {
       const group = new THREE.Group();
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const halfRoadW = getActiveRoadWidth() / 2;
 
-      // 1. Thick Painted White Road Stop Line + Red Hazard Band across Forward Lanes (X = -11.2 to 0)
-      const stopLine = new THREE.Mesh(new THREE.BoxGeometry(11.0, 0.028, 0.75), stopLineWhiteMat);
-      stopLine.position.set(-5.6, 0.015, 0);
+      // 1. Thick Painted White Road Stop Line + Red Hazard Band across Forward Lanes
+      const stopLineW = isGully ? 4.6 : 11.0;
+      const stopLineX = isGully ? -2.35 : -5.6;
+      const stopLine = new THREE.Mesh(new THREE.BoxGeometry(stopLineW, 0.028, 0.75), stopLineWhiteMat);
+      stopLine.position.set(stopLineX, 0.015, 0);
       group.add(stopLine);
 
-      const redStopBand = new THREE.Mesh(new THREE.BoxGeometry(11.0, 0.024, 0.45), stopLineRedMat);
-      redStopBand.position.set(-5.6, 0.014, 0.72);
+      const redStopBand = new THREE.Mesh(new THREE.BoxGeometry(stopLineW, 0.024, 0.45), stopLineRedMat);
+      redStopBand.position.set(stopLineX, 0.014, 0.72);
       group.add(redStopBand);
 
       // Zebra stripes immediately ahead of the stop line
-      const zGeo = new THREE.BoxGeometry(0.85, 0.025, 2.8);
-      for (let zx = -10.2; zx <= -0.8; zx += 1.55) {
+      const zGeo = new THREE.BoxGeometry(isGully ? 0.65 : 0.85, 0.025, 2.6);
+      const zStart = isGully ? -4.2 : -10.2;
+      const zStep = isGully ? 1.15 : 1.55;
+      for (let zx = zStart; zx <= -0.6; zx += zStep) {
         const zs = new THREE.Mesh(zGeo, stopLineWhiteMat);
         zs.position.set(zx, 0.015, -2.1);
         group.add(zs);
       }
 
       // 2. Left Kerb Cantilever Signal Mast + Overhead Horizontal Boom Arm
-      const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 6.8, 12), poleMetalMat);
-      mast.position.set(-ROAD_WIDTH / 2 - 0.85, 3.4, 0);
+      const mastX = -halfRoadW - (isGully ? 0.42 : 0.85);
+      const mastH = isGully ? 5.8 : 6.8;
+      const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.20, mastH, 12), poleMetalMat);
+      mast.position.set(mastX, mastH / 2, 0);
       group.add(mast);
 
-      const boom = new THREE.Mesh(new THREE.BoxGeometry(8.6, 0.22, 0.22), poleMetalMat);
-      boom.position.set(-ROAD_WIDTH / 2 + 3.4, 6.4, 0);
+      const boomW = isGully ? 4.8 : 8.6;
+      const boomY = isGully ? 5.55 : 6.4;
+      const boom = new THREE.Mesh(new THREE.BoxGeometry(boomW, 0.20, 0.20), poleMetalMat);
+      boom.position.set(mastX + boomW * 0.48, boomY, 0);
       group.add(boom);
 
-      // 3. Bilingual BTP Signal Instruction Board on Boom
+      // 3. HD Bilingual BTP Signal Instruction Board on Boom
       const signBoard = new THREE.Mesh(
-        new THREE.BoxGeometry(4.4, 1.55, 0.14),
+        new THREE.BoxGeometry(isGully ? 3.2 : 4.4, isGully ? 1.15 : 1.55, 0.14),
         new THREE.MeshBasicMaterial({ map: signalSignageTex })
       );
-      signBoard.position.set(-5.8, 6.4, 0.18);
+      signBoard.position.set(isGully ? -2.9 : -5.8, boomY, 0.18);
       group.add(signBoard);
 
       // 4. Dual Signal Light Heads (Kerb Eye-Level Head + Overhead Cantilever Head)
@@ -3779,10 +4375,17 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const yellowBulbs = [];
       const greenBulbs = [];
 
-      for (const posCfg of [
-        { x: -ROAD_WIDTH / 2 - 0.85, y: 3.9, z: 0.26, scale: 1.0 },
-        { x: -2.2, y: 6.1, z: 0.24, scale: 1.22 }
-      ]) {
+      const headPositions = isGully
+        ? [
+            { x: mastX, y: 3.4, z: 0.26, scale: 0.88 },
+            { x: -1.15, y: 5.25, z: 0.24, scale: 1.05 }
+          ]
+        : [
+            { x: mastX, y: 3.9, z: 0.26, scale: 1.0 },
+            { x: -2.2, y: 6.1, z: 0.24, scale: 1.22 }
+          ];
+
+      for (const posCfg of headPositions) {
         const head = new THREE.Group();
         const box = new THREE.Mesh(new THREE.BoxGeometry(0.78, 2.15, 0.36), housingMat);
         head.add(box);
@@ -3804,7 +4407,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         greenBulbs.push(gBulb);
       }
 
-      const startZ = index === 0 ? -78 : -78 - index * (CORRIDOR_LENGTH / Math.max(2, total));
+      const startZ = index === 0 ? (isGully ? -62 : -78) : -78 - index * (CORRIDOR_LENGTH / Math.max(2, total));
       group.position.set(0, 0, startZ);
       scene.add(group);
 
@@ -3967,8 +4570,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         player.handbrakeLatched = false;
         updateBrakeButtonsUI();
       }
-      if (player.forwardSpeed < 14) {
-        player.forwardSpeed = 18;
+      if (player.forwardSpeed < 12) {
+        player.forwardSpeed = currentProfile && currentProfile.isNarrowGully ? 14 : 18;
       }
     }
 
@@ -4007,10 +4610,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     function triggerSuddenCopEncounterNow() {
       audio.init();
       if (trafficCops.length === 0) return;
+      const isGully = Boolean(currentProfile && currentProfile.isNarrowGully);
+      const spotX = isGully ? -2.4 : -3.8;
       const cop = trafficCops[0];
       cop.pos.z = -12.5;
-      cop.pos.x = -3.8;
-      cop.targetX = -3.8;
+      cop.pos.x = spotX;
+      cop.targetX = spotX;
+      cop.copMesh.rotation.y = Math.PI;
       cop.state = 'stepping_out';
       cop.whistleBlown = true;
       cop.resolved = false;
@@ -4222,13 +4828,21 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       audio.playBeepBeepHorn('auto');
       spawnComicCallout(player.pos, '📯 ಪಾ-ಪಾ-ಪಾರ್ಪ್! ಸೈಡ್ ಕೊಡಿ! (SIDE KODI!)', '#ffd000');
 
+      const activeLanes = getActiveLanes();
+      const halfLanes = Math.floor(activeLanes.length / 2);
+      const shiftStep = currentProfile && currentProfile.isNarrowGully ? 1.7 : 3.8;
+
       // Same-direction vehicles ahead yield slightly when honked at
       trafficPool.forEach((v) => {
         const dz = Math.abs(v.pos.z - player.pos.z);
         const dx = v.pos.x - player.pos.x;
         if (!v.isOncoming && dz < 16 && Math.abs(dx) < 4.5 && v.type !== 'bmtc') {
           const shiftDir = dx >= 0 ? 1 : -1;
-          v.targetLaneX = THREE.MathUtils.clamp(v.targetLaneX + shiftDir * 3.8, LANES[0], LANES[2]);
+          v.targetLaneX = THREE.MathUtils.clamp(
+            v.targetLaneX + shiftDir * shiftStep,
+            activeLanes[0],
+            activeLanes[halfLanes - 1]
+          );
         }
       });
 
@@ -4558,6 +5172,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
     function applyGravityProfile(modeKey, closeDialog = true) {
       currentProfile = GRAVITY_PROFILES[modeKey] || GRAVITY_PROFILES.medium;
+      const isGully = Boolean(currentProfile.isNarrowGully);
 
       document.querySelectorAll('[data-quick-mode]').forEach((btn) => {
         btn.classList.toggle('active-mode', btn.dataset.quickMode === modeKey);
@@ -4565,6 +5180,20 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       document.querySelectorAll('.mode-card').forEach((card) => {
         card.classList.toggle('selected', card.dataset.mode === modeKey);
       });
+
+      // Toggle 6-Lane Tech Corridor Highway vs Narrow Old Bengaluru Heritage Gullies (0.5 KM)
+      oldBlrGullyGroup.visible = isGully;
+      hoardingGroup.visible = !isGully;
+      highwayLandmarksGroup.visible = !isGully;
+      highwayOnlyObjects.forEach((obj) => {
+        obj.visible = !isGully;
+      });
+      roadMesh.scale.x = isGully ? (GULLY_ROAD_WIDTH / ROAD_WIDTH) : 1.0;
+
+      const nhShieldEl = document.querySelector('.nh-shield');
+      if (nhShieldEl) {
+        nhShieldEl.textContent = currentProfile.shieldCode || (isGully ? 'BLR 02' : 'NH 44');
+      }
 
       resetPlayerStatsAndTrip();
       rebuildPotholes(currentProfile.potholeCount);
@@ -4701,6 +5330,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     function updateSimulation(dt, elapsed) {
       if (player.tripFinished) return;
 
+      const isGully = Boolean(currentProfile.isNarrowGully);
+      const activeRoadW = getActiveRoadWidth();
+      const halfRoadW = activeRoadW / 2;
+      const activeLanes = getActiveLanes();
+      const halfLanes = Math.floor(activeLanes.length / 2);
+
       if (player.hornCooldown > 0) player.hornCooldown -= dt;
       if (player.turboBoostTimer > 0) player.turboBoostTimer -= dt;
       if (player.dlVerifiedTimer > 0) {
@@ -4723,7 +5358,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       rainMat.opacity = rainIntensity * 0.68;
       roadMat.roughness = 0.68 - rainIntensity * 0.54;
       roadMat.metalness = 0.14 + rainIntensity * 0.45;
-      scene.background.lerpColors(drySkyColor, rainSkyColor, rainIntensity);
+      const baseDrySky = isGully ? gullySkyColor : drySkyColor;
+      scene.background.lerpColors(baseDrySky, rainSkyColor, rainIntensity);
       scene.fog.color.copy(scene.background);
 
       if (rainIntensity > 0.02) {
@@ -4758,13 +5394,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       // 2. Vayuputra RE Strictly Grounded Physics + Full 0 KM/H Stop & Start Controls!
       const isBrakingToStop = keys.down || player.handbrakeLatched;
-      let targetSpeed = 32;
+      const cruiseSpeed = currentProfile.cruiseSpeed || 32;
+      let targetSpeed = cruiseSpeed;
       if (isBrakingToStop) {
         targetSpeed = 0;
       } else if (player.turboBoostTimer > 0) {
-        targetSpeed = 56;
+        targetSpeed = isGully ? 36 : 56;
       } else if (keys.up) {
-        targetSpeed = 48;
+        targetSpeed = isGully ? 29 : 48;
       }
       const accelRate = isBrakingToStop ? 7.2 : 4.2;
       player.forwardSpeed += (targetSpeed - player.forwardSpeed) * Math.min(1, dt * accelRate);
@@ -4778,7 +5415,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const wheelStability = 0.45 + 0.55 * (attachedWheelCount / 3);
       const speedSteerFactor = Math.min(1.0, 0.25 + player.forwardSpeed / 24);
 
-      const steerAccel = (24 + (1 - tireGrip) * 8) * wheelStability * speedSteerFactor;
+      const steerAccel = ((isGully ? 19 : 24) + (1 - tireGrip) * 8) * wheelStability * speedSteerFactor;
       player.vel.x += steerInput * steerAccel * dt;
 
       if (attachedWheelCount < 3) {
@@ -4794,7 +5431,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       player.pos.y = 0;
       player.vel.y = 0;
 
-      const maxRoadX = ROAD_WIDTH / 2 - 1.1;
+      const maxRoadX = halfRoadW - (isGully ? 0.92 : 1.1);
       if (Math.abs(player.pos.x) > maxRoadX) {
         player.pos.x = Math.sign(player.pos.x) * maxRoadX;
         player.vel.x = -player.vel.x * 0.6;
@@ -4827,7 +5464,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       const wiperAngle = rainActive ? Math.sin(elapsed * 8.0) * 38 : -28;
       document.documentElement.style.setProperty('--wiper-deg', `${wiperAngle.toFixed(1)}deg`);
 
-      // 3. Seamless Scrolling Corridor, Bilingual Hoardings, Viaduct & Metro Train
+      // 3. Seamless Scrolling Corridor (6-Lane Tech Corridor OR Narrow Old Bengaluru Gullies!)
       const scrollStep = player.forwardSpeed * dt;
       scrollingStrips.forEach((row) => {
         row.position.z += scrollStep;
@@ -4836,36 +5473,59 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
 
-      hoardingInstances.forEach((h) => {
-        h.position.z += scrollStep;
-        if (h.position.z > 36) {
-          h.position.z -= CORRIDOR_LENGTH;
-        }
-      });
+      let nearestDist = Infinity;
+      let nearestName = isGully ? 'CHICKPET HERITAGE BAZAAR' : 'SILK BOARD JUNCTION';
+      let nearestKn = isGully ? 'ಚಿಕ್ಕಪೇಟೆ ಪೇಟೆ ದ್ವಾರ' : 'ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಜಂಕ್ಷನ್';
 
-      if (continuousMetroTrain) {
-        continuousMetroTrain.position.z += (player.forwardSpeed - 24) * dt;
-        if (continuousMetroTrain.position.z > 65) {
-          continuousMetroTrain.position.z = -CORRIDOR_LENGTH + 65;
+      if (isGully) {
+        gullyScrollingRows.forEach((gRow) => {
+          gRow.position.z += scrollStep;
+          if (gRow.position.z > 36) {
+            gRow.position.z -= CORRIDOR_LENGTH;
+          }
+        });
+        gullyLandmarkInstances.forEach((lm) => {
+          lm.mesh.position.z += scrollStep;
+          if (lm.mesh.position.z > 60) {
+            lm.mesh.position.z -= CORRIDOR_LENGTH;
+          }
+          const distAhead = -lm.mesh.position.z;
+          if (distAhead > -10 && distAhead < nearestDist) {
+            nearestDist = distAhead;
+            nearestName = lm.type;
+            nearestKn = lm.kn;
+          }
+        });
+      } else {
+        hoardingInstances.forEach((h) => {
+          h.position.z += scrollStep;
+          if (h.position.z > 36) {
+            h.position.z -= CORRIDOR_LENGTH;
+          }
+        });
+
+        if (continuousMetroTrain) {
+          continuousMetroTrain.position.z += (player.forwardSpeed - 24) * dt;
+          if (continuousMetroTrain.position.z > 65) {
+            continuousMetroTrain.position.z = -CORRIDOR_LENGTH + 65;
+          }
         }
+
+        landmarkInstances.forEach((lm) => {
+          lm.mesh.position.z += scrollStep;
+          if (lm.mesh.position.z > 60) {
+            lm.mesh.position.z -= CORRIDOR_LENGTH;
+          }
+          const distAhead = -lm.mesh.position.z;
+          if (distAhead > -10 && distAhead < nearestDist) {
+            nearestDist = distAhead;
+            nearestName = lm.type;
+            nearestKn = lm.kn;
+          }
+        });
       }
 
-      let nearestDist = Infinity;
-      let nearestName = 'SILK BOARD JUNCTION';
-      let nearestKn = 'ಸಿಲ್ಕ್ ಬೋರ್ಡ್ ಜಂಕ್ಷನ್';
-      landmarkInstances.forEach((lm) => {
-        lm.mesh.position.z += scrollStep;
-        if (lm.mesh.position.z > 60) {
-          lm.mesh.position.z -= CORRIDOR_LENGTH;
-        }
-        const distAhead = -lm.mesh.position.z;
-        if (distAhead > -10 && distAhead < nearestDist) {
-          nearestDist = distAhead;
-          nearestName = lm.type;
-          nearestKn = lm.kn;
-        }
-      });
-      const distMeters = Math.max(0, Math.round(nearestDist));
+      const distMeters = Math.max(0, Math.round(nearestDist === Infinity ? 120 : nearestDist));
       hudEls.landmark.textContent = `${nearestName} • ${distMeters}m`;
       hudEls.landmarkKn.textContent = `${nearestKn} • ${distMeters}m`;
 
@@ -4985,7 +5645,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         p.anomalyRing.rotation.z += dt * 2.5;
         if (p.group.position.z > 20) {
           p.group.position.z -= CORRIDOR_LENGTH;
-          p.group.position.x = LANES[Math.floor(Math.random() * LANES.length)];
+          p.group.position.x = activeLanes[Math.floor(Math.random() * activeLanes.length)];
         }
 
         const dx = p.group.position.x - player.pos.x;
@@ -4998,7 +5658,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           player.vel.x += (dx / dist) * currentProfile.potholePullStrength * falloff * dt;
 
           if (dist < 1.35 && cameraShake < 0.15) {
-            player.forwardSpeed = Math.max(12, player.forwardSpeed * 0.85);
+            player.forwardSpeed = Math.max(10, player.forwardSpeed * 0.85);
             cameraShake = 0.32;
             audio.playBounceImpact(false);
             spawnComicCallout(player.pos, '🕳️ BBMP POTHOLE SUSPENSION JOLT!', '#38bdf8');
@@ -5006,7 +5666,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
       });
 
-      // 5. Sudden Road-Crossing Bengaluru Jaywalkers (Strictly Grounded)
+      // 5. Sudden Road-Crossing Bengaluru Jaywalkers (Strictly Grounded & Forward-Walking!)
       for (let i = 0; i < jaywalkers.length; i++) {
         const p = jaywalkers[i];
         if (p.hitCooldown > 0) p.hitCooldown -= dt;
@@ -5016,6 +5676,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const distAhead = -p.pos.z;
         if (p.state === 'waiting' && distAhead < p.triggerDist && distAhead > 8) {
           p.state = 'crossing';
+          p.mesh.rotation.y = getJaywalkerForwardYaw(p.dirX);
           if (!p.warned && distAhead < 48) {
             p.warned = true;
             const call = JAYWALKER_CALLOUTS[i % JAYWALKER_CALLOUTS.length];
@@ -5033,10 +5694,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (p.armL) p.armL.rotation.x = -swing * 0.7;
           if (p.armR) p.armR.rotation.z = Math.sin(p.walkPhase * 1.4) * 0.22;
 
-          if ((p.dirX > 0 && p.pos.x > ROAD_WIDTH / 2 + 1.0) || (p.dirX < 0 && p.pos.x < -ROAD_WIDTH / 2 - 1.0)) {
+          if ((p.dirX > 0 && p.pos.x > halfRoadW + 0.9) || (p.dirX < 0 && p.pos.x < -halfRoadW - 0.9)) {
             p.state = 'crossed';
             if (p.legL) p.legL.rotation.x = 0;
             if (p.legR) p.legR.rotation.x = 0;
+            if (p.armL) p.armL.rotation.x = 0;
           }
         }
 
@@ -5093,10 +5755,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           const stepErr = cop.targetX - cop.pos.x;
           cop.pos.x += Math.sign(stepErr) * Math.min(Math.abs(stepErr), 4.2 * dt);
           if (Math.abs(stepErr) > 0.1) {
+            cop.copMesh.rotation.y = stepErr > 0 ? -Math.PI * 0.62 : Math.PI * 0.62;
             const swing = Math.sin(cop.walkPhase) * 0.55;
             if (cop.legL) cop.legL.rotation.x = swing;
             if (cop.legR) cop.legR.rotation.x = -swing;
           } else {
+            cop.copMesh.rotation.y = Math.PI;
             if (cop.legL) cop.legL.rotation.x = 0;
             if (cop.legR) cop.legR.rotation.x = 0;
           }
@@ -5117,12 +5781,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           // Check if Cop intercepts Player Auto without showing License!
           const cdx = player.pos.x - cop.pos.x;
           const cdz = player.pos.z - cop.pos.z;
-          if (!cop.resolved && Math.abs(cdx) < 2.25 && Math.abs(cdz) < 2.0) {
+          const interceptWidth = isGully ? 1.65 : 2.25;
+          if (!cop.resolved && Math.abs(cdx) < interceptWidth && Math.abs(cdz) < 2.0) {
             cop.resolved = true;
             cop.state = 'fined';
             player.stats.copsFined++;
             player.forwardSpeed = 11.0;
-            player.vel.x = (cdx >= 0 ? 1 : -1) * 8.5;
+            player.vel.x = (cdx >= 0 ? 1 : -1) * (isGully ? 6.5 : 8.5);
             player.fareRupees = Math.max(30, player.fareRupees - 100);
             cameraShake = 0.42;
             audio.playPoliceWhistle(true);
@@ -5152,6 +5817,16 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         } else if (cop.state === 'cleared') {
           const backErr = cop.kerbX - cop.pos.x;
           cop.pos.x += Math.sign(backErr) * Math.min(Math.abs(backErr), 5.0 * dt);
+          if (Math.abs(backErr) > 0.1) {
+            cop.copMesh.rotation.y = backErr < 0 ? Math.PI * 0.54 : -Math.PI * 0.54;
+            const swing = Math.sin(cop.walkPhase) * 0.55;
+            if (cop.legL) cop.legL.rotation.x = swing;
+            if (cop.legR) cop.legR.rotation.x = -swing;
+          } else {
+            cop.copMesh.rotation.y = Math.PI;
+            if (cop.legL) cop.legL.rotation.x = 0;
+            if (cop.legR) cop.legR.rotation.x = 0;
+          }
         }
 
         if (cop.pos.z > 22) {
@@ -5190,8 +5865,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (d.legRL) d.legRL.rotation.x = -bound;
           if (d.legRR) d.legRR.rotation.x = -Math.sin(d.gallopPhase + 0.6) * 0.78;
 
-          if ((d.dirX > 0 && d.pos.x > ROAD_WIDTH / 2 + 1.5) || (d.dirX < 0 && d.pos.x < -ROAD_WIDTH / 2 - 1.5)) {
+          if ((d.dirX > 0 && d.pos.x > halfRoadW + 1.2) || (d.dirX < 0 && d.pos.x < -halfRoadW - 1.2)) {
             d.state = 'crossed';
+            if (d.legFL) d.legFL.rotation.x = 0;
+            if (d.legFR) d.legFR.rotation.x = 0;
+            if (d.legRL) d.legRL.rotation.x = 0;
+            if (d.legRR) d.legRR.rotation.x = 0;
           }
         }
 
@@ -5226,8 +5905,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         const v = trafficPool[i];
         if (v.hitCooldown > 0) v.hitCooldown -= dt;
 
-        const minLane = v.isOncoming ? 3 : 0;
-        const maxLane = v.isOncoming ? 5 : 2;
+        const minLane = v.isOncoming ? halfLanes : 0;
+        const maxLane = v.isOncoming ? (activeLanes.length - 1) : (halfLanes - 1);
 
         // Check if same-direction NPC vehicle should stop behind an active Red/Yellow signal
         let stoppedByRedSignal = false;
@@ -5249,11 +5928,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           const other = trafficPool[j];
           if (other.isOncoming !== v.isOncoming) continue;
           const dz = v.isOncoming ? (other.pos.z - v.pos.z) : (v.pos.z - other.pos.z);
-          if (dz > 0 && dz < 14 && Math.abs(v.pos.x - other.pos.x) < 2.2) {
+          if (dz > 0 && dz < 14 && Math.abs(v.pos.x - other.pos.x) < (isGully ? 1.45 : 2.2)) {
             if (v.baseSpeed > other.baseSpeed && !stoppedByRedSignal) {
-              const nextLane = minLane + ((v.laneIdx - minLane + 1) % 3);
+              const nextLane = minLane + ((v.laneIdx - minLane + 1) % halfLanes);
               v.laneIdx = nextLane;
-              v.targetLaneX = LANES[nextLane];
+              v.targetLaneX = activeLanes[nextLane];
             }
           }
         }
@@ -5264,7 +5943,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
           if (Math.abs(v.pos.z - player.pos.z) < 38 && Math.random() < currentProfile.cutOffAggression) {
             const shift = Math.random() < 0.5 ? -1 : 1;
             v.laneIdx = THREE.MathUtils.clamp(v.laneIdx + shift, minLane, maxLane);
-            v.targetLaneX = LANES[v.laneIdx];
+            v.targetLaneX = activeLanes[v.laneIdx];
           }
         }
 
@@ -5386,11 +6065,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         camera.position.x = player.pos.x + shakeX * 0.35;
         camera.position.y = 1.48 + engineVibY + shakeY * 0.35;
         camera.position.z = -0.35;
-        camera.lookAt(player.pos.x - steerInput * 2.2, 1.32, -38);
+        camera.lookAt(player.pos.x - steerInput * (isGully ? 1.5 : 2.2), 1.32, -38);
       } else {
+        const targetCamY = isGully ? 3.45 : 3.85;
         camera.position.x += (player.pos.x * 0.58 - camera.position.x) * dt * 7.5 + shakeX;
-        camera.position.y += (3.85 - camera.position.y) * dt * 6.5 + shakeY;
-        camera.position.z = 7.2;
+        camera.position.y += (targetCamY - camera.position.y) * dt * 6.5 + shakeY;
+        camera.position.z = isGully ? 6.4 : 7.2;
         camera.lookAt(player.pos.x * 0.75, 1.25, -14);
       }
 
@@ -5429,10 +6109,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     }
 
     window.addEventListener('resize', () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
+      renderer.setPixelRatio(dpr);
       renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setPixelRatio(dpr);
       composer.setSize(window.innerWidth, window.innerHeight);
+      bloomPass.resolution.set(window.innerWidth * dpr, window.innerHeight * dpr);
     });
 
     // =========================================================================
@@ -5503,6 +6187,19 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         }
         if (params.get('redlight') === '1') {
           triggerRedLightSignalAheadNow(true);
+        }
+        if (params.get('jaywalker') === '1' && jaywalkers[0]) {
+          const stageForwardJaywalker = () => {
+            const jw = jaywalkers[0];
+            if (!jw) return;
+            jw.dirX = 1;
+            jw.state = 'crossing';
+            jw.pos.set(-3.2, 0, -13.5);
+            jw.mesh.position.copy(jw.pos);
+            jw.mesh.rotation.y = getJaywalkerForwardYaw(1);
+          };
+          stageForwardJaywalker();
+          setTimeout(stageForwardJaywalker, 2900);
         }
         if (params.get('action') === '1' || params.get('hop') === '1') {
           player.turboBoostTimer = 1.4;
